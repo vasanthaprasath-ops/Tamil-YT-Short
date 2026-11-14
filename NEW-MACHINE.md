@@ -17,6 +17,7 @@ Claude's memory does not travel to a new account. Everything a new Claude sessio
 - **All project files live in this repo folder** (scripts, research, reports, skills). Films live in the VideoHub workspace.
 - **Script language**: spoken Tamil, the way people talk, with English words where Tamil speakers use them ("chess board", "map", "plan"). Hooks must sound natural, not written. He supplies his own hook lines often; adopt them.
 - **Facts**: every claim needs a source, graded as in `reports/Short form video craft playbook.md`. No god/temple claims, no religious rituals in the first 30 days.
+- **Script before voice**: lock the whole script (lines, hook, on-screen text) with Vasanth first; generate the ElevenLabs voice only after he says it's final. Before any voice call, state the credit cost and ask. One take, only the changed lines (`vo/splice.mjs`, `vo/tighten.mjs`). No rewrite → regenerate loops.
 - **Videos made as code**: build in VideoHub, open with `hub_live`, let him leave notes, fix by editing code, render only when he asks, one render at a time. (Copy this rule into the new `~/.claude/CLAUDE.md`.)
 
 ## Setup checklist (Windows)

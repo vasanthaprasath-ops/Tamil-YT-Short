@@ -31,6 +31,9 @@ Target: **30–45 seconds of measured voice-over** by default (go longer only wh
 SERIES:
 TITLE (Tamil script + 1 English keyword + emoji):
 ONE-LINE TRUE TAKEAWAY (write this FIRST):
+CONTRAST: common belief → true reality → first proof (within ~5 s):
+TARGET EMOTION (one):
+REPEATER (the takeaway again, said with the Tamil analogy):
 LAST LINE (write with the hook, before the middle):
 SOURCES (2 independent, credible):
   1.

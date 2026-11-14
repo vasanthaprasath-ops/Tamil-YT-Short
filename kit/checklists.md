@@ -23,7 +23,12 @@ Tool picks and the bake-off test plan (run it before paying for anything): `repo
 - [ ] Exactly one mystery beat (question to the viewer) before the reveal.
 - [ ] A mechanism line with an everyday Tamil analogy ("ஏன்னா…") at about 55–65 % of runtime.
 - [ ] The last line is the twist and the video ends on its last word. No recap.
-- [ ] Pace: every sentence ≤ 3.6 s; pauses over 0.25 s add up to ≤ 1 s per 40 s. Voice never sped up.
+- [ ] Pace: every sentence ≤ 3.6 s; pauses over 0.25 s add up to ≤ 1 s per 40 s. Sentence lengths vary (mostly short, some medium, no run-ons). Cut words before speeding the voice; any speed-up (≤ 1.08×) is Vasanth's call.
+- [ ] Contrast mapped: common belief → true, sourced reality → one quick proof within ~5 s.
+- [ ] The key fact is said twice (plainly, then with the analogy); the myth only once.
+- [ ] One target emotion named for the episode; no manufactured fear.
+- [ ] Walkaway test: the fact can be retold to family in one sentence.
+- [ ] Script locked with Vasanth before any voice is generated.
 - [ ] Paati series: guess beat early; order is fact → myth once → why people believed it → fact; the stamp matches the evidence.
 - [ ] The final line and card state the **fact**, not the myth.
 - [ ] Health: explanatory, not prescriptive; authority named; a "see a doctor if…" line where relevant.

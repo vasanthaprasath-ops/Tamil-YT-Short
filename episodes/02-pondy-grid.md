@@ -30,6 +30,26 @@ Mani: a friendly Tamil man about 25, medium-dark brown skin, round face, short b
 ```
 **Episode look:** a toy-town Pondicherry made of clay. Pastel yellow and white colonial houses with bougainvillea, and Tamil-side houses with thinnai verandahs and tiled roofs. Old-map scenes use the same clay style on a parchment-coloured table. Keep everything stylised and miniature, like a tabletop model city, never photoreal.
 
+## Script v10 (2026-11-14, locked with Vasanth; practice v2, built in VideoHub)
+
+Ep 02 v1 is already public, so v2 is practice for the kit and is not uploaded. This applies `kit/film-craft.md` §1 to the v8 lines. Source of truth: the film's `vo/script.json`.
+**Voice:** lines 1–2 are one take of 116 characters (`v10-hook-t1`), spliced onto take `v9-t2` for lines 3–9 (`vo/tighten.mjs`, `vo/splice.mjs`). Played 1.08× faster in the mix, by Vasanth's ear (natural speed felt slow). Film 38.8 s.
+
+| # | Shot | VO (v9 draft) | Rule it fixes |
+|---|---|---|---|
+| 1 | hook | பாண்டிச்சேரில வழி தவறுனா, திட்ட வேண்டியது Dutch-அ! (screen: திட்டுங்க / Dutch-அ!) | **v10, Vasanth's pick.** Most surprising opener; names Dutch early, so the twist scene confirms rather than surprises |
+| 2 | foreshadow | 300 வருஷ பழைய ஒரு map தான் காரணம். அத வரைஞ்சது… French இல்ல! | Concrete number (maps 1693–94 = 330+ years); French flag gets crossed out |
+| 3 | contrast | தமிழ்நாட்டுல நிறைய ஊரு, கோவிலை சுத்தி தானா வளர்ந்துச்சு. ஆனா பாண்டி அப்படி இல்ல. | But-beat 1 (kept from v8) |
+| 4 | ruler | இங்க யாரோ map-ல ruler வெச்சு, நேரா கோடு போட்டாங்க. அவ்ளோ நேரா… வழி தவறுனா கூட, நேரா தான் தவறுவீங்க! | Therefore-beat 2 + the one exaggeration joke |
+| 5 | guess | சரி, அந்த கோடு போட்டது யாரு? எல்லாரும் French-னு தான் சொல்லுவாங்க. | The one mystery beat |
+| 6 | twist | ஆனா இந்த grid முதல்ல வர்றது, ஒரு Dutch map-ல! 1693-ல, கொஞ்ச நாள் பாண்டி Dutch காரங்க கையில இருந்துச்சு. | But-beat 3; "Dutch" lands early; one 6.9 s sentence split in two |
+| 7 | french | அப்புறம் French திரும்ப வந்து, அதே கோட்டு மேல ஊரை கட்டி முடிச்சாங்க. | (kept from v8) |
+| 8 | card | விஷயம் என்னன்னா, இது கோலம் மாதிரி தான். புள்ளி வெச்சது Dutch. கோலம் போட்டது French. | Mechanism line with a Tamil home analogy, replaces the "So…" recap |
+| 9 | loop | ஆனா பேரு மட்டும்… இன்னும் French town! | Ironic last line, no recap |
+
+**Facts:** only what sources 1–2 below already support (Dutch plans 1693–94 while the Dutch held the town; French completed the plan). The kolam line is an analogy, not a claim. "French town" is how people commonly refer to Pondy's French quarter today.
+**Open for Vasanth:** (a) the hook: this draft states the surprise instead of your question line "நம்ம பாண்டிச்சேரி தெரு எல்லாம் ஏன் chess board மாதிரி இருக்கு தெரியுமா?"; your line can stay as the on-screen title. (b) any phrasing that isn't how you talk. (c) the joke line.
+
 ## Script v7 (2026-11-13, built in VideoHub; replaces v2)
 
 **v8 update (same day):** every VO line is rewritten in natural spoken Tamil. The hook, from Vasanth, is now "நம்ம பாண்டிச்சேரி தெரு எல்லாம் ஏன் chess board மாதிரி இருக்கு தெரியுமா?". Line 3 now starts "தமிழ்நாட்டுல நிறைய ஊரு…". The exact lines are in the film's `vo/script.json`; the table below shows v7 wording.

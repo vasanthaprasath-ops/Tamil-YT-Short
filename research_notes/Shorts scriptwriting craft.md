@@ -20,6 +20,34 @@ Evidence grades for these rules are in `reports/Short form video craft playbook.
 12. **Captions are part of the script.** Break lines for emphasis and highlight keywords. [Toptal](https://www.toptal.com/creator/post/how-to-write-a-youtube-script). (Practitioner opinion. Show 2–4-word phrases timed to speech; keyword highlighting is untested.)
 13. **No spoken subscribe ask by default.** Spoken calls to action show as retention dips, and Zack D. Films uses none. Earn the follow with the recurring stamp, Paati and the series name.
 
+## Added 2026-11-14: Kallaway, "Short-Form Storytelling Principles"
+
+Source: a 5-page excerpt from Kallaway's paid Short Form Academy (a free lead magnet; local copy at `D:\Shorts\Short-Form Storytelling Principles.pdf`, not stored in this repo). It is one practitioner's teaching, written to sell a course, and gives no data. The numbers in it ("5 seconds", "6th grade") are rules of thumb. Where research backs a point, the grade says so.
+
+14. **Contrast drives curiosity.** Map the viewer's common belief, then show the true reality that breaks it; the bigger the gap, the stronger the pull. Kallaway's own example claim (blueberry sauce beats sunscreen) is false: **for us the contrarian reality must be true and sourced, never invented for the gap.** *Grade: RESEARCH-backed in spirit (Loewenstein's information-gap theory of curiosity).*
+15. **The leash: prove a bold claim fast.** The more outlandish the claim, and the more sure viewers are of their belief, the less time you get. Follow a surprising hook with one quick proof or plain example within ~5 s. Viewers who care about the topic and are unsure of their belief give you the longest leash. *Grade: PRACTITIONER opinion; plausible.* Ep 02 v10's hook "திட்ட வேண்டியது Dutch-அ!" needs its proof ("300 வருஷ பழைய map") right after it, which it has.
+16. **Value signal by ~5 s; value density all the way.** For storytelling, value means "something interesting worth hearing". Count how often something unexpected happens; cut any line the viewer doesn't need. *Grade: PRACTITIONER; matches our surprise-by-3 s rule and Hoyos' "end when delivered".*
+17. **Repeaters: say the key point twice.** Once short (with the term if needed), then once stupid-simple with a metaphor. Ep 02's card does this: "இது கோலம் மாதிரி தான். புள்ளி வெச்சது Dutch. கோலம் போட்டது French." **Repeat the fact, never the myth**: repetition makes any statement feel truer, including a myth. *Grade: RESEARCH-backed (illusory-truth effect; processing fluency).*
+18. **Two levels simpler, two levels more interesting.** Reframe the core idea in plain words and active voice; one concept per sentence; define any term in one breath. *Grade: RESEARCH-backed (processing fluency: easy-to-process statements are understood and trusted more).*
+19. **Walkaway value.** Can the viewer repeat the fact to someone after one watch? For us: could they tell it in the family WhatsApp group in one sentence? That is our share driver. *Grade: PRACTITIONER; fits our sharing research (practical value + face-saving correction).*
+20. **Anticipation with a non-obvious reveal** is the strongest tactic: tease a condition so viewers wait for the answer, and the answer must contrast with what they guessed. *Grade: PRACTITIONER; already our foreshadow + mystery beat.*
+21. **Pick one target emotion per video** and choose the words, visuals and sounds for it. Kallaway says fear and shock get the most shares. Research says high-arousal emotions (awe, surprise, anxiety, anger) get shared and sadness less (Berger & Milkman 2012), so awe and surprise belong on that list too. **Never manufacture fear**, especially on health topics. *Grade: RESEARCH-backed for arousal; "fear and shock most" is overstated.*
+22. **Rhythm: mostly short sentences, but not all the same length.** Same-length lines drone; mix short punches (about 1–1.5 s) with medium lines, and keep run-ons out, because listeners lose the start of a long sentence. *Grade: rhythm is PRACTITIONER; the short-sentence part is RESEARCH-backed (working memory holds only a few chunks).*
+23. **Energy carries through the screen.** A calm or monotone voice needs extra push in delivery. For our ElevenLabs voice (Prashant V, "Calm"), direct energy in the script, and test expressive settings on **one** take at the start of a new episode, never by re-recording a locked script. *Grade: PRACTITIONER.* Ep 02: Vasanth found natural speed slow and chose 1.08×.
+
+## Added 2026-11-14: Kallaway Tech "Top Short-Form Video Collections" (names only)
+
+Source: a one-page sales sheet (`D:\Shorts\Copy of Top Short-Form Video Collections (105 Collections).pdf`). The 105 analysed collections are behind a paid sign-up; the sheet shows only the four category groups and a dozen collection names. **There is no evidence or analysis in it**, so the list below is an idea menu, not a rule. *Grade: UNVERIFIED (labels only).*
+
+- **Four ways to look at any Short:** its *visual hook* (what moves in frame 0), its *signature series* (the recurring segment people come back for), its *editing style*, and its *format*. Our channel already has a signature series (UNMAI / PAADHI UNMAI / POI stamp, the city "yen?" series); keep it identical every episode so it becomes the reason to subscribe.
+- **Visual-hook menu for frame 0** (pick one per Short and don't repeat it in back-to-back episodes, so the channel never looks templated):
+  - **Impending disaster:** something is about to go wrong to Mani (the leg about to buckle, the scooter heading for the same wrong corner).
+  - **A vs B graphic:** two things side by side, one about to win (ep 02's temple town vs ruler town).
+  - **Crash zoom onto the subject:** a fast push to the face or object on the first word (ours: the punch-in, used only on 1–2 beats).
+  - **Camera whip:** a fast blurred pan into the scene (ours: at most one per film).
+  - **Beat-matched switch:** the picture changes exactly on a music beat (ours: one tempo grid per episode).
+- **Formats seen there that fit us:** breakdowns/explainers (our core), A-vs-B comparisons (good for city and "Paati vs science" episodes), and case studies. Skip "car yap", "about me" and challenge formats, which need a real face.
+
 ## Checklist for every script
 
 - One question in the hook, and nothing in the video that doesn't answer it. Save a second great hook for its own episode.
@@ -30,3 +58,8 @@ Evidence grades for these rules are in `reports/Short form video craft playbook.
 - Read it aloud: plain spoken Tamil, short words. Cut every word that isn't needed.
 - Optional and untested: a loop line, only if it adds no time and doesn't blur the payoff. The video cuts within ~0.5 s of the payoff.
 - The hook passes the mute test: frame 0 plus the on-screen text alone name the subject.
+- Belief → true reality → one quick proof within ~5 s (rules 14–15).
+- The key fact said twice: once plainly, once with the Tamil analogy. The myth is said only once (rule 17).
+- One target emotion named; no manufactured fear (rule 21).
+- Sentence lengths vary: mostly short, a few medium, no run-ons (rule 22).
+- Walkaway test: the viewer can repeat the fact in one sentence to their family (rule 19).

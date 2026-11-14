@@ -34,6 +34,16 @@ The one-page "where are we" for a new Claude session. Read this first, then `PRO
   - Title: `பாண்டி தெரு ஏன் chess board மாதிரி? 🤯 | Pondicherry`
   - Description, tags, hashtags and pinned comment are written up in this session; the short description puts searchable keywords first and sources on one line.
 
+## Ep 02 v2: practice upgrade (2026-11-14, new laptop; not for upload)
+
+v1 is public, so v2 is practice for the kit. Working copy: `C:\Users\vasan\Documents\VideoHub\films\02-pondy-grid` (VideoHub id 861506f06c8a). v1 source, mix and v8 voice are backed up in `.v1-src\` there.
+- **Script v9** (film-craft §1): the surprise is stated in sentence 1, then a foreshadow, 3 but/therefore beats with one joke, the kolam analogy on the card ("புள்ளி வெச்சது Dutch. கோலம் போட்டது French."), and the ironic last line "இன்னும் French town!". Script v10 locked with Vasanth: hook "பாண்டிச்சேரில வழி தவறுனா, திட்ட வேண்டியது Dutch-அ!", scene 2 "300 வருஷ பழைய ஒரு map தான் காரணம்…". Voice: one 116-character take for lines 1–2 spliced onto take v9-t2, 1.08× speed, film 38.8 s. Rule from now on: script locked first, voice second, ask before every ElevenLabs call.
+- **Camera**: constant push-ins, reframes every ~1.8 s on word times, 2 roll moves, one blurred whip, punch only into the twist, a kick on the reveal, tilt-shift on the town, no float. Still-camera share 44.8 % → 10.6 % (card is the only still shot).
+- **Look**: indigo shadows, contact blobs, outlines + background blur on the tourists, vignette, shirt `#E3A72F`; Mani's new face (eye whites, brows, mouth, seeded blinks) is coded but not on screen in this script.
+- **Sound**: duck from word times, music stop + button chord, boom after the key word, one tempo grid, ambience beds, stems levelled separately, look-ahead limiter. −14.0 LUFS, −1.0 dBTP.
+- **QA tools**: `kit/tools/qa-motion.cjs` (still share, pops) and `kit/tools/grab.cjs` (contact sheet), both run against the film page with Chrome.
+- Not rendered yet. Before rendering, make sure the render uses the new `audio/mix.wav`, not v1's track.
+
 ## Knowledge base (newest first)
 
 - `kit/film-craft.md`: the rulebook for directing code-animated Shorts. It covers script, camera, characters, light, sound and QA, has an **ep 02 gap scorecard**, and ends with **7 decisions for Vasanth**. Built from `research_notes/Animated shorts repo teardown/` (5 notes, including `competitor_gap.md`).
