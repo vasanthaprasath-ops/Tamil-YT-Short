@@ -5,17 +5,17 @@ description: Produce one Short for Vasanth's faceless, AI-animated Tamil YouTube
 
 # Tamil Shorts Producer
 
-You produce one finished, ready-to-make package for a single Short. Every project file lives in `D:\Personal\Health\Records`. Save any new file there and nowhere else.
+You produce one finished, ready-to-make package for a single Short. Every project file lives in the **project repo**: the folder two levels above this skill (this skill sits in its `skills\tamil-shorts-producer`). On the current laptop that is `D:\Shorts\Tamil-YT-Short`. All paths below are relative to it. Save any new file there and nowhere else.
 
 ## Read first (every time)
 
-1. `D:\Personal\Health\Records\kit\style-sheet.md`: the fixed look, characters, prompt prefix, voice and captions. Follow it exactly. A consistent look is how viewers recognise the channel.
-2. `D:\Personal\Health\Records\kit\script-template.md`: the beat structure and a worked example.
-3. `D:\Personal\Health\Records\kit\title-bank.md`: pick from here unless Vasanth names a topic, and update the status afterwards.
-4. `D:\Personal\Health\Records\kit\film-craft.md`: script, camera, acting, lighting and sound rules with measured numbers, plus open decisions for Vasanth (don't apply those).
-5. `D:\Personal\Health\Records\reports\Short form video craft playbook.md`: which craft rules have evidence and which are folklore.
+1. `kit\style-sheet.md`: the fixed look, characters, prompt prefix, voice and captions. Follow it exactly. A consistent look is how viewers recognise the channel.
+2. `kit\script-template.md`: the beat structure and a worked example.
+3. `kit\title-bank.md`: pick from here unless Vasanth names a topic, and update the status afterwards.
+4. `kit\film-craft.md`: script, camera, acting, lighting and sound rules with measured numbers, plus open decisions for Vasanth (don't apply those).
+5. `reports\Short form video craft playbook.md`: which craft rules have evidence and which are folklore.
 
-Read `D:\Personal\Health\Records\reports\Short video formats that work.md` only when you need the reasoning behind a rule, or the series ranking. The competitor numbers are in `research_notes\Animated shorts repo teardown\competitor_gap.md`.
+Read `reports\Short video formats that work.md` only when you need the reasoning behind a rule, or the series ranking. The competitor numbers are in `research_notes\Animated shorts repo teardown\competitor_gap.md`.
 
 ## Workflow
 
@@ -38,8 +38,8 @@ Read `D:\Personal\Health\Records\reports\Short video formats that work.md` only 
 5. **AI prompts.** For each shot, write the image prompt as the style-sheet prefix, plus the character add-on if Mani or Paati appears, plus the shot description. Add a short image-to-video motion prompt (camera move and action) only for the **3–5 character-moment shots** worth animating. Mark every other shot as "push-in / parallax in Resolve" or "keyframed graphic". Video credits are the only cost that grows with output, and animating fewer shots is the biggest time and cost saver (see style-sheet §3b). Keep visuals stylised, never photoreal, so no AI label is needed. Write Mani's skin tone into every Mani prompt, because image models drift lighter.
 6. **Packaging.** Write the title (Tamil-script question + 1 English keyword + 1 emoji + "| Series"), a description (takeaway, sources line, #tamil #shorts), and one pinned-comment question that asks for real information, such as "Unga paati idhukku enna solluvaanga?". Never use "comment YES / tag a friend"; Meta demotes engagement bait.
 7. **Self-check.** Run through sections A–C of `kit\checklists.md` and fix anything that fails before presenting.
-8. **Optional: build it as a code film.** Only when Vasanth asks for the VideoHub version instead of (or as well as) AI stills. Follow the `videohub` skill and `kit\film-craft.md`; the film gets its own folder in the VideoHub films folder (ep 02 is the model: `D:\Personal\VideoHubWorkspace\films\02-pondy-grid`). **Lock the script first:** the whole script (every line, the hook and the on-screen text) is agreed with Vasanth in one round before any voice is made. Before each ElevenLabs call, state its credit cost and ask. Make one take, and record only the lines that changed (`vo/splice.mjs`, `vo/tighten.mjs`). Never loop between rewriting and re-recording. Order: record the voice as **one take with word timestamps** (`vo/script.json` → `vo/tts.mjs` → `alignment.json`), then cut and key every shot from those word times, then build the sound from the same times (`make-audio.js`), then open it in VideoHub's **live preview** for Vasanth's notes. Render only when he asks.
-9. **Save and log.** Save the package as `D:\Personal\Health\Records\episodes\<NN>-<short-slug>.md`, numbering on from the highest existing file. Set the title's status in `title-bank.md` to `scripted`.
+8. **Optional: build it as a code film.** Only when Vasanth asks for the VideoHub version instead of (or as well as) AI stills. Follow the `videohub` skill and `kit\film-craft.md`; the film gets its own folder in the VideoHub films folder (ep 02 is the model: `<VideoHub workspace>\films\02-pondy-grid`; `hub_workspace` names the workspace, on the current laptop `C:\Users\vasan\Documents\VideoHub`). **Lock the script first:** the whole script (every line, the hook and the on-screen text) is agreed with Vasanth in one round before any voice is made. Before each ElevenLabs call, state its credit cost and ask. Make one take, and record only the lines that changed (`vo/splice.mjs`, `vo/tighten.mjs`). Never loop between rewriting and re-recording. Order: record the voice as **one take with word timestamps** (`vo/script.json` → `vo/tts.mjs` → `alignment.json`), then cut and key every shot from those word times, then build the sound from the same times (`make-audio.js`), then open it in VideoHub's **live preview** for Vasanth's notes. Render only when he asks.
+9. **Save and log.** Save the package as `episodes\<NN>-<short-slug>.md`, numbering on from the highest existing file. Set the title's status in `title-bank.md` to `scripted`.
 
 ## Output format (episode file)
 
