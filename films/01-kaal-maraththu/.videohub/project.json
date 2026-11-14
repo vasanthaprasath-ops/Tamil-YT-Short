@@ -1,0 +1,13 @@
+{
+ "title": "01 Kaal maraththu - needle-prick is a good sign",
+ "status": "review",
+ "render": {
+  "workers": 2,
+  "env": {
+   "DUR": "40.85",
+   "CHROME": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+   "FFMPEG": "C:/Users/vasan/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-9.0.2-full_build/bin/ffmpeg.exe"
+  }
+ },
+ "updated": "2026-11-14T13:20:03.329Z"
+}

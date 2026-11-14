@@ -77,6 +77,8 @@ Tool picks and the bake-off test plan (run it before paying for anything): `repo
 ## C2. Code film only (VideoHub)
 - [ ] Every shot and sound is keyed from the voice's word times (`alignment.json`), not hand-typed seconds.
 - [ ] QA run before sending for notes: no frozen run of ≥ 12 frames, no unplanned pops, hits on the contact frame or ≤ 1 frame early (never > 3 late), per-stem LUFS and voice margin printed. Details: `kit/film-craft.md` §6.
+- [ ] **One-pass check passes:** `node kit/tools/check-film.cjs <film folder>` (page errors, length, still camera, layout, loudness, true peak), and the contact sheet it writes has been looked at.
+- [ ] **Layout:** nothing overlaps and nothing is cut off at any moment (`layout-check.cjs`, part of the one-pass check). Zones and rules: `kit/film-craft.md` §7. After fixing one overlap, run it again.
 - [ ] **Sound cues measured, not assumed** (needs earshot): run `earshot timeline audio/mix.wav --cues "t1,t2,…" --out tl.json`, then `python kit/tools/cue_check.py tl.json id1,id2,…`. Each key effect passes when it is heard **within 40 ms of its cue** and **at least 6 dB over the bed**. Fix only what fails, by the measured amount.
 - [ ] True peak ≤ −1 dBTP read with `earshot measure` (ffmpeg's "Peak" is the sample peak and reads about 0.3 dB lower).
 - [ ] Any real recorded sound is **CC0**, fetched with `python kit/tools/fetch_cc0.py "<words>" <film>/audio/sfx/<kind>`, and its row in `sources.json` (title, creator, source page) is kept with the film. Open the source page once before publishing: Openverse does not guarantee the licence.

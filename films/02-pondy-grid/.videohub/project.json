@@ -2,12 +2,11 @@
  "title": "02 Pondy grid - why chess board?",
  "status": "review",
  "render": {
-  "workers": 2,
   "env": {
-   "DUR": "39.139",
+   "DUR": "38.81",
    "CHROME": "C:/Program Files/Google/Chrome/Application/chrome.exe",
    "FFMPEG": "C:/Users/vasan/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-9.0.2-full_build/bin/ffmpeg.exe"
   }
  },
- "updated": "2026-11-13T17:24:30.287Z"
+ "updated": "2026-11-14T02:16:07.719Z"
 }

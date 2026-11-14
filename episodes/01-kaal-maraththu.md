@@ -18,7 +18,32 @@ Note: sources differ on how much is nerve pressure versus blood flow. The script
 ## Competition check (yt-dlp search, 2026-11-04)
 Tamil videos on "கை கால் மரத்து போவது" get **290K–3.3M views**. Examples: SathiyamTV 2.8M, a sleep-numbness video 3.3M, a paati vaithiyam remedy 512K. Almost all of them are **chronic-numbness remedies or doctor talk-shows**. None is a short animated "what happens inside when you sit too long" explainer. Demand is proven, and our angle is open.
 
-## Script
+## Script v2 — LOCKED with Vasanth, 2026-11-14
+
+This is the script to build. Any change needs a new lock with Vasanth; no voice is generated before that (see NEW-MACHINE.md "Script before voice").
+
+- **Contrast:** people believe the needle-prick feeling means something is wrong → it is the nerve starting to work again (sources 1–2) → proof by the phone-tower picture.
+- **Target emotion:** surprise, then relief. **Walkaway line:** "ஊசி குத்துனா, கால் 'நான் வந்துட்டேன்'னு சொல்லுது."
+- **Ending (changed 2026-11-14, Vasanth's pick):** the old last line re-explained the reveal in plain words and dropped the energy. The new one is a friendly twist aimed at the viewer's next time. Voice: male (Vasanth's preference); Prashant V at 1.08× unless he picks another.
+- "நல்ல sign" is our wording for the ordinary sitting-too-long case; the on-screen doctor line covers the rest. The phone-tower line is an analogy, not a medical claim.
+
+| # | Beat | Shot | VO (spoken Tamil) | On screen |
+|---|---|---|---|---|
+| 1 | Hook | Mani gets up from the floor at a wedding lunch; his leg buckles and prickles | கால் மரத்துப் போயி ஊசி குத்துற மாதிரி இருக்கா? அது கெட்ட sign இல்ல… நல்ல sign! | Title: **ஊசி குத்துதா? நல்ல sign!** · series tag **உடம்பு series**, far top-left (stays all film; the number #1 goes in the title/description) |
+| 2 | Foreshadow | Mani looks at his leg, puzzled | ஏன்னு தெரிஞ்சா, அடுத்த தடவை சிரிப்பீங்க. | — |
+| 3 | Setup | The leg opens in layers: one glowing nerve "wire" from foot to brain | உங்க கால்ல இருந்து மூளைக்கு message அனுப்ப, நரம்புன்னு ஒரு wire இருக்கு. | நரம்பு = wire |
+| 4 | But | Mani cross-legged; his weight presses the wire at the knee | ரொம்ப நேரம் சம்மணம் போட்டு உக்காந்தா, உங்க weight அந்த wire-அ அமுக்குது. | — |
+| 5 | And | The blood vessel beside it thins | கூடவே, அதுக்கு போற ரத்தமும் குறையுது. | — |
+| 6 | Therefore | Message dots stop at the pinch | அதனால message மூளைக்கு போகவே போகாது. அதான் கால் மரத்துப் போச்சு. | Signal ✗ |
+| 7 | Joke | Mani pinches his own leg, feels nothing, looks at it suspiciously | கிள்ளுனா கூட தெரியாது… இது என் கால் தானான்னே doubt வரும்! | — |
+| 8 | Mystery | Mani stands; freeze on the first prickle | சரி, எழுந்ததும் ஏன் ஊசி குத்துது? | ? |
+| 9 | Analogy | A phone with no tower; signal returns; held messages pour in | விஷயம் என்னன்னா, இது phone-க்கு tower கிடைக்காத மாதிரி. Signal திரும்ப வந்ததும், நின்னு போன message எல்லாம் ஒரே நேரத்துல வந்து கொட்டும். | — |
+| 10 | Reveal | The same burst inside the leg: sparks along the nerve (the one peak moment) | அந்த டிங் டிங் டிங் தான்… உங்க கால்ல ஊசி குத்துறது! | டிங் டிங் டிங்! |
+| 11 | Twist | Sparks settle to a steady glow; Mani pats his leg and walks off smiling | அடுத்த தடவை ஊசி குத்துனா திட்டாதீங்க… கால் 'நான் வந்துட்டேன்'னு சொல்லுது! | Card: சில நிமிஷத்துல சரியாகும். அடிக்கடி வந்தா doctor-அ பாருங்க. (no subscribe or channel tag: removed by Vasanth 2026-11-14) |
+
+**Subscribe (decided 2026-11-14):** no spoken ask. No subscribe or channel-name tag on screen either (Vasanth removed both, 2026-11-14). The only tag is "உடம்பு series" in the far top-left corner; the episode number lives in the title and description. Judge by subscribers per 1,000 engaged views.
+
+## Script v1 (superseded, 2026-11-04)
 
 VO is in Tanglish, for you to read aloud. On-screen text is in Tamil script. About 105 words.
 
@@ -76,7 +101,49 @@ Everything else:
 
 Mute the audio on every generated clip.
 
-## Title / Description / Pinned comment
+## Upload text v2 (2026-11-14, for the rendered film `01-kaal-maraththu_v1.mp4`)
+
+**YouTube title** (57 characters)
+```
+கால் மரத்துப் போனா ஊசி குத்துதா? நல்ல sign! 😮 | உடம்பு #1
+```
+
+**YouTube description**
+```
+கால் மரத்துப் போயி ஊசி குத்துற மாதிரி இருக்கா? அது கெட்ட sign இல்ல. நரம்பு திரும்ப வேலை செய்ய ஆரம்பிக்குற sign!
+
+ரொம்ப நேரம் சம்மணம் போட்டு உக்காந்தா, நரம்பு அமுங்கி மூளைக்கு signal போகாது. எழுந்ததும் signal திரும்ப வரும்போது தான் அந்த "ஊசி குத்துற" feeling.
+Why your leg goes numb and tingles (pins and needles), explained in Tamil.
+
+சில நிமிஷத்துல சரியாகும். அடிக்கடி வந்தா, ரொம்ப நேரம் இருந்தா doctor-அ பாருங்க. இது தகவலுக்கு மட்டும்; மருத்துவ ஆலோசனை இல்ல.
+
+உடம்பு series #1
+Sources: NHS (Pins and needles); neurologists quoted by NBC News and ScienceAlert.
+
+#அதுஏன் #உடம்பு #tamilshorts #tamilfacts #shorts
+```
+
+**Pinned comment** (asks for real information; no "comment YES")
+```
+உங்களுக்கு கால் அதிகமா மரத்துப் போறது எப்போ? தரையில சம்மணம் போட்டு உக்காரும்போதா, bike-ல ரொம்ப நேரம் போகும்போதா? 👇
+```
+
+**Instagram / Facebook caption** (first line is 104 characters, inside the ~125 the feed shows; 5 hashtags, the limit)
+```
+கால் மரத்துப் போயி ஊசி குத்துதா? அது கெட்ட sign இல்ல, நல்ல sign! நரம்பு திரும்ப வேலை செய்ய ஆரம்பிக்குது.
+
+ரொம்ப நேரம் சம்மணம் போட்டு உக்காந்தா நரம்பு அமுங்கும். எழுந்ததும் signal திரும்ப வரும்போது தான் அந்த feeling. சில நிமிஷத்துல சரியாகும்; அடிக்கடி வந்தா doctor-அ பாருங்க.
+
+உங்களுக்கு எப்போ அதிகமா மரத்துப் போகும்? 👇
+
+உடம்பு series #1 · Source: NHS
+
+#அதுஏன் #உடம்பு #tamilreels #tamilfacts #kaalmaraththu
+```
+
+**Upload settings** (same as ep 02): YouTube from the phone app with frame 0 as the cover, Unlisted first, watch once, then Public; not made for kids. Instagram and Facebook: upload the same clean mp4 natively, AI label on. Add to an "உடம்பு" playlist. Never delete and re-upload.
+
+## Title / Description / Pinned comment (v1, superseded)
 
 **Title:** கால் மரத்துப் போனா உள்ள என்ன நடக்குது? 😵 Nerve | உடம்பு
 

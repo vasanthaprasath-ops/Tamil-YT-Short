@@ -18,8 +18,11 @@
   // ---------- palette (episode style sheet v2) ----------
   const P = {
     tur: '#E3A72F', kol: '#F7F3EA', red: '#B23A2E', leaf: '#4C8C3A', ind: '#1F2A44',
-    skin: '#7A4A2E', hair: '#16110E', shirt: '#C9921E', trou: '#6E6E73', scoot: '#F0C23B',
+    skin: '#7A4A2E', hair: '#16110E', shirt: '#E3A72F', trou: '#6E6E73', scoot: '#F0C23B',   // v2: shirt = style-sheet canon
   };
+  // v2 (kit/film-craft.md §4.5): shade mixes toward night indigo, never black; skin keeps a warm shadow
+  const SKINS = new Set(['#7A4A2E', '#E8B894', '#C98E6A', '#F0C9A8', '#8B5A3C']);
+  let OUTLINING = false;   // true while a character is drawn for outline: drop shadows off (§4.8)
   const TA = '"Nirmala UI", "Latha", "Noto Sans Tamil", sans-serif';
   const EN = '"Segoe UI", system-ui, sans-serif';
 
@@ -40,9 +43,19 @@
     }
     return keys[keys.length - 1][1];
   }
-  function shade(hex, k) {   // k > 0 towards white, k < 0 towards black
-    const n = parseInt(hex.slice(1), 16), c = [n >> 16 & 255, n >> 8 & 255, n & 255], m = k > 0 ? 255 : 0, a = Math.abs(k);
-    return `rgb(${c.map(v => Math.round(v + (m - v) * a)).join(',')})`;
+  function shade(hex, k) {   // k > 0 towards white, k < 0 towards night indigo (skin: towards warm brown)
+    const n = parseInt(hex.slice(1), 16), c = [n >> 16 & 255, n >> 8 & 255, n & 255], a = Math.abs(k);
+    const m = k > 0 ? [255, 255, 255] : SKINS.has(hex.toUpperCase()) ? [62, 38, 20] : [31, 42, 68];
+    return `rgb(${c.map((v, i) => Math.round(v + (m[i] - v) * a)).join(',')})`;
+  }
+  // camera helpers (§2): near-linear push, smootherstep glide, impact kick
+  const glide = x => { x = clamp(x); return x * x * x * (x * (6 * x - 15) + 10); };
+  // blinks (§3.2): per character, seeded gaps 0.5-2.3 s, 4 frames half/shut/shut/half; a pure function of t
+  const BLINKS = {};
+  function lidAt(id, t) {
+    if (!BLINKS[id]) { const a = [], h = k => rnd(id * 97.3 + k * 13.1); let tt = 0.4 + h(0) * 1.5; for (let k = 1; tt < 120; k++) { a.push(tt); tt += 0.5 + h(k) * 1.8; } BLINKS[id] = a; }
+    for (const b of BLINKS[id]) { const f = Math.floor((t - b) * 30); if (f >= 0 && f < 4) return [0.5, 0.08, 0.08, 0.5][f]; if (b > t) break; }
+    return 1;
   }
 
   // ---------- drawing primitives ----------
@@ -50,7 +63,7 @@
   function circ(x, y, r) { g.beginPath(); g.arc(x, y, Math.max(0.01, r), 0, Math.PI * 2); }
   function ell(x, y, rx, ry, rot = 0) { g.beginPath(); g.ellipse(x, y, Math.max(0.01, rx), Math.max(0.01, ry), rot, 0, Math.PI * 2); }
   function soft(on = true, blur = 16, oy = 7, a = 0.28) {
-    if (on) { g.shadowColor = `rgba(25,18,35,${a})`; g.shadowBlur = blur; g.shadowOffsetX = 0; g.shadowOffsetY = oy; }
+    if (on && !OUTLINING) { g.shadowColor = `rgba(31,42,68,${a})`; g.shadowBlur = blur; g.shadowOffsetX = oy * 0.6; g.shadowOffsetY = oy; }   // key light upper-left (§4.6)
     else { g.shadowColor = 'rgba(0,0,0,0)'; g.shadowBlur = 0; g.shadowOffsetY = 0; }
   }
   function clayFill(col, y0, y1, lift = 0.2, drop = 0.18) {   // the "clay" look: light top, darker bottom
@@ -73,7 +86,8 @@
   // lines = [[ [text, colour], ... ], ...]; big outlined "sticker" text, auto-shrinks to fit
   function title(lines, x, y, size, a, sc = 1) {
     if (a <= 0) return;
-    g.save(); g.globalAlpha = clamp(a); g.translate(x, y); g.scale(sc, sc);
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0);   // v2: titles are screen-locked, so the camera push never moves them out of the safe box
+    g.globalAlpha = clamp(a); g.translate(x, y); g.scale(sc, sc);
     g.textBaseline = 'middle'; g.textAlign = 'left'; g.lineJoin = 'round';
     lines.forEach((segs, i) => {
       let sz = size; const font = z => `800 ${z}px ${TA}`; g.font = font(sz);
@@ -94,7 +108,7 @@
   // one line of sticker text followed by a drawn icon, centred as a group
   function titleIcon(text, y, size, a, sc, iconW, drawIcon) {
     if (a <= 0) return;
-    g.save(); g.globalAlpha = clamp(a); g.translate(CXS, y); g.scale(sc, sc);
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = clamp(a); g.translate(CXS, y); g.scale(sc, sc);
     g.font = `800 ${size}px ${TA}`;
     { const tw0 = g.measureText(text).width; if (tw0 + 34 + iconW > 800) { size = Math.floor(size * (800 - 34 - iconW) / tw0); g.font = `800 ${size}px ${TA}`; } } g.textBaseline = 'middle'; g.textAlign = 'left'; g.lineJoin = 'round';
     const tw = g.measureText(text).width, gap = 34, x0 = -(tw + gap + iconW) / 2;
@@ -144,7 +158,7 @@
   }
 
   // ---------- characters ----------
-  function head(x, y, r, look, expr, t) {
+  function head(x, y, r, look, expr, t, id = 0) {
     const fx = x + look * r * 0.32;
     g.save();
     soft(true, 18, 8);
@@ -153,9 +167,10 @@
     ell(x + r * 0.95 + look * r * 0.18, y + r * 0.06, r * 0.2, r * 0.27); g.fill();
     circ(x, y, r);
     const gr = g.createRadialGradient(x - r * 0.35, y - r * 0.4, r * 0.1, x, y, r * 1.05);
-    gr.addColorStop(0, shade(P.skin, 0.22)); gr.addColorStop(1, shade(P.skin, -0.2));
+    gr.addColorStop(0, shade(P.skin, 0.22)); gr.addColorStop(1, shade(P.skin, -0.1));   // v2: edge darkening -0.20 -> -0.10 (§3.5)
     g.fillStyle = gr; g.fill();
     soft(false);
+    g.fillStyle = 'rgba(255,214,170,0.2)'; ell(x - r * 0.42, y - r * 0.38, r * 0.3, r * 0.2, -0.5); g.fill();   // small warm highlight, not diffuse light
     // hair: a cap clipped to the head, a side-parted swoop and some volume on top
     g.fillStyle = P.hair;
     g.save(); circ(x, y, r * 1.03); g.clip();
@@ -166,20 +181,24 @@
     ell(x + look * r * 0.05, y - r * 0.86, r * 0.95, r * 0.26); g.fill();
     g.strokeStyle = 'rgba(255,255,255,0.18)'; g.lineWidth = r * 0.04; g.lineCap = 'round';
     g.beginPath(); g.moveTo(x - r * 0.3 + look * r * 0.1, y - r * 1.12); g.quadraticCurveTo(x - r * 0.36, y - r * 0.85, x - r * 0.28 + look * r * 0.1, y - r * 0.62); g.stroke();
-    // eyes (blink is a pure function of t)
-    const blink = (t % 3.3) < 0.09 ? 0.15 : 1, ey = y - r * 0.02, ex = r * 0.33;
-    g.fillStyle = '#1A1210';
-    for (const sx of [-1, 1]) { ell(fx + sx * ex, ey, r * 0.1, r * 0.13 * blink); g.fill(); }
-    if (blink === 1) { g.fillStyle = 'rgba(255,255,255,0.85)'; for (const sx of [-1, 1]) { circ(fx + sx * ex + r * 0.03, ey - r * 0.05, r * 0.035); g.fill(); } }
-    // brows
-    g.strokeStyle = P.hair; g.lineWidth = r * 0.075;
+    // eyes (v2, §3.2/3.5/3.8): almond whites, 0.27 W apart, per-character seeded 4-frame blinks
+    const blink = lidAt(id, t), ey = y - r * 0.02, ex = r * 0.27, pd = look * r * 0.04;
     for (const sx of [-1, 1]) {
-      const raise = expr === 'confused' && sx === 1 ? r * 0.13 : (expr === 'smile' || expr === 'big') ? r * 0.05 : 0;
+      g.save(); ell(fx + sx * ex, ey, r * 0.16, r * 0.13 * blink); g.fillStyle = '#F7F3EA'; g.fill(); g.clip();
+      g.fillStyle = '#1A1210'; ell(fx + sx * ex + pd, ey + r * 0.01, r * 0.085, r * 0.1); g.fill();
+      if (blink === 1) { g.fillStyle = 'rgba(255,255,255,0.9)'; circ(fx + sx * ex + pd + r * 0.03, ey - r * 0.03, r * 0.03); g.fill(); }
+      g.restore();
+      if (blink < 1) { g.strokeStyle = '#1A0E0C'; g.lineWidth = r * 0.035; g.beginPath(); g.moveTo(fx + sx * ex - r * 0.16, ey); g.lineTo(fx + sx * ex + r * 0.16, ey); g.stroke(); }
+    }
+    // brows (v2, §3.6): near-black, tapered 0.05 W -> 0.025 W, 0.17 W long; they carry the emotion
+    g.fillStyle = '#16110E';
+    for (const sx of [-1, 1]) {
+      const raise = expr === 'confused' && sx === 1 ? r * 0.13 : (expr === 'smile' || expr === 'big') ? r * 0.06 : 0;
       const tilt = expr === 'confused' && sx === -1 ? r * 0.06 : 0;
+      const ix = fx + sx * (ex - r * 0.17), ox = fx + sx * (ex + r * 0.17), iy = ey - r * 0.27 - raise + tilt, oy = ey - r * 0.25 - raise - tilt, my = ey - r * 0.34 - raise;
       g.beginPath();
-      g.moveTo(fx + sx * ex - r * 0.14, ey - r * 0.24 - raise + tilt);
-      g.quadraticCurveTo(fx + sx * ex, ey - r * 0.31 - raise, fx + sx * ex + r * 0.14, ey - r * 0.24 - raise - tilt);
-      g.stroke();
+      g.moveTo(ix, iy - r * 0.05); g.quadraticCurveTo(fx + sx * ex, my - r * 0.04, ox, oy - r * 0.025);
+      g.lineTo(ox, oy + r * 0.025); g.quadraticCurveTo(fx + sx * ex, my + r * 0.06, ix, iy + r * 0.05); g.closePath(); g.fill();
     }
     // nose, moustache, mouth
     g.fillStyle = shade(P.skin, -0.18); ell(fx + look * r * 0.06, y + r * 0.2, r * 0.11, r * 0.09); g.fill();
@@ -192,9 +211,9 @@
       g.save(); g.clip(); g.fillStyle = '#FFF8EE'; g.fillRect(fx - r * 0.3, y + r * 0.45, r * 0.6, r * 0.09); g.restore();
       g.fillStyle = 'rgba(230,120,110,0.18)'; for (const sx of [-1, 1]) { circ(fx + sx * r * 0.5, y + r * 0.32, r * 0.16); g.fill(); }
     } else if (expr === 'confused') {
-      g.fillStyle = '#5A1E1A'; ell(fx + r * 0.06, y + r * 0.57, r * 0.07, r * 0.09); g.fill();
+      g.fillStyle = '#2A0E0C'; ell(fx + r * 0.06, y + r * 0.57, r * 0.07, r * 0.09); g.fill();
     } else {
-      g.strokeStyle = '#5A1E1A'; g.lineWidth = r * 0.05; g.beginPath(); g.moveTo(fx - r * 0.13, y + r * 0.55); g.lineTo(fx + r * 0.13, y + r * 0.54); g.stroke();
+      g.strokeStyle = '#1A0E0C'; g.lineWidth = r * 0.1; g.lineCap = 'round'; g.beginPath(); g.moveTo(fx - r * 0.13, y + r * 0.56); g.lineTo(fx + r * 0.13, y + r * 0.55); g.stroke();   // v2: near-black closed mouth (§3.5)
     }
     g.restore();
   }
@@ -202,11 +221,11 @@
   // standing body, feet at (x, y); about 210 units tall below the neck
   function body(x, y, k, o, t) {
     g.save(); g.translate(x, y); g.scale(k, k);
-    soft(false); g.fillStyle = 'rgba(20,15,25,0.22)'; ell(0, 2, 64, 11); g.fill();
+    if (!OUTLINING) { soft(false); g.fillStyle = 'rgba(31,42,68,0.3)'; ell(0, 2, 64, 11); g.fill(); }   // contact blob (§4.7); drawn outside the outline pass
     soft(true, 12, 6);
     for (const sx of [-1, 1]) { rr(sx * 19 - 12, -112, 24, 110, 10); clayFill(o.trou, -112, 0); }
     g.fillStyle = '#3A2A22'; for (const sx of [-1, 1]) { ell(sx * 21, -5, 18, 9); g.fill(); }
-    const sway = Math.sin(t * 1.7 + (o.ph || 0)) * 0.035;
+    const sway = 0;   // v2: still unless acting (§3.1); was an always-on sine sway
     for (const sx of [-1, 1]) {
       g.save(); g.translate(sx * 40, -182); g.rotate(-sx * (0.13 + sway));
       rr(-9, 0, 18, 72, 9); clayFill(o.skin, 0, 72);
@@ -416,6 +435,19 @@
     g.fillStyle = P.shirt; ell(x - 3, y, 7, 9); g.fill();
     g.fillStyle = P.hair; circ(x - 2, y, 5); g.fill();
   }
+  // v2 tilt-shift (§4.4): the top-down town reads as a clay miniature. Sharp band around the subject, 12 px blur
+  // outside, feathered. Works in screen space on whatever g is drawing into.
+  const bufS = mk();
+  function tiltShift(y0, y1) {
+    const c = g.canvas, fe = 0.12 * H;
+    bufS.setTransform(1, 0, 0, 1, 0, 0); bufS.globalCompositeOperation = 'source-over'; bufS.clearRect(0, 0, W, H);
+    bufS.filter = 'blur(12px)'; bufS.drawImage(c, 0, 0); bufS.filter = 'none';
+    const m = bufS.createLinearGradient(0, 0, 0, H);
+    m.addColorStop(0, 'rgba(0,0,0,1)'); m.addColorStop(Math.max(0, y0 - fe / H), 'rgba(0,0,0,1)'); m.addColorStop(y0, 'rgba(0,0,0,0)');
+    m.addColorStop(y1, 'rgba(0,0,0,0)'); m.addColorStop(Math.min(1, y1 + fe / H), 'rgba(0,0,0,1)'); m.addColorStop(1, 'rgba(0,0,0,1)');
+    bufS.globalCompositeOperation = 'destination-in'; bufS.fillStyle = m; bufS.fillRect(0, 0, W, H); bufS.globalCompositeOperation = 'source-over';
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.drawImage(bufS.canvas, 0, 0); g.restore();
+  }
   function cam2d(cx, cy, sc, rot) { g.translate(W / 2, H / 2); g.rotate(rot); g.scale(sc, sc); g.translate(-cx, -cy); }
 
   // ---------- old map on a table (shots 5, 6) ----------
@@ -545,9 +577,25 @@
     { x: 660, shirt: '#2F5DA8', hat: '#E3A72F', band: P.ind, skin: '#F0C9A8', ph: 1.7 },
     { x: 900, shirt: '#E3A72F', hat: '#F3E2B5', band: P.leaf, skin: '#8B5A3C', ph: 2.4 },
   ];
+  // v2 outline (§4.8): draw the characters off-screen with drop shadows off, stamp a tinted copy 8 times around
+  // (2.2x thicker on the bottom/shadow side), then the characters on top. px is screen pixels, not scaled by zoom.
+  const bufO = mk(), bufT = mk(), bufK = mk();
+  function outlined(px, drawFn) {
+    const old = g, tr = g.getTransform();
+    bufO.setTransform(1, 0, 0, 1, 0, 0); bufO.clearRect(0, 0, W, H); bufO.setTransform(tr); bufO.globalAlpha = 1; bufO.filter = 'none';
+    g = bufO; OUTLINING = true; soft(false); drawFn(); OUTLINING = false; g = old;
+    bufO.setTransform(1, 0, 0, 1, 0, 0);
+    bufT.setTransform(1, 0, 0, 1, 0, 0); bufT.globalCompositeOperation = 'source-over'; bufT.clearRect(0, 0, W, H); bufT.drawImage(bufO.canvas, 0, 0);
+    bufT.globalCompositeOperation = 'source-in'; bufT.fillStyle = '#2A1A14'; bufT.fillRect(0, 0, W, H); bufT.globalCompositeOperation = 'source-over';
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.filter = 'none';
+    for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4, dy = Math.sin(a) * px; g.drawImage(bufT.canvas, Math.cos(a) * px, dy > 0 ? dy * 2.2 : dy); }
+    g.drawImage(bufO.canvas, 0, 0);
+    g.restore();
+  }
   function shot3(s, opt = {}) {
     const pk = 1 + 0.06 * clamp(s / 3);
     g.save(); g.translate(W / 2, H * 0.55); g.scale(pk, pk); g.translate(-W / 2, -H * 0.55);
+    g.filter = 'blur(8px)';   // v2: background blur behind the characters (§4.1); characters stay sharp
     const sk = g.createLinearGradient(0, 0, 0, 760); sk.addColorStop(0, '#7FBFE0'); sk.addColorStop(1, '#F7E3B8');
     g.fillStyle = sk; g.fillRect(-100, -100, W + 200, 870);
     const sea = g.createLinearGradient(0, 760, 0, 1060); sea.addColorStop(0, '#4D9AC0'); sea.addColorStop(1, '#2F6F96');
@@ -561,10 +609,12 @@
     for (let x = -60; x < W + 100; x += 90) { rr(x, 960, 16, 110, 6); clayFill('#EFE6D2', 960, 1070); }
     rr(-100, 950, W + 200, 22, 10); clayFill('#F4EDDE', 950, 972);
     soft(false);
-    TOURISTS.forEach(p => {
+    g.filter = 'none';
+    TOURISTS.forEach(p => { g.fillStyle = 'rgba(31,42,68,0.3)'; ell(p.x, 1383, 64 * 1.45, 11 * 1.45); g.fill(); });
+    outlined(4, () => TOURISTS.forEach(p => {
       body(p.x, 1380, 1.45, { shirt: p.shirt, trou: '#E6DCC8', skin: p.skin, ph: p.ph }, s);
       touristHead(p.x, 1380 - 240 * 1.45, 36 * 1.45, p, s);
-    });
+    }));
     g.restore();
     if (!opt.noRibbon) ribbon(s, 0);
     if (!opt.noText) { const pp = pop(s, 0.3); titleIcon('French?', 300, 128, pp.a, pp.sc, 110, flagIcon('fr', s)); }
@@ -708,7 +758,7 @@
   }
 
   // ---------- v2 shots: each cut lands on the voice (timeline.js); every shot keeps moving ----------
-  const HOOK_TITLE = [[['நம்ம பாண்டி தெரு ஏன்', P.kol]], [['chess board', P.tur], [' மாதிரி?', P.kol]]];
+  const HOOK_TITLE = [[['திட்டுங்க', P.kol]], [['Dutch-அ!', P.tur]]];   // v10 hook (locked with Vasanth 2026-11-14)   // v9b: hook A (Vasanth's pick, 2026-11-14)
   // Mani's scooter route through the grid streets (street centres: x 208/394/580/766, y 308 + 186k)
   const ROUTE = [[394, 1560], [394, 1238], [766, 1238], [766, 866], [208, 866], [208, 494], [580, 494]];
   function routeAt(d) {
@@ -732,7 +782,8 @@
   function hookCam(d) { const c = routeAt(Math.max(0, d - 70)); return [c.x, c.y + HOOK_DY]; }
   function hook(s) {
     const d = s * HOOK_SPEED, p = routeAt(d), [cx, cy] = hookCam(d);
-    g.save(); cam2d(cx, cy, HOOK_SCALE, Math.sin(s * 2.4) * 0.025); town(s); topScooterR(p.x, p.y, p.ang, s); g.restore();
+    g.save(); cam2d(cx, cy, HOOK_SCALE, 0); town(s); topScooterR(p.x, p.y, p.ang, s); g.restore();   // v2: no continuous roll (§2.7)
+    tiltShift(0.27, 0.5);   // the scooter sits at about y 0.38
     // dizzy question marks circling him
     const sx = W / 2 + (p.x - cx) * HOOK_SCALE, sy = H / 2 + (p.y - cy) * HOOK_SCALE;
     g.font = `900 46px ${EN}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
@@ -742,7 +793,7 @@
       g.globalAlpha = k; g.strokeStyle = P.kol; g.lineWidth = 9; g.strokeText('?', x, y); g.fillStyle = P.red; g.fillText('?', x, y);
     }
     g.globalAlpha = 1;
-    title(HOOK_TITLE, CXS, 300, 100, 1, 1 + 0.03 * Math.sin(s * 6));
+    title(HOOK_TITLE, CXS, 300, 100, 1, 1);
   }
   function lost(s) {
     const e = ease(s / 0.25);   // whip: the next street slides in, and it is identical
@@ -882,7 +933,7 @@
   function wordS(name, sub, dflt) {
     const c = TL.shots.find(x => x.name === name); if (!c) return dflt;
     const w = (TL.words || []).find(w => w.t0 >= c.t0 - 0.01 && w.t0 < c.t1 && w.w.includes(sub));
-    return w ? w.t0 - c.t0 : dflt;
+    return w ? w.t0 - c.t0 - 2 / 30 : dflt;   // v2: reactions start 2 frames before their word (§2.11)
   }
   function parchment(x, y, w, h) {
     soft(true, 34, 16, 0.5); rr(x, y, w, h, 10);
@@ -911,7 +962,7 @@
     const pp = pop(s, 0.25);
     title([[['map வரைஞ்சது யாரு?', P.kol]]], CXS, 300, 92, pp.a, pp.sc);
     // "French இல்ல": the French flag appears beside the seal and gets a red cross
-    const no = wordS('foreshadow', 'இல்ல', d - 0.6), fa = clamp((s - (no - 0.7)) / 0.25);
+    const no = wordS('foreshadow', 'இல்ல', d - 0.6), fa = clamp((s - (no - 0.7)) / 0.25);   // flag shows, crossed on "French இல்ல"
     if (fa > 0) {
       g.save(); g.globalAlpha = fa; g.translate(CXS, 880); g.scale(1.7, 1.7);
       soft(true, 20, 10, 0.4); g.fillStyle = 'rgba(0,0,0,0.001)'; g.fillRect(-70, -45, 140, 90); soft(false);
@@ -1011,7 +1062,7 @@
     tags.forEach(([txt, col], i) => {
       const k = back((s - 0.1 - i * 0.25) / 0.3); if (k <= 0) return;
       const y = 330 + i * 125, glow = i === 0 ? win(s, fr - 0.1, d, 0.15) : 0;
-      g.save(); g.translate(CXS, y); g.scale(k * (1 + 0.08 * glow), k * (1 + 0.08 * glow)); g.rotate((i - 1) * 0.04);
+      g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.translate(CXS, y); g.scale(k * (1 + 0.08 * glow), k * (1 + 0.08 * glow)); g.rotate((i - 1) * 0.04);
       g.font = `800 76px ${TA}`; const w = g.measureText(txt).width + 70;
       soft(true, 18, 8, 0.35); rr(-w / 2, -52, w, 104, 30); g.fillStyle = glow > 0 ? `rgba(227,167,47,${0.95})` : P.ind; g.fill(); soft(false);
       g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = glow > 0 ? P.ind : col; g.fillText(txt, 0, 4);
@@ -1039,10 +1090,10 @@
     g.restore(); g.restore();
     const flash = 1 - clamp((s - rv) / 0.25);
     if (s >= rv && flash > 0) { g.fillStyle = `rgba(255,255,255,${0.6 * flash})`; g.fillRect(0, 0, W, H); }
-    const yr = pop(s, 0.3);
-    title([[['1693', P.kol]]], CXS, 300, 110, yr.a * (1 - clamp((s - rv) / 0.2)), yr.sc);
     const pp = pop(s, rv + 0.05, 0.4);
     titleIcon('Dutch!', 300, 132, pp.a, pp.sc, 110, flagIcon('nl', s));
+    const yr = pop(s, wordS('twist', '1693', rv + 1.5), 0.35);   // v9: the year is said after "Dutch", so it lands under it
+    title([[['1693', P.tur]]], CXS, 450, 96, yr.a, yr.sc);
   }
   function card7(s, d) {
     g.fillStyle = P.ind; g.fillRect(0, 0, W, H);
@@ -1051,10 +1102,11 @@
     kolamBorder(clamp(s / 0.9), back((s - 0.2) / 0.4));
     // note #1: the card was one line high up with an empty middle. Now a centred two-step card:
     // [mini map + Dutch flag] "Plan: Dutch"  ->  [mini town + French flag] "கட்டினது: French"
-    const b = wordS('card', 'கட்டினது', d * 0.5);
+    // v9: the card carries the kolam analogy ("புள்ளி வெச்சது Dutch. கோலம் போட்டது French."), not a recap
+    const a1 = wordS('card', 'புள்ளி', d * 0.35), b = wordS('card', 'போட்டது', d * 0.6);
     const head = pop(s, 0.0, 0.3);
-    title([[['சுருக்கமா…', P.tur]]], CXS, 560, 64, head.a, head.sc);
-    cardPanel(790, back((s - 0.08) / 0.35), 'nl', 'Plan', 'Dutch', mapIcon, s);
+    title([[['கோலம் மாதிரி!', P.tur]]], CXS, 560, 64, head.a, head.sc);
+    cardPanel(790, back((s - a1) / 0.35), 'nl', 'புள்ளி வெச்சது', 'Dutch', mapIcon, s);
     const ar = clamp((s - b + 0.25) / 0.25);
     g.save(); g.globalAlpha = 0.35 + 0.65 * ar; g.translate(CXS, 1035 + Math.sin(s * 6) * 4); g.strokeStyle = P.tur; g.lineWidth = 12; g.lineCap = 'round'; g.lineJoin = 'round';   // arrow from step 1 to step 2
     g.beginPath(); g.moveTo(0, -40); g.lineTo(0, 30); g.moveTo(-26, 6); g.lineTo(0, 32); g.lineTo(26, 6); g.stroke(); g.restore();
@@ -1064,7 +1116,7 @@
       g.save(); g.globalAlpha = a; g.setLineDash([18, 14]); g.strokeStyle = 'rgba(247,243,234,0.45)'; g.lineWidth = 4; rr(CXS - 400, 1280 - 125, 800, 250, 34); g.stroke(); g.setLineDash([]);
       g.font = `900 120px ${EN}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = 'rgba(247,243,234,0.45)'; g.fillText('?', CXS, 1286); g.restore();
     }
-    cardPanel(1280, k2, 'fr', 'கட்டினது', 'French', townIcon, s);
+    cardPanel(1280, k2, 'fr', 'கோலம் போட்டது', 'French', townIcon, s);
   }
   function cardPanel(cy, k, kind, label, word, icon, s) {
     if (k <= 0) return;
@@ -1095,14 +1147,22 @@
     g.save(); cam2d(ROUTE[0][0], py + HOOK_DY, lerp(3.2, HOOK_SCALE, k), 0);
     town(s - d); topScooterR(ROUTE[0][0], py, -Math.PI / 2, s - d);
     g.restore();
+    tiltShift(0.27, 0.5);   // same band as hook, so the loop still lands on hook's frame 0
     title(HOOK_TITLE, CXS, 300, 100, clamp((s - (d - 0.35)) / 0.3), 1);
   }
 
   // ---------- shot list (also VideoHub's scene lane) ----------
   const DRAW = { hook, foreshadow, contrast, ruler, guess, twist: twist7, french, card: card7, loop: loop7 };
-  const TIN = { foreshadow: 'cut', contrast: 'whip', ruler: 'cut', guess: 'whip', twist: 'cut', french: 'cut', card: 'fade', loop: 'cut' };
+  // v2: one whip per film (§2.8): contrast is now a plain cut, guess keeps the whip
+  const TIN = { foreshadow: 'cut', contrast: 'cut', ruler: 'cut', guess: 'whip', twist: 'cut', french: 'cut', card: 'fade', loop: 'cut' };
+  const PUNCH = new Set(['twist']);              // zoom punch-in only on the beat cut into the reveal (§2.10)
+  const NO_PUSH = new Set(['card', 'loop']);     // card is a planned still graphic; loop must land exactly on hook's frame 0
+  const VIGNETTE = new Set(['hook', 'guess', 'loop']);   // day/town shots; table shots keep their own lamp pool (§4.13)
   const SHOTS = TL.shots.map((c, k) => ({ name: c.name, t0: c.t0, t1: c.t1, draw: DRAW[c.name], tin: TIN[c.name] || 'cut', n: k + 1 }));
   window.VH_SCENES = SHOTS.map(sh => ({ name: `${sh.n} ${sh.name}`, t0: sh.t0, t1: sh.t1 }));
+  // the one real hit: the "?" patch rips off on "Dutch" (same word time twist7 uses)
+  const TWIST = SHOTS.find(x => x.name === 'twist');
+  const KICKS = TWIST ? [[TWIST.t0 + wordS('twist', 'Dutch', (TWIST.t1 - TWIST.t0) * 0.75), 1]] : [];
 
   // ---------- kinetic Tamil captions: 2-4 word phrases timed to speech (playbook), the spoken word lit in turmeric ----------
   const CAP_SIZE = 66, CAP_Y = 1300, CAP_MAX = 780;
@@ -1156,9 +1216,34 @@
     g.restore();
   }
 
+  // v2 camera push (§2.1-2.3): every shot keeps pushing in, near-linear, 0.15-0.25 %/frame, capped at +20 % per shot
+  function pushAt(sh, s) {
+    if (NO_PUSH.has(sh.name)) return 1;
+    const rate = Math.min(0.075, 0.2 / (sh.t1 - sh.t0));
+    const x = Math.max(0, s), e = 0.25;   // 0.25 s ease-in only at the start, never eased to a stop
+    return 1 + rate * (x < e ? x * x / (2 * e) : x - e / 2);
+  }
+  // v2 reframes (§2.2, §2.5): on word times from timeline.js, glide 0.6 s (smootherstep) to a new framing; the moves
+  // add up within a shot and are clamped so the frame edge never shows
+  const RF_STEPS = [[46, -34, 0.05], [-64, 26, 0.045], [38, 44, 0.05], [-40, -28, 0.04]];
+  const RF = {};
+  (TL.reframes || []).forEach(r => { (RF[r.shot] = RF[r.shot] || []).push(r.t); });
+  // roll moves (§2.7): 1-2 per film, 3°, glided over 0.8 s on an emphasis word, held to the end of the shot
+  const ROLLS = [['foreshadow', 'இல்ல', 3], ['twist', 'Dutch', -2.5]];
+  function frameAt(sh, s) {
+    let dx = 0, dy = 0, dz = 0, rot = 0;
+    (RF[sh.name] || []).forEach((t, k) => { const e = glide((sh.t0 + s - t) / 0.6), st = RF_STEPS[k % RF_STEPS.length]; dx += st[0] * e; dy += st[1] * e; dz += st[2] * e; });
+    for (const [name, sub, deg] of ROLLS) if (name === sh.name) { const w = wordS(name, sub, -1); if (w >= 0) rot += deg * glide((s - w) / 0.8); }
+    return { dx, dy, dz, rot: rot * Math.PI / 180 };
+  }
   function drawInto(ctx, sh, s) {
     const old = g; g = ctx;
     g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.filter = 'none'; soft(false); g.clearRect(0, 0, W, H);
+    const f = frameAt(sh, s), r = Math.abs(f.rot);
+    const pk = pushAt(sh, s) * (1 + f.dz) * (Math.cos(r) + (H / W) * Math.sin(r));   // rolls overscale to hide corners
+    const mx = CXS * (pk - 1), Mx = (W - CXS) * (pk - 1), my = 900 * (pk - 1), My = (H - 900) * (pk - 1);
+    const dx = clamp(f.dx, -Mx, mx), dy = clamp(f.dy, -My, my);
+    g.setTransform(1, 0, 0, 1, CXS + dx, 900 + dy); g.rotate(f.rot); g.scale(pk, pk); g.translate(-CXS, -900);   // push around the action centre
     sh.draw(s, sh.t1 - sh.t0);
     g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; soft(false);
     g = old;
@@ -1169,7 +1254,7 @@
     t = clamp(+t || 0, 0, DUR);
     let i = SHOTS.findIndex(sh => t >= sh.t0 && t < sh.t1); if (i < 0) i = SHOTS.length - 1;
     const sh = SHOTS[i], s = t - sh.t0, m = mainCtx;
-    const D = sh.tin === 'whip' ? 0.22 : sh.tin === 'fade' ? 0.25 : 0;
+    const D = sh.tin === 'whip' ? 0.5 : sh.tin === 'fade' ? 0.25 : 0;   // v2 whip: 15 f, smootherstep, peak ~135 px/f (§2.8)
     if (i > 0 && D > 0 && s < D) {
       const pv = SHOTS[i - 1], ps = t - pv.t0, k = ease(s / D);
       if (sh.tin === 'fade') {
@@ -1178,20 +1263,33 @@
       } else {
         drawInto(bufA, pv, ps); drawInto(bufB, sh, s);
         m.setTransform(1, 0, 0, 1, 0, 0); m.clearRect(0, 0, W, H);
-        for (const j of [0, 2, 1]) {
-          const o = (j - 1) * 50 * Math.sin(Math.PI * k);
-          m.globalAlpha = j === 1 ? 1 : 0.35;
-          m.drawImage(bufA.canvas, -k * W + o, 0); m.drawImage(bufB.canvas, W - k * W + o, 0);
+        // real motion blur: the pair drawn 10 times across half a frame of motion, exact running average
+        for (let j = 0; j < 10; j++) {
+          const kk = glide((s - (j / 9) * 0.5 / 30) / D);
+          m.globalAlpha = 1 / (j + 1);
+          m.drawImage(bufA.canvas, -kk * W, 0); m.drawImage(bufB.canvas, W - kk * W, 0);
         }
         m.globalAlpha = 1;
       }
-    } else if (i > 0 && sh.tin === 'cut' && s < 0.18) {   // punch-in on a hard cut
+    } else if (i > 0 && PUNCH.has(sh.name) && s < 0.18) {   // punch-in on the one beat cut
       drawInto(bufB, sh, s);
       const k = 1 + 0.07 * (1 - out3(s / 0.18));
       m.setTransform(1, 0, 0, 1, 0, 0); m.clearRect(0, 0, W, H);
       m.drawImage(bufB.canvas, W / 2 - W * k / 2, H / 2 - H * k / 2, W * k, H * k);
     } else drawInto(m, sh, s);
     g = m; g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; soft(false);
+    // impact kick on the reveal (§2.9): 7 frames, offset flips sign every frame, 1 % overscale hides the edge
+    const kn = KICKS.map(([k0, gain]) => [Math.floor((t - k0) * 30 + 1e-6), gain]).find(([n]) => n >= 0 && n < 7);
+    if (kn) {
+      const [n, gain] = kn, sg = n % 2 ? -1 : 1, d = Math.pow(1 - n / 7, 1.5), dx = 4.5 * gain * d * sg, rot = 0.2 * Math.PI / 180 * d * sg;
+      bufK.setTransform(1, 0, 0, 1, 0, 0); bufK.clearRect(0, 0, W, H); bufK.drawImage(m.canvas, 0, 0);
+      m.save(); m.clearRect(0, 0, W, H); m.translate(W / 2 + dx, H / 2 + dx * 0.6); m.rotate(rot); m.scale(1.01, 1.01); m.drawImage(bufK.canvas, -W / 2, -H / 2); m.restore();
+    }
+    if (VIGNETTE.has(sh.name)) {   // light indigo vignette under the captions: corners about 0.86 of centre
+      const v = m.createRadialGradient(W / 2, H * 0.48, H * 0.3, W / 2, H * 0.48, H * 0.62);
+      v.addColorStop(0, 'rgba(31,42,68,0)'); v.addColorStop(1, 'rgba(31,42,68,0.22)');
+      m.fillStyle = v; m.fillRect(0, 0, W, H);
+    }
     captions(t, sh.name);
   };
 

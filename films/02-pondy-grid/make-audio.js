@@ -8,7 +8,7 @@ const fs = require('fs'), path = require('path');
 const { execFileSync } = require('child_process');
 const SR = 44100, TAU = Math.PI * 2, FF = process.env.FFMPEG || 'ffmpeg';
 const VO_AT = 0.12, PRE_CUT = 0.06, TAIL = 0.5;
-const TEMPO = +(process.env.TEMPO || 1.08);   // pitch-preserving speed-up of the take (ffmpeg atempo); timings scale with it   // voice starts 0.12 s in; cuts land 60 ms before a line
+const TEMPO = +(process.env.TEMPO || 1.08);   // v10: 1.08x by Vasanth's ear (natural speed felt slow), overriding film-craft §1.7   // pitch-preserving speed-up of the take (ffmpeg atempo); timings scale with it   // voice starts 0.12 s in; cuts land 60 ms before a line
 
 // ---------- 1. voice + alignment -> timeline ----------
 const { segments } = JSON.parse(fs.readFileSync(path.join(__dirname, 'vo', 'script.json'), 'utf8'));
@@ -43,6 +43,24 @@ const sdur = name => shot(name).t1 - shot(name).t0;
 const REVEAL = (words.find(w => w.w.includes('Dutch') && w.t0 >= cuts.find(c => c.name === 'twist').t0) || { t0: 0 }).t0;
 const wordAt = (name, sub) => { const c = cuts.find(c => c.name === name); const w = words.find(w => w.t0 >= c.t0 - 0.01 && w.t0 < c.t1 && w.w.includes(sub)); return w ? w.t0 : c.t0; };
 const shotAt = t => (cuts.find(c => t >= c.t0 && t < c.t1) || cuts[cuts.length - 1]).name;
+// v2 (kit/film-craft.md §5.2): music stops dead at the twist cut and stays out until the "Dutch" line has landed
+const REVEAL_END = (segT.find(([a, b]) => REVEAL >= a && REVEAL <= b) || [0, REVEAL + 0.5])[1];
+const STOP0 = at('twist', 0), STOP1 = REVEAL_END + 0.15;
+// v2 (§2.2): a new framing at least every ~1.8 s. Reframe glides start on a word, chosen here once and written to
+// timeline.js, so film.js (the move) and the whoosh below read the same times. Hook tracks the scooter, card is a
+// still graphic and loop must land on hook's frame 0, so they get none.
+const REFRAMES = [];
+for (const c of cuts) {
+  if (['hook', 'card', 'loop'].includes(c.name)) continue;
+  const from = c.t0 + (c.name === 'guess' ? 0.8 : 0.6), to = c.t1 - 0.5, ws = words.filter(w => w.t0 > from && w.t0 < to);
+  let last = c.t0;
+  for (;;) {
+    const target = last + 1.8, ok = ws.filter(w => w.t0 >= last + 1.2 && Math.abs(w.t0 - target) <= 0.6);
+    if (!ok.length) break;
+    const w = ok.reduce((a, b) => Math.abs(b.t0 - target) < Math.abs(a.t0 - target) ? b : a);
+    REFRAMES.push({ shot: c.name, t: +(w.t0 - 2 / 30).toFixed(3) }); last = w.t0;
+  }
+}
 
 // ---------- helpers ----------
 let L = new Float32Array(N), R = new Float32Array(N);
@@ -74,8 +92,9 @@ function pluck(f, d, decay = 0.995) {
 // ---------- 2. music bed ----------
 const B = 60 / 112;
 const PROG = [[50, [62, 66, 69, 74]], [47, [59, 62, 66, 71]], [43, [55, 59, 62, 67]], [45, [57, 61, 64, 69]]];   // D Bm G A
-const level = t => { const n = shotAt(t); if (n === 'twist') return t < REVEAL ? 0.25 : 1; return ({ guess: 0.6, card: 0.8, hook: 0.85, loop: 0.85 })[n] ?? 1; };
-const drums = t => { const n = shotAt(t); return !(['guess', 'card'].includes(n) || (n === 'twist' && t < REVEAL)); };
+// music states (§5.4): hook full, explain light, tension (pedal + ticks), stop (silence), payoff, end
+const level = t => { if (t >= STOP0 && t < STOP1) return 0; const n = shotAt(t); return ({ hook: 1, loop: 0.9, foreshadow: 0.7, contrast: 0.7, ruler: 0.7, guess: 0.45, twist: 1, french: 0.85, card: 0.8 })[n] ?? 0.8; };
+const drums = t => { const n = shotAt(t); return !(['guess', 'card'].includes(n) || (t >= STOP0 && t < STOP1)); };
 const PAT = [0, 2, 1, 3, 2, 1, 3, 2];
 for (let beat = 0; beat * B < DUR; beat++) {
   const t = beat * B, [root, ch] = PROG[Math.floor(beat / 4) % 4];
@@ -92,7 +111,13 @@ for (let beat = 0; beat * B < DUR; beat++) {
   if (drums(t)) addBuf(t + B / 2, env(hp(noise(0.05), 0.5), x => Math.exp(-x * 80)), 0.3, 0.06);
 }
 { const d = sdur('card') + 0.2; for (const m of [62, 66, 69]) add(at('card', 0), d, x => Math.sin(TAU * midi(m) * x) * Math.min(1, x / 0.4) * Math.min(1, (d - x) / 0.5), (m - 66) / 6, 0.05); }
-{ const d = REVEAL - at('guess', 0); add(at('guess', 0), d, x => Math.sin(TAU * midi(38) * x) * Math.min(1, x / 0.3) * Math.min(1, (d - x) / 0.1), 0, 0.1); }   // suspense drone up to the reveal
+{ const d = STOP0 - at('guess', 0); add(at('guess', 0), d, x => Math.sin(TAU * midi(38) * x) * Math.min(1, x / 0.3) * Math.min(1, (d - x) / 0.012), 0, 0.1); }   // tension pedal, cut dead at the stop
+// the stop: a 12 ms fade on everything that rings over STOP0 (no click), silence until STOP1
+{ const a = Math.round(STOP0 * SR), b = Math.min(N, Math.round(STOP1 * SR)), f = Math.round(0.012 * SR); for (let i = a; i < b; i++) { const k = i < a + f ? 1 - (i - a) / f : 0; L[i] *= k; R[i] *= k; } }
+// the return: a tonic "button" chord (D major) right after the answer lands
+for (const m of [50, 62, 66, 69, 74]) add(STOP1, 1.4, x => (Math.sin(TAU * midi(m) * x) + 0.3 * Math.sin(TAU * 2 * midi(m) * x)) * Math.min(1, x / 0.005) * Math.exp(-x * 2.6), (m - 64) / 20, 0.07);
+// composed ending (§5.12): tonic chord on the last word, nothing after it, ring out
+{ const tl = words[words.length - 1].t0, d = DUR - tl; for (const m of [50, 57, 62, 66]) add(tl, d, x => Math.sin(TAU * midi(m) * x) * Math.min(1, x / 0.01) * Math.exp(-x * 1.5) * Math.min(1, (d - x) / 0.2), 0, 0.06); }
 const ML = L, MR = R; L = new Float32Array(N); R = new Float32Array(N);   // from here on: effects
 
 // ---------- 3. effects ----------
@@ -116,13 +141,45 @@ whoosh(at('foreshadow', -0.05), 0.35); rustle(at('foreshadow', 0.05), 0.6);
 whoosh(at('contrast', -0.05), 0.3); { const t = wordAt('contrast', 'ஆனா'); whoosh(t - 0.1, 0.3, 0.4); }
 for (let k = 0; k < 6; k++) { const t = at('ruler', 0.3 + k * 0.55); addBuf(t, env(hp(noise(0.35), 0.35), (x, l) => Math.sin(Math.PI * x / l)), (k % 2 ? 0.3 : -0.3), 0.14); pop(t + 0.3, 900 + k * 60); }   // pencil strokes + houses
 whoosh(at('guess', -0.05), 0.3); [0.1, 0.35, 0.6].forEach((o, i) => pop(at('guess', o), 600 + i * 150));
-for (let t = at('guess', 0.9); t < REVEAL - 0.25; t += 0.5) knock(t, 0);   // clock ticking towards the reveal
-addBuf(REVEAL - 0.9, env(lp(noise(0.9), x => 0.02 + 0.3 * (x / 0.9)), (x, l) => Math.pow(x / l, 2)), 0, 0.25);   // riser
-snap(REVEAL); boom(REVEAL); bell(REVEAL + 0.05, 440, 0.12); pop(REVEAL + 0.08, 420);   // reveal sting
+// v2 (§5.3): one tempo grid. Ticks sit on the 112 BPM beat, not on a 120 BPM half-second
+const onGrid = (t, step) => Math.ceil(t / step - 1e-9) * step;
+for (let t = onGrid(at('guess', 0.9), B); t < REVEAL - 0.25; t += B) knock(t, 0);   // clock ticking towards the reveal
+addBuf(REVEAL - 0.9, env(lp(noise(0.9), x => 0.02 + 0.3 * (x / 0.9)), (x, l) => Math.pow(x / l, 2)), 0, 0.25);   // riser into the reveal
+// v2 (§5.1): never a loud hit on the key word. Only the short high snap sits on "Dutch"; the boom (with a
+// 150-700 Hz layer for phones, §5.9) and the bell land in the gap right after the line
+snap(REVEAL - 1 / 30); boom(REVEAL_END + 0.02); add(REVEAL_END + 0.02, 0.25, x => Math.sin(TAU * 220 * x) * Math.exp(-x * 14), 0, 0.18); bell(REVEAL_END + 0.07, 440, 0.12); pop(REVEAL_END + 0.1, 420);
 pop(at('french', 0.5), 760); bell(at('french', 0.3), 784, 0.08, 0.4);
-for (let x = 0.9; x < sdur('french') - 0.3; x += 0.27) knock(at('french', x), Math.round(x / 0.27) % 2 ? 0.4 : -0.4);
-whoosh(at('card', -0.1), 0.3); bell(at('card', 0.05), 587, 0.1); bell(wordAt('card', 'கட்டினது'), 880, 0.06);
+for (let t = onGrid(at('french', 0.9), B / 2), k = 0; t < at('french', sdur('french') - 0.3); t += B / 2, k++) knock(t, k % 2 ? 0.4 : -0.4);
+whoosh(at('card', -0.1), 0.3); bell(at('card', 0.05), 587, 0.1); bell(wordAt('card', 'புள்ளி'), 587, 0.06); bell(wordAt('card', 'போட்டது'), 880, 0.06);
 whoosh(at('loop', 0), 0.45, 0, 0.35);
+whoosh(at('guess', 0.15), 0.5, 0.3, 0.3);   // the whip (now 0.5 s) gets its own swell
+// a soft whoosh on every reframe glide (§5.8): peak ~80 ms after the move starts, 0.5 s long, alternating pan
+REFRAMES.forEach((r, k) => whoosh(r.t - 0.17, 0.5, k % 2 ? 0.35 : -0.35, 0.16));
+const SL = L, SR_ = R;   // effects stem
+
+// ---------- 3b. ambience bed (§5.5): always on, one per place, crossfaded at the cuts ----------
+L = new Float32Array(N); R = new Float32Array(N);
+const PLACE = { hook: 'town', loop: 'town', foreshadow: 'room', contrast: 'room', ruler: 'room', twist: 'room', french: 'room', card: 'room', guess: 'sea' };
+{
+  // three continuous beds, each a pure noise texture; gains follow the current place with a 0.2 s crossfade
+  const sea = lp(noise(DUR), 0.05), town = hp(lp(noise(DUR), 0.12), 0.01), room = lp(noise(DUR), 0.02);
+  const placeGain = (name, t) => { const c = cuts.find(c => t >= c.t0 - 0.1 && t < c.t1 + 0.1 && PLACE[c.name] === name); if (!c) return 0; return Math.min(1, (t - c.t0 + 0.1) / 0.2, (c.t1 + 0.1 - t) / 0.2); };
+  for (let i = 0; i < N; i++) {
+    const t = i / SR, gs = placeGain('sea', t), gt = placeGain('town', t), gr = placeGain('room', t);
+    const swell = 0.55 + 0.45 * Math.sin(TAU * t / 6.5) * Math.sin(TAU * t / 2.3);   // slow waves
+    const v = sea[i] * gs * swell * 1.6 + town[i] * gt * 0.8 + room[i] * gr * 1.4;
+    L[i] += v; R[i] += v * 0.92;
+  }
+  // a few far birds over the town, and small gulls over the sea
+  for (const c of cuts) {
+    const p = PLACE[c.name]; if (p === 'room') continue;
+    for (let t = c.t0 + 0.3 + rng() * 0.6; t < c.t1 - 0.2; t += 0.9 + rng() * 1.4) {
+      const f = p === 'sea' ? 1400 + rng() * 300 : 2600 + rng() * 900, d = 0.12 + rng() * 0.1, pan = rng() * 1.4 - 0.7;
+      add(t, d, x => Math.sin(TAU * (f * x - 0.3 * f * x * x / d)) * Math.sin(Math.PI * x / d), pan, 0.05);
+    }
+  }
+}
+const AL = L, AR = R;
 
 // ---------- 4. mix: voice on top, music ducks with a follower on the voice ----------
 const vb = execFileSync(FF, ['-v', 'error', '-i', path.join(__dirname, 'vo', 'vo.mp3'), '-af', 'atempo=' + TEMPO, '-ac', '1', '-ar', String(SR), '-f', 'f32le', '-'], { maxBuffer: 1 << 28 });
@@ -145,23 +202,48 @@ function lufs(Lc, Rc) {   // integrated loudness (EBU R128) via ffmpeg
   const r = spawnSync(FF, ['-hide_banner', '-nostats', '-i', f, '-af', 'ebur128', '-f', 'null', '-'], { encoding: 'utf8' }); fs.unlinkSync(f);
   const m = [...r.stderr.matchAll(/I:\s+(-?[\d.]+) LUFS/g)].pop(); return m ? +m[1] : -70;
 }
-const VOICE_LUFS = -14, BED_LUFS = -27;
-// bed = ducked music + effects (ducking follows the voice envelope)
-const BL = new Float32Array(N), BR = new Float32Array(N), vp = 0.9 / Math.max(1e-6, peakOf(VL));
-let e = 0; const att = 1 - Math.exp(-1 / (0.01 * SR)), rel = 1 - Math.exp(-1 / (0.35 * SR));
-for (let i = 0; i < N; i++) {
-  const x = Math.abs(VL[i] * vp); e += (x - e) * (x > e ? att : rel);
-  const duck = 1 - 0.6 * Math.min(1, e / 0.08);
-  BL[i] = ML[i] * duck + L[i] * 0.9; BR[i] = MR[i] * duck + R[i] * 0.9;
-}
-const vI = lufs(VL, VL), bI = lufs(BL, BR);
-const vg = Math.pow(10, (VOICE_LUFS - vI) / 20), bg = Math.pow(10, (BED_LUFS - bI) / 20);
-for (let i = 0; i < N; i++) { L[i] = BL[i] * bg + VL[i] * vg; R[i] = BR[i] * bg + VL[i] * vg; }
-// soft limiter to keep peaks under about -1 dBFS, plus a short fade at the very end
-for (let i = 0; i < N; i++) { const f = Math.min(1, (N - i) / (SR * 0.12)); L[i] = 0.89 * Math.tanh(L[i] * f / 0.89); R[i] = 0.89 * Math.tanh(R[i] * f / 0.89); }
+// v2 (§5.6, 5.10): every stem measured on its own and set relative to the voice. Music 12 LU under (10-14 LU,
+// Vasanth's choice for older listeners), effects 11 LU under, ambience 28 LU under.
+const VOICE_LUFS = -14, MUSIC_LUFS = -26, SFX_LUFS = -25, AMB_LUFS = -42;
+// v2 (§5.7): duck the music from word times, not from the audio: -3.5 dB, attack 70 ms, release 450 ms,
+// word gaps under 0.3 s merged, plus a further -2.5 dB ride under each sentence-final word
+const spans = [];
+for (const w of words) { const l = spans[spans.length - 1]; if (l && w.t0 - l[1] < 0.3) l[1] = w.t1; else spans.push([w.t0, w.t1]); }
+const finals = segT.map(([, b]) => b);
+const DK = new Float32Array(N);
+{ let gdb = 0, si = 0; const att = 1 - Math.exp(-1 / (0.07 * SR)), rel = 1 - Math.exp(-1 / (0.45 * SR));
+  for (let i = 0; i < N; i++) {
+    const t = i / SR; while (si < spans.length && spans[si][1] < t) si++;
+    const inW = si < spans.length && t >= spans[si][0];
+    const fin = finals.some(b => t > b - 0.35 && t < b);
+    const target = (inW ? -3.5 : 0) + (fin ? -2.5 : 0);
+    gdb += (target - gdb) * (target < gdb ? att : rel); DK[i] = Math.pow(10, gdb / 20);
+  } }
+const MLd = new Float32Array(N), MRd = new Float32Array(N);
+for (let i = 0; i < N; i++) { MLd[i] = ML[i] * DK[i]; MRd[i] = MR[i] * DK[i]; }
+const vI = lufs(VL, VL), mIu = lufs(MLd, MRd), sI = lufs(SL, SR_), aI = lufs(AL, AR);
+const G = (target, have) => Math.pow(10, (target - have) / 20);
+const vg = G(VOICE_LUFS, vI), mg = G(MUSIC_LUFS, mIu), sg = G(SFX_LUFS, sI), ag = G(AMB_LUFS, aI);
+// ambience rises to about 20 LU under the voice in music-free gaps (the stop), so silence is never empty
+const ambRise = t => (t >= STOP0 && t < STOP1) ? Math.pow(10, 8 / 20) : 1;
+for (let i = 0; i < N; i++) { const ar = ag * ambRise(i / SR); L[i] = MLd[i] * mg + SL[i] * sg + AL[i] * ar + VL[i] * vg; R[i] = MRd[i] * mg + SR_[i] * sg + AR[i] * ar + VL[i] * vg; }
+// v2 (§5.14): look-ahead gain limiter instead of an always-on tanh clipper: 5 ms look-ahead, 80 ms release
+{ const ceil = 0.84, la = Math.round(0.005 * SR), relK = 1 - Math.exp(-1 / (0.08 * SR)), need = new Float32Array(N);
+  for (let i = 0; i < N; i++) { const p = Math.max(Math.abs(L[i]), Math.abs(R[i])); need[i] = p > ceil ? ceil / p : 1; }
+  // minimum over the look-ahead window (monotonic deque), then attack instantly / release smoothly
+  const q = new Int32Array(N + 1); let qh = 0, qt = 0, gl = 1;
+  for (let i = 0; i < N + la; i++) {
+    if (i < N) { while (qt > qh && need[q[qt - 1]] >= need[i]) qt--; q[qt++] = i; }
+    const o = i - la; if (o < 0) continue;
+    while (q[qh] < o) qh++;
+    const want = need[q[qh]]; gl = want < gl ? want : gl + (want - gl) * relK;
+    const f = Math.min(1, (N - o) / (SR * 0.12));   // short fade at the very end
+    L[o] *= gl * f; R[o] *= gl * f;
+  } }
 const mI = lufs(L, R);
-const gain = Math.min(Math.pow(10, (VOICE_LUFS - mI) / 20), 0.89 / Math.max(1e-6, peakOf(L, R)));   // final mix to -14 LUFS, peak <= -1 dBFS
-console.log(`loudness: voice stem ${vI.toFixed(1)} -> ${VOICE_LUFS}, bed stem ${bI.toFixed(1)} -> ${BED_LUFS}, mix ${mI.toFixed(1)} LUFS before final gain x${gain.toFixed(2)}`);
+const gain = Math.min(Math.pow(10, (VOICE_LUFS - mI) / 20), 0.84 / Math.max(1e-6, peakOf(L, R)));   // final mix to -14 LUFS; sample peak <= -1.5 dBFS so the TRUE peak stays under -1 dBTP (earshot measured -0.8 at 0.89)
+console.log(`loudness: voice ${vI.toFixed(1)} -> ${VOICE_LUFS}, music ${mIu.toFixed(1)} -> ${MUSIC_LUFS}, sfx ${sI.toFixed(1)} -> ${SFX_LUFS}, ambience ${aI.toFixed(1)} -> ${AMB_LUFS}, mix ${mI.toFixed(1)} LUFS before final gain x${gain.toFixed(2)}`);
+console.log(`music stop: ${STOP0.toFixed(2)}-${STOP1.toFixed(2)} s (reveal word at ${REVEAL.toFixed(2)} s)`);
 const data = Buffer.alloc(N * 4);
 for (let i = 0; i < N; i++) { data.writeInt16LE(Math.round(L[i] * gain * 32767), i * 4); data.writeInt16LE(Math.round(R[i] * gain * 32767), i * 4 + 2); }
 const h = Buffer.alloc(44);
@@ -171,5 +253,5 @@ fs.mkdirSync(path.join(__dirname, 'audio'), { recursive: true });
 fs.writeFileSync(path.join(__dirname, 'audio', 'mix.wav'), Buffer.concat([h, data]));
 fs.writeFileSync(path.join(__dirname, 'timeline.js'),
   `// written by make-audio.js from the voice: shot cuts, each script segment's [start, end] and every caption word's timing (s)\n` +
-  `window.TIMELINE = ${JSON.stringify({ dur: DUR, shots: cuts, segs: segT, words })};\n`);
+  `window.TIMELINE = ${JSON.stringify({ dur: DUR, shots: cuts, segs: segT, words, reframes: REFRAMES })};\n`);
 console.log(`timeline: ${DUR.toFixed(2)} s, ${cuts.length} shots: ${cuts.map(c => `${c.name} ${(c.t1 - c.t0).toFixed(1)}`).join(' | ')}`);

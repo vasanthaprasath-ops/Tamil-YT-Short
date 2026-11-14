@@ -6,6 +6,8 @@ Small scripts used on code films. On this Windows laptop run Python tools as `py
 |---|---|---|
 | `qa-motion.cjs` | Renders every frame of a film page and reports the still-camera share, frozen spans and sudden jumps | `node qa-motion.cjs <film folder> <VideoHub folder> <chrome.exe>` |
 | `grab.cjs` | Contact sheet of chosen frames | `node grab.cjs <film folder> <VideoHub folder> <chrome.exe> out.jpg 1.0 5.5 …` |
+| `check-film.cjs` | **Run this before sending any film for notes.** One pass: page errors, length, still-camera share, layout (overlaps, cut-offs), loudness, true peak, and one contact sheet with a frame from every shot | `node check-film.cjs <film folder>` |
+| `layout-check.cjs` | Checks every 0.1 s that no label, caption or key picture element overlaps another or leaves the frame. The film must expose `window.VH_BOXES(t)` (see film 01) | `node layout-check.cjs <film folder>` |
 | `fetch_cc0.py` | Downloads **CC0-only** sound effects from Openverse (Freesound source) and logs title, creator, licence and source page in `sources.json` beside the output folder | `python fetch_cc0.py "bicycle bell" <film>/audio/sfx/bell --limit 8` |
 | `cue_check.py` | Pass/fail per sound cue from an earshot timeline: heard within 40 ms of the cue and at least 6 dB over the bed | `earshot timeline mix.wav --cues "23.75,24.70" --out tl.json` then `python cue_check.py tl.json reveal_snap,boom` |
 

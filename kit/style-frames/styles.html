@@ -1,0 +1,167 @@
+<!doctype html><meta charset="utf-8"><title>Style frames</title>
+<style>body{margin:0;background:#15171c;font:600 22px "Segoe UI",sans-serif;color:#eee}
+#row{display:flex;gap:18px;padding:18px}figure{margin:0;text-align:center}canvas{width:360px;height:640px;border-radius:10px;display:block;margin-bottom:8px}</style>
+<div id="row"></div>
+<script>
+// Five looks for one scene: Mani, lost on his scooter in a Pondy street. Stills only, drawn in code.
+const W = 540, H = 960, TA = '"Nirmala UI","Latha",sans-serif';
+const C = { tur: '#E3A72F', kol: '#F7F3EA', red: '#B23A2E', leaf: '#4C8C3A', ind: '#1F2A44', skin: '#7A4A2E', hair: '#16110E', trou: '#6E6E73', scoot: '#F0C23B', dark: '#26242A' };
+const rnd = n => { const v = Math.sin(n * 127.1 + 311.7) * 43758.5453; return v - Math.floor(v); };
+function canvas(name) { const f = document.createElement('figure'), c = document.createElement('canvas'); c.width = W; c.height = H; c.id = name[0];
+  f.append(c, name); document.getElementById('row').append(f); return c.getContext('2d'); }
+function path(g, s) {   // s = [type, ...]; returns bbox
+  g.beginPath();
+  if (s[0] === 'c') { g.arc(s[1], s[2], s[3], 0, 7); return [s[1] - s[3], s[2] - s[3], 2 * s[3], 2 * s[3]]; }
+  if (s[0] === 'e') { g.ellipse(s[1], s[2], s[3], s[4], 0, 0, 7); return [s[1] - s[3], s[2] - s[4], 2 * s[3], 2 * s[4]]; }
+  if (s[0] === 'r') { g.roundRect(s[1], s[2], s[3], s[4], s[5]); return [s[1], s[2], s[3], s[4]]; }
+  if (s[0] === 'p') { s[1].forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])); g.closePath(); }
+  if (s[0] === 'l') { const p = s[1]; g.moveTo(p[0][0], p[0][1]); g.quadraticCurveTo(p[1][0], p[1][1], p[2][0], p[2][1]); }
+  const xs = s[1].map(p => p[0]), ys = s[1].map(p => p[1]); return [Math.min(...xs), Math.min(...ys), Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys)];
+}
+// Mani on the scooter, facing right; origin = ground under the scooter. [shape, colour, lineWidth?]
+const MANI = [
+  [['c', -120, -46, 46], C.dark], [['c', 130, -46, 46], C.dark], [['c', -120, -46, 20], '#BFC3C9'], [['c', 130, -46, 20], '#BFC3C9'],
+  [['r', -160, -128, 300, 84, 38], C.scoot], [['p', [[104, -60], [150, -60], [178, -236], [140, -244]]], C.scoot],
+  [['r', 118, -262, 84, 18, 9], C.dark], [['c', 180, -218, 17], C.kol], [['r', -168, -150, 150, 28, 13], '#5A3A2A'],
+  [['r', -70, -176, 130, 44, 22], C.trou], [['r', 26, -176, 40, 118, 18], C.trou], [['e', 62, -58, 32, 14], '#3A2A22'],
+  [['r', -132, -350, 116, 210, 50], C.tur], [['r', -92, -372, 36, 40, 10], '#5E3822'],
+  [['p', [[-62, -312], [-52, -276], [126, -238], [130, -268]]], C.skin], [['c', 132, -252, 17], C.skin],
+  [['e', -150, -428, 13, 19], C.skin], [['c', -74, -432, 76], C.skin],
+  [['e', -78, -486, 78, 36], C.hair], [['p', [[-152, -470], [-150, -420], [-134, -440], [-120, -480]]], C.hair],
+  [['e', -98, -432, 17, 15], C.kol], [['e', -42, -432, 17, 15], C.kol], [['c', -93, -431, 7.5], C.hair], [['c', -37, -431, 7.5], C.hair],
+  [['l', [[-120, -458], [-100, -470], [-80, -456]]], C.hair, 9], [['l', [[-60, -470], [-40, -482], [-18, -462]]], C.hair, 9],
+  [['l', [[-102, -392], [-70, -406], [-38, -392]]], C.hair, 9], [['e', -62, -372, 9, 11], '#2A0E0C'],
+];
+function mani(g, x, y, k, pen) { g.save(); g.translate(x, y); g.scale(k, k); MANI.forEach(([s, col, lw]) => pen(g, s, col, lw)); g.restore(); }
+function qmark(g, x, y, sz, fill, stroke, rot = 0.15) { g.save(); g.translate(x, y); g.rotate(rot); g.font = `900 ${sz}px "Segoe UI"`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
+  if (stroke) { g.strokeStyle = stroke; g.lineWidth = sz * 0.14; g.strokeText('?', 0, 0); } g.fillStyle = fill; g.fillText('?', 0, 0); g.restore(); }
+function tamil(g, txt, x, y, sz, fill, stroke, lw = 0.2) { g.font = `800 ${sz}px ${TA}`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
+  if (stroke) { g.strokeStyle = stroke; g.lineWidth = sz * lw; g.strokeText(txt, x, y); } g.fillStyle = fill; g.fillText(txt, x, y); }
+const shade = (hex, k) => { const n = parseInt(hex.slice(1), 16), c = [n >> 16 & 255, n >> 8 & 255, n & 255], m = k > 0 ? [255, 255, 255] : [31, 42, 68], a = Math.abs(k); return `rgb(${c.map((v, i) => Math.round(v + (m[i] - v) * a)).join(',')})`; };
+
+// ---------- 1. Paper cut-out ----------
+(function () {
+  const g = canvas('1 · Paper cut-out');
+  const paper = (g, s, col, lw) => { g.save(); g.shadowColor = 'rgba(40,25,15,.38)'; g.shadowBlur = 9; g.shadowOffsetX = 3; g.shadowOffsetY = 6; path(g, s);
+    if (lw) { g.shadowColor = 'transparent'; g.strokeStyle = col; g.lineWidth = lw; g.lineCap = 'round'; g.stroke(); } else { g.fillStyle = col; g.fill(); } g.restore(); };
+  g.fillStyle = '#BFE0E8'; g.fillRect(0, 0, W, H);
+  paper(g, ['c', 400, 190, 70], '#F6D77A');
+  [['#F2E6CF', 430, 0.55], ['#E9B9A4', 500, 0.75], ['#EFC25A', 580, 1]].forEach(([col, y0, k], L) => {
+    for (let i = 0; i < 6; i++) { const w = 120 * k, x = -40 + i * w * 0.98 + rnd(i + L * 7) * 10, h = (150 + rnd(i * 3 + L) * 110) * k;
+      paper(g, ['p', [[x, y0 + 200], [x, y0 + 200 - h], [x + w * 0.5, y0 + 170 - h], [x + w, y0 + 200 - h], [x + w, y0 + 200]]], L === 2 && i % 2 ? '#F4EEE2' : col);
+      if (L === 2) for (let q = 0; q < 2; q++) paper(g, ['r', x + 22 + q * 50, y0 + 110 - h * 0.35, 30, 46, 4], '#3F7F8C'); }
+  });
+  paper(g, ['p', [[-20, 780], [560, 780], [560, 980], [-20, 980]]], '#CDBB99');
+  paper(g, ['p', [[-20, 780], [560, 780], [560, 800], [-20, 800]]], '#E2D4B8');
+  for (let i = 0; i < 9; i++) paper(g, ['c', 40 + rnd(i) * 120, 560 + rnd(i + 4) * 60, 16 + rnd(i + 9) * 12], i % 2 ? '#D94C8A' : C.leaf);
+  mani(g, 250, 880, 0.9, paper);
+  g.save(); g.shadowColor = 'rgba(40,25,15,.4)'; g.shadowBlur = 8; g.shadowOffsetY = 6; qmark(g, 400, 420, 190, C.red, C.kol); g.restore();
+  g.save(); g.shadowColor = 'rgba(40,25,15,.4)'; g.shadowBlur = 8; g.shadowOffsetY = 5; g.fillStyle = C.kol; g.beginPath(); g.roundRect(60, 60, 420, 110, 18); g.fill(); g.restore();
+  tamil(g, 'பாண்டி தெரு ஏன்?', 270, 117, 40, C.ind);
+  const id = g.getImageData(0, 0, W, H), d = id.data;   // paper grain
+  for (let i = 0; i < d.length; i += 4) { const n = (rnd(i * 0.37) - 0.5) * 16; d[i] += n; d[i + 1] += n; d[i + 2] += n; } g.putImageData(id, 0, 0);
+})();
+
+// ---------- 2. Kolam chalk on indigo ----------
+(function () {
+  const g = canvas('2 · Kolam chalk');
+  g.fillStyle = C.ind; g.fillRect(0, 0, W, H);
+  const rg = g.createRadialGradient(270, 560, 60, 270, 560, 620); rg.addColorStop(0, 'rgba(70,95,150,.55)'); rg.addColorStop(1, 'rgba(0,0,0,0)'); g.fillStyle = rg; g.fillRect(0, 0, W, H);
+  g.fillStyle = 'rgba(247,243,234,.22)'; for (let x = 30; x < W; x += 40) for (let y = 30; y < H; y += 40) { g.beginPath(); g.arc(x, y, 2.2, 0, 7); g.fill(); }
+  const chalkLine = (col, lw) => { g.strokeStyle = col; g.lineWidth = lw; g.lineCap = 'round'; g.lineJoin = 'round'; g.stroke(); g.globalAlpha = 0.35; g.lineWidth = lw + 5; g.stroke(); g.globalAlpha = 1; };
+  const FILL = new Set([C.tur, C.scoot, C.kol]);
+  const chalk = (g, s, col, lw) => { path(g, s); if (FILL.has(col)) { g.fillStyle = col === C.kol ? C.kol : C.tur; g.globalAlpha = col === C.kol ? 1 : 0.92; g.fill(); g.globalAlpha = 1; }
+    else if (col === C.hair && !lw && s[0] === 'c') { g.fillStyle = C.ind; g.fill(); }
+    path(g, s); chalkLine(C.kol, lw ? 6 : 5); };
+  // street in chalk perspective, houses as line boxes
+  g.beginPath(); [[270, 520, 20, 900], [270, 520, 520, 900], [270, 520, -160, 760], [270, 520, 700, 760]].forEach(([a, b, c, d]) => { g.moveTo(a, b); g.lineTo(c, d); }); chalkLine('rgba(247,243,234,.55)', 3);
+  for (const sd of [-1, 1]) for (let i = 0; i < 3; i++) { const x = 270 + sd * (70 + i * 78), w = 70 + i * 14, h = 110 + i * 60, y = 545 + i * 26;
+    g.beginPath(); g.rect(sd > 0 ? x : x - w, y - h, w, h); g.moveTo(sd > 0 ? x : x - w, y - h); g.lineTo((sd > 0 ? x : x - w) + w / 2, y - h - 26); g.lineTo((sd > 0 ? x : x - w) + w, y - h); chalkLine('rgba(247,243,234,.6)', 3);
+    g.beginPath(); g.rect((sd > 0 ? x : x - w) + w * 0.3, y - h * 0.62, w * 0.36, h * 0.3); chalkLine('rgba(227,167,47,.8)', 3); }
+  // kolam border: loops between dots
+  const loop = (ax, ay, bx, by, k) => { const mx = (ax + bx) / 2, my = (ay + by) / 2, a = Math.atan2(by - ay, bx - ax) + Math.PI; g.beginPath(); g.arc(mx, my, 20, a, a + (k % 2 ? Math.PI : -Math.PI), k % 2 === 0); chalkLine(C.kol, 3); g.beginPath(); g.arc(mx, my, 20, a, a + (k % 2 ? -Math.PI : Math.PI), k % 2 === 1); chalkLine(C.kol, 3); };
+  for (let i = 0; i < 12; i++) { loop(30 + i * 40, 30, 70 + i * 40, 30, i); loop(30 + i * 40, 930, 70 + i * 40, 930, i + 1); }
+  for (let j = 0; j < 22; j++) { loop(30, 30 + j * 40, 30, 70 + j * 40, j + 1); loop(510, 30 + j * 40, 510, 70 + j * 40, j); }
+  mani(g, 250, 870, 0.88, chalk);
+  qmark(g, 410, 400, 190, C.tur, null);
+  tamil(g, 'பாண்டி தெரு ஏன்?', 270, 150, 40, C.kol);
+  g.beginPath(); g.moveTo(110, 196); g.quadraticCurveTo(270, 214, 430, 194); chalkLine(C.tur, 5);
+})();
+
+// ---------- 3. Matchbox label print ----------
+(function () {
+  const g = canvas('3 · Matchbox print');
+  const cream = '#F3E4C0', ink = '#1B1512';
+  g.fillStyle = cream; g.fillRect(0, 0, W, H);
+  g.save(); g.translate(270, 560);   // sunburst centre
+  for (let i = 0; i < 28; i++) { g.fillStyle = i % 2 ? C.red : C.tur; g.beginPath(); g.moveTo(0, 0); g.arc(0, 0, 900, i * Math.PI / 14, (i + 1) * Math.PI / 14); g.closePath(); g.fill(); }
+  g.restore();
+  g.fillStyle = cream; g.beginPath(); g.arc(270, 560, 235, 0, 7); g.fill(); g.strokeStyle = ink; g.lineWidth = 7; g.stroke();
+  const halftone = (bb, col) => { g.fillStyle = col; for (let y = bb[1]; y < bb[1] + bb[3]; y += 9) for (let x = bb[0] + bb[2] * 0.5 + ((y / 9) % 2) * 4.5; x < bb[0] + bb[2]; x += 9) { g.beginPath(); g.arc(x, y, 2.6, 0, 7); g.fill(); } };
+  const print = (g, s, col, lw) => { if (lw) { path(g, s); g.strokeStyle = ink; g.lineWidth = lw + 2; g.lineCap = 'round'; g.stroke(); return; }
+    const flat = col === C.skin ? '#B5673A' : col === C.trou ? C.ind : col === C.scoot ? C.tur : col === C.tur ? C.red : col === '#BFC3C9' ? cream : col === '#5E3822' ? '#8A4A28' : col;
+    g.save(); g.translate(5, 4); path(g, s); g.fillStyle = flat; g.fill(); g.restore();   // misregistered colour plate
+    g.save(); const bb = path(g, s); g.clip(); if (bb[2] > 40) halftone(bb, 'rgba(27,21,18,.3)'); g.restore();
+    path(g, s); g.strokeStyle = ink; g.lineWidth = 6; g.lineJoin = 'round'; g.stroke(); };
+  mani(g, 258, 740, 0.8, print);
+  // border, banner, label
+  g.strokeStyle = ink; g.lineWidth = 12; g.strokeRect(16, 16, W - 32, H - 32); g.strokeStyle = C.red; g.lineWidth = 5; g.strokeRect(32, 32, W - 64, H - 64);
+  g.fillStyle = C.ind; g.beginPath(); g.moveTo(50, 90); g.lineTo(490, 90); g.lineTo(466, 150); g.lineTo(490, 210); g.lineTo(50, 210); g.lineTo(74, 150); g.closePath(); g.fill(); g.strokeStyle = ink; g.lineWidth = 6; g.stroke();
+  tamil(g, 'அது ஏன்?', 270, 152, 70, C.tur, ink, 0.12);
+  g.fillStyle = ink; g.fillRect(50, 820, 440, 96); tamil(g, 'பாண்டி தெரு', 270, 868, 54, cream);
+  for (const [x, y] of [[80, 262], [460, 262]]) { g.save(); g.translate(x, y); g.fillStyle = ink; g.beginPath(); for (let i = 0; i < 10; i++) { const r = i % 2 ? 9 : 22, a = i * Math.PI / 5 - Math.PI / 2; g.lineTo(Math.cos(a) * r, Math.sin(a) * r); } g.closePath(); g.fill(); g.restore(); }
+  g.save(); g.translate(5, 4); qmark(g, 425, 430, 150, C.red, null); g.restore(); qmark(g, 425, 430, 150, 'rgba(0,0,0,0)', ink);
+})();
+
+// ---------- 4. Clay 3D ----------
+(function () {
+  const g = canvas('4 · Soft clay 3D');
+  const sk = g.createLinearGradient(0, 0, 0, 640); sk.addColorStop(0, '#7FBFE0'); sk.addColorStop(1, '#F7E3B8'); g.fillStyle = sk; g.fillRect(0, 0, W, H);
+  g.filter = 'blur(7px)';
+  for (const sd of [-1, 1]) for (let i = 3; i >= 0; i--) { const w = 150 - i * 22, h = 380 - i * 60, x = 270 + sd * (60 + (3 - i) * 62), y = 640 + (3 - i) * 30;
+    const col = ['#EFC25A', '#F4EEE2', '#E9B9A4', '#F2D58A'][(i + (sd > 0 ? 1 : 0)) % 4], gr = g.createLinearGradient(0, y - h, 0, y); gr.addColorStop(0, shade(col, 0.2)); gr.addColorStop(1, shade(col, -0.25));
+    g.fillStyle = gr; g.beginPath(); g.roundRect(sd > 0 ? x : x - w, y - h, w, h, 18); g.fill();
+    g.fillStyle = '#3B4D68'; for (let q = 0; q < 2; q++) { g.beginPath(); g.roundRect((sd > 0 ? x : x - w) + w * 0.3, y - h * (0.8 - q * 0.36), w * 0.36, h * 0.2, 8); g.fill(); } }
+  g.filter = 'none';
+  const rd = g.createLinearGradient(0, 640, 0, H); rd.addColorStop(0, '#D8C6A2'); rd.addColorStop(1, '#A8946E'); g.fillStyle = rd; g.fillRect(0, 700, W, H);
+  g.fillStyle = 'rgba(31,42,68,.35)'; g.filter = 'blur(10px)'; g.beginPath(); g.ellipse(262, 884, 215, 26, 0, 0, 7); g.fill(); g.filter = 'none';
+  const clay = (g, s, col, lw) => { if (lw) { path(g, s); g.strokeStyle = col; g.lineWidth = lw; g.lineCap = 'round'; g.stroke(); return; }
+    const bb = path(g, s), gr = g.createLinearGradient(bb[0], bb[1], bb[0] + bb[2] * 0.4, bb[1] + bb[3]); gr.addColorStop(0, shade(col, 0.3)); gr.addColorStop(0.55, col); gr.addColorStop(1, shade(col, -0.32));
+    g.save(); g.shadowColor = 'rgba(31,42,68,.3)'; g.shadowBlur = 10; g.shadowOffsetX = 4; g.shadowOffsetY = 7; g.fillStyle = gr; g.fill(); g.restore();
+    if (bb[2] > 60) { g.save(); path(g, s); g.clip(); g.fillStyle = 'rgba(255,255,255,.22)'; g.beginPath(); g.ellipse(bb[0] + bb[2] * 0.3, bb[1] + bb[3] * 0.22, bb[2] * 0.26, bb[3] * 0.13, -0.5, 0, 7); g.fill(); g.restore(); } };
+  mani(g, 250, 880, 0.94, clay);
+  g.save(); g.shadowColor = 'rgba(31,42,68,.4)'; g.shadowBlur = 16; g.shadowOffsetY = 10; qmark(g, 410, 400, 200, C.red, C.kol); g.restore();
+  tamil(g, 'பாண்டி தெரு ஏன்?', 270, 130, 42, C.kol, C.ind);
+  const v = g.createRadialGradient(270, 500, 280, 270, 500, 620); v.addColorStop(0, 'rgba(31,42,68,0)'); v.addColorStop(1, 'rgba(31,42,68,.35)'); g.fillStyle = v; g.fillRect(0, 0, W, H);
+})();
+
+// ---------- 5. Isometric miniature ----------
+(function () {
+  const g = canvas('5 · Isometric miniature');
+  const bg = g.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, '#F6E9D2'); bg.addColorStop(1, '#E8C9A6'); g.fillStyle = bg; g.fillRect(0, 0, W, H);
+  const S = 34, OX = 270, OY = 470, P = (x, y, z = 0) => [OX + (x - y) * 0.866 * S, OY + (x + y) * 0.5 * S - z * S];
+  const quad = (pts, col) => { g.beginPath(); pts.forEach((p, i) => i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1])); g.closePath(); g.fillStyle = col; g.fill(); };
+  const box = (x, y, w, d, h, col, z0 = 0) => { quad([P(x, y + d, z0), P(x + w, y + d, z0), P(x + w, y + d, z0 + h), P(x, y + d, z0 + h)], shade(col, -0.18));
+    quad([P(x + w, y, z0), P(x + w, y + d, z0), P(x + w, y + d, z0 + h), P(x + w, y, z0 + h)], shade(col, -0.36)); quad([P(x, y, z0 + h), P(x + w, y, z0 + h), P(x + w, y + d, z0 + h), P(x, y + d, z0 + h)], shade(col, 0.12)); };
+  g.fillStyle = 'rgba(31,42,68,.22)'; g.filter = 'blur(14px)'; g.beginPath(); g.ellipse(270, 800, 230, 46, 0, 0, 7); g.fill(); g.filter = 'none';
+  box(0, 0, 9, 9, 1.1, '#CDB58E', -1.1);                 // the floating tile
+  quad([P(0, 0), P(9, 0), P(9, 9), P(0, 9)], '#D9C7A5');
+  const cols = ['#EFC25A', '#F4EEE2', '#E9B9A4', '#C0623B', '#F2D58A', '#B4553A'];
+  for (let j = 0; j < 3; j++) for (let i = 0; i < 3; i++) {     // 3 x 3 blocks, streets between: the chess board
+    const x = 0.4 + i * 3, y = 0.4 + j * 3, h = 1.1 + rnd(i * 5 + j * 3) * 1.5, col = cols[(i * 2 + j) % 6];
+    if ((i + j) % 2 === 0) quad([P(x - 0.2, y - 0.2), P(x + 2.4, y - 0.2), P(x + 2.4, y + 2.4), P(x - 0.2, y + 2.4)], 'rgba(31,42,68,.16)');
+    box(x, y, 2.2, 2.2, h, col); box(x + 0.3, y + 0.3, 1.6, 1.6, 0.35, i % 2 ? '#B9573A' : '#9E4A31', h);
+    if (rnd(i + j * 7) > 0.5) { const t = P(x + 2.0, y + 2.3, 0.5); g.fillStyle = C.leaf; g.beginPath(); g.arc(t[0], t[1], 13, 0, 7); g.fill(); g.fillStyle = '#62A64C'; g.beginPath(); g.arc(t[0] - 4, t[1] - 5, 7, 0, 7); g.fill(); } }
+  const flat = (g, s, col, lw) => { path(g, s); if (lw) { g.strokeStyle = col; g.lineWidth = lw; g.lineCap = 'round'; g.stroke(); } else { g.fillStyle = col; g.fill(); } };
+  const m = P(5.75, 8.85); g.fillStyle = 'rgba(31,42,68,.3)'; g.beginPath(); g.ellipse(m[0], m[1] + 2, 50, 10, 0, 0, 7); g.fill();
+  mani(g, m[0], m[1], 0.26, flat);
+  qmark(g, m[0] + 40, m[1] - 150, 70, C.red, C.kol);
+  const ts = g.getImageData(0, 0, W, H); g.filter = 'blur(6px)'; g.drawImage(g.canvas, 0, 0); g.filter = 'none';   // tilt-shift: blur top and bottom, keep the middle band
+  const mid = document.createElement('canvas'); mid.width = W; mid.height = H; const mg = mid.getContext('2d'); mg.putImageData(ts, 0, 0);
+  const mask = mg.createLinearGradient(0, 0, 0, H); mask.addColorStop(0, 'rgba(0,0,0,0)'); mask.addColorStop(0.36, 'rgba(0,0,0,1)'); mask.addColorStop(0.8, 'rgba(0,0,0,1)'); mask.addColorStop(0.96, 'rgba(0,0,0,0)');
+  mg.globalCompositeOperation = 'destination-in'; mg.fillStyle = mask; mg.fillRect(0, 0, W, H); g.drawImage(mid, 0, 0);
+  tamil(g, 'பாண்டி தெரு ஏன்?', 270, 130, 42, C.ind);
+  g.fillStyle = C.red; g.fillRect(170, 172, 200, 6);
+})();
+window.READY = true;
+</script>

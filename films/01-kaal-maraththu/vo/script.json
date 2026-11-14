@@ -1,0 +1,17 @@
+{
+  "_note": "Ep 01 Kaal maraththu, script v2 LOCKED with Vasanth 2026-11-14 (ending C). Each segment with 'shot' starts that shot. Source of truth for the film; the episode file in the repo mirrors it. Voice: Prashant V, eleven_v3, one take, 1.08x in the mix.",
+  "segments": [
+    { "shot": "hook",       "text": "கால் மரத்துப் போயி ஊசி குத்துற மாதிரி இருக்கா? அது கெட்ட sign இல்ல… நல்ல sign!" },
+    { "shot": "foreshadow", "text": "ஏன்னு தெரிஞ்சா, அடுத்த தடவை சிரிப்பீங்க." },
+    { "shot": "wire",       "text": "உங்க கால்ல இருந்து மூளைக்கு message அனுப்ப, நரம்புன்னு ஒரு wire இருக்கு." },
+    { "shot": "press",      "text": "ரொம்ப நேரம் சம்மணம் போட்டு உக்காந்தா, உங்க weight அந்த wire-அ அமுக்குது." },
+    { "shot": "blood",      "text": "கூடவே, அதுக்கு போற ரத்தமும் குறையுது." },
+    { "shot": "stop",       "text": "அதனால message மூளைக்கு போகவே போகாது. அதான் கால் மரத்துப் போச்சு." },
+    { "shot": "joke",       "text": "கிள்ளுனா கூட தெரியாது… இது என் கால் தானான்னே doubt வரும்!" },
+    { "shot": "mystery",    "text": "சரி, எழுந்ததும் ஏன் ஊசி குத்துது?" },
+    { "shot": "analogy",    "text": "விஷயம் என்னன்னா, இது phone-க்கு tower கிடைக்காத மாதிரி." },
+    {                       "text": "Signal திரும்ப வந்ததும், நின்னு போன message எல்லாம் ஒரே நேரத்துல வந்து கொட்டும்." },
+    { "shot": "reveal",     "text": "அந்த டிங் டிங் டிங் தான்… உங்க கால்ல ஊசி குத்துறது!" },
+    { "shot": "twist",      "text": "அடுத்த தடவை ஊசி குத்துனா திட்டாதீங்க… கால் 'நான் வந்துட்டேன்'னு சொல்லுது!" }
+  ]
+}

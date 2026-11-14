@@ -118,6 +118,23 @@ Distilled on 2026-11-14 from the teardown notes in `research_notes/Animated shor
 6. **Phone checks:** 300 Hz high-pass listen; faces at phone size (expression readable, features not sinking into the skin); Tamil glyphs in an exported frame. [CANON + OPINION]
 7. Pauses over 0.25 s summed from `alignment.json`: ≤ 1.0 s per 40 s. [MEASURED-ref]
 
+## 7. Layout: nothing overlaps, nothing is cut off (added 2026-11-14, from ep 01's notes)
+
+**What went wrong on ep 01, and why.** Vasanth found an arrow cut off by the frame edge, then, after that was "fixed", the same arrow sitting on top of the ✗ mark, with a label on top of the arrow. Four causes, all general:
+- **Labels and picture were placed independently.** Labels sit at fixed screen positions; the picture moves under a camera that pushes in and reframes. Nothing reserved space for either, so they met.
+- **Elements were drawn at hand-typed coordinates with no gap rule**, and one was drawn past the frame edge from the start.
+- **A fix was made without checking its neighbours.** Moving the arrow to cure the cut-off put its tip on the ✗.
+- **The check looked at one frame per shot.** Overlaps that appear only for part of a shot were never seen.
+
+**The rules**
+1. **Zones (1080×1920).** Series tag ("உடம்பு series"): y 150–206, far top-left (x from 48). It sits above the usual safe box on purpose, by Vasanth's choice; it stays below y 140 because the apps' own top bar covers the very top edge. The episode number goes in the title and description, not on screen. Labels: y 340–650. Picture subject: y 660–1150. Captions: y 1230–1370. Nothing important goes below 1470 or outside x 90–918. Design each shot's subject to sit in its zone *after* the camera's largest push.
+2. **One label at a time** in the label zone. If a label would repeat the caption's words, drop the label.
+3. **Pointers stop short.** An arrow, line or bubble that points at something ends 12–16 px before it; it never lands on it.
+4. **Camera travel is part of the layout.** A shot with a label above a diagram gets half the reframe travel. A deliberate close-up may crop things, and says so in the code.
+5. **Every label, caption and key picture element reports its box** (`claim(kind, name, x, y, w, h)` in the film; kinds `label`, `caption`, `key`, `prop`), exposed as `window.VH_BOXES(t)`.
+6. **`kit/tools/layout-check.cjs` must pass before the film goes for notes.** It tests every 0.1 s: no two boxes overlap (except prop-with-prop and caption-with-prop), labels and captions stay in the safe box, key and prop boxes stay in the frame. `check-film.cjs` runs it.
+7. **After fixing one overlap, run the check again**: a move that cures one clash often causes the next.
+
 ---
 
 ## Ep 02 gap scorecard (02-pondy-grid, v1)

@@ -90,7 +90,30 @@ Inside-the-body shots: "cutaway cross-section, translucent skin, glowing nerves 
 - Check the **last frame** of every clip for face and outfit drift.
 - Tool: the bake-off winner. Candidates: Omni Flash in YouTube Create (free), Veo 3.1 Lite in Flow (AI Pro), or Kling 3.0 (STANDARD stack).
 
-## 3c. Code-film look (VideoHub 2D canvas; added 2026-11-14)
+## 3d. Code-film look v3: paper world (decided by Vasanth, 2026-11-14)
+
+**Scope (Vasanth, 2026-11-14): the city series, for now.** This replaces §3c for city-series code films. He does not expect the same mix to suit the other series (body, Paati, objects, survival); their look is **undecided**, so show style frames for a series before building its first film rather than assuming this one. Vasanth found the ep 02 clay look not distinctive enough and chose a mix of three looks from style frames. Reference frames and the code that drew them: `kit/style-frames/`. The frames are rough sketches of the style, not final art: the first job of ep 03 is to polish them into a reusable starter.
+
+| Mode | Look | Use it for | Share of a film |
+|---|---|---|---|
+| **Main: paper cut-out** (`main-paper-cutout.png`) | Flat paper shapes in layers, soft drop shadows between layers, light paper grain, no outlines, clean and uncluttered | Mani and Paati, the body, close and medium shots, most explaining | about 70 % |
+| **Places: isometric miniature** (`places-isometric-miniature.png`) | A small toy world on a floating tile seen from above at an angle, top and bottom softly out of focus | Towns, streets, maps, "how it is laid out", the inside of a body part shown as a little machine | about 20 %, mostly city and how-it-works beats |
+| **Peak: matchbox print** (`peak-matchbox-print.png`) | Old Tamil matchbox-label print: thick ink outlines, sunburst rays, halftone dots, colour printed slightly off-register, ribbon banner | The hook frame when it helps, the reveal, the verdict stamp card | **1–2 moments per film, a few seconds each** |
+
+**Rules that keep the mix one world**
+- One paper world: the isometric tile is made of paper blocks (same grain, same soft shadows), and the matchbox frame is a printed card that lands on the paper scene, not a different universe.
+- Same palette (§1), same Mani and Paati, same Tamil lettering in all three modes.
+- **Clean first.** Few elements, lots of empty space, nothing decorative that doesn't explain. This is why Vasanth picked the paper and miniature looks.
+- The matchbox look is a spice: only on a peak moment (hook, reveal or verdict), never for explaining, never more than two per film. If it shows up everywhere it stops meaning "big moment".
+- Move between modes on a beat: the camera rises from the paper scene into the miniature; the matchbox card slams in on the reveal word. No slow dissolves between modes.
+- Paper moves like paper: pieces slide, hinge and pop up; characters may step in small increments like stop-motion while the camera moves smoothly. (A proposal, to be judged on ep 03's preview.)
+- Looked at and not chosen: kolam chalk on indigo (the kolam border stays for end cards), soft clay 3D (ep 02), light-box puppet, the single red kolam line. See `D:\Shorts\style-frames` on the current laptop.
+
+**What still carries over from §3c:** shadows tinted toward night indigo, never black; one key light per shot (upper-left); glow only on things that give off light. **What changes:** paper grain is now part of the look (light, on every mode), and the main mode has **no** character outline; the ink outline belongs to the matchbox mode only.
+
+**Not done yet:** proper character design for paper Mani and Paati (hands, poses, the expression set from §2 "Face readability"), and the reusable film starter with the three modes.
+
+## 3c. Code-film look v2: clay (ep 02 only; superseded by §3d)
 
 The clay look drawn in code, in place of the AI prefix. Full rules and canvas hints: `kit/film-craft.md` §4.
 - **Shadows** are a darker, slightly richer version of the surface's own colour (about half as bright), mixed toward night indigo `#1F2A44`, **never toward black**. Drop shadows are indigo-tinted, not near-black.

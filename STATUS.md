@@ -2,6 +2,18 @@
 
 The one-page "where are we" for a new Claude session. Read this first, then `PROJECT-CONTEXT.md` (decisions and reasons). This file wins where the two disagree on current state.
 
+## Where we are right now (end of 2026-11-14) — read this first
+
+- **Ep 02 (Pondy grid) is PUBLIC** on YouTube, Instagram and Facebook since 2026-11-13. The "rendered, not uploaded" heading further down is old.
+- **Ep 01 (Kaal maraththu) is RENDERED and ready to upload**; Vasanth was about to post it. File: `C:\Users\vasan\Documents\VideoHub\outputs\2026-11-14\2026-11-14 01 Kaal maraththu - needle-prick is a good sign v1.mp4` (1080×1920, 30 fps, 40.9 s, −14.0 LUFS, 68 MB). Upload text (title, description, pinned comment, Instagram caption): `episodes/01-kaal-maraththu.md` → "Upload text v2". Chosen title: `கால் மரத்துப் போனா ஊசி குத்துதா? நல்ல sign! 😮 | உடம்பு #1`.
+- **Ep 01 facts:** script v2 locked with Vasanth (ending C); voice Prashant V, one take, word emphasis + tone ("version D", `films/01-kaal-maraththu/vo/VOICE-NOTES.md`), played at 1.04×; paper cut-out look; series tag "உடம்பு series" far top-left; no subscribe or channel tag; 4 whooshes only. Working copy: `C:\Users\vasan\Documents\VideoHub\films\01-kaal-maraththu` (VideoHub id 93d1ca4c4b49); source backup in `films/01-kaal-maraththu/` (no media).
+- **Known weak points of ep 01:** still-camera share 18.3 % (limit 15 %); Mani is a simple sketch figure (no hands); the reveal comes at 82 % of the runtime.
+- **How we work now** (also in NEW-MACHINE.md and the skill): script locked with Vasanth before any voice; ask and state the cost before each ElevenLabs call (measured ≈ 0.4 credits per character on v3; 6,418 of 40,000 used at last check); show still frames before building; run `node kit/tools/check-film.cjs <film>` before every preview (it includes the no-overlap layout check, `kit/film-craft.md` §7); in VideoHub choose **Full film** for a film's first render.
+- **Posting plan:** 2 Shorts a week on fixed days; no platform penalty for consecutive days or time of day; never delete and re-upload.
+- **Series:** 5 planned, 30 titles in `kit/title-bank.md` (1 published, 1 rendered, 28 ideas). The paper/miniature/matchbox look is decided for the **city** series; ep 01 (body) used the paper cut-out look after Vasanth approved frames; other series: show frames first.
+- **Next:** upload ep 01; in 1–2 days read ep 02's retention curve in YouTube Studio (it was not ready; Vasanth signs in to the built-in browser); pick ep 03 and lock its script; extract a reusable film starter from ep 01; design paper Mani and Paati properly.
+- **Local additions outside this repo:** VideoHub (`D:\Shorts\Videohub`) has a video-only full-screen button (🎬, Shift+F) added to `ui/review.js`, `ui/review/transport.js`, `ui/review.css`; `UPDATE.cmd` may overwrite it. Audio tools: earshot at `D:\Shorts\ext\earshot` (see `kit/tools/README.md`).
+
 ## Channel
 
 | Item | State |
@@ -10,7 +22,7 @@ The one-page "where are we" for a new Claude session. Read this first, then `PRO
 | Logo / banner | Logo option A (a "?" made of kolam dots) and the premium banner are uploaded. Files are in `kit/brand/` (`logo.png`, `banner.png`); `brand.html` is the editable source. Re-export with Chrome headless through puppeteer-core from `D:/Personal/VideoHub/node_modules`. |
 | Tagline | சின்ன கேள்வி. பெரிய காரணம். |
 | Channel description | Set, in a short version. Two suggested lines are not added yet: "உண்மையா இருந்தா உண்மை. இல்லனா இல்ல. ஒவ்வொரு பதிலுக்கும் source." and "அடுத்த தடவை family group-ல, பதில் தெரிஞ்சவர் நீங்கதான்." |
-| Instagram | **Not created yet.** Plan: sign up with the channel Gmail, username `adhuyen` (fallbacks `adhu.yen`, `adhuyen.tamil`), name "Adhu Yen? \| அது ஏன்?", Creator account, 2FA on, link to the YouTube channel. The Facebook Page needs a personal Facebook profile; link it through Accounts Center. |
+| Instagram | **Created; ep 02 posted 2026-11-13 on YouTube, Instagram and Facebook (Vasanth, 2026-11-14).** Original plan, for reference: Plan: sign up with the channel Gmail, username `adhuyen` (fallbacks `adhu.yen`, `adhuyen.tamil`), name "Adhu Yen? \| அது ஏன்?", Creator account, 2FA on, link to the YouTube channel. The Facebook Page needs a personal Facebook profile; link it through Accounts Center. |
 | Security to-do | Turn on 2FA on the channel Gmail with backup codes. Add the personal Gmail as Manager in YouTube Studio → Permissions. **Revoke the ElevenLabs API key that was pasted in chat** and set a new one with `$k = Read-Host; [Environment]::SetEnvironmentVariable('ELEVENLABS_API_KEY',$k,'User')` (PowerShell). |
 
 ## Episode 02: Pondy grid (rendered, not uploaded)
@@ -43,6 +55,12 @@ v1 is public, so v2 is practice for the kit. Working copy: `C:\Users\vasan\Docum
 - **Sound**: duck from word times, music stop + button chord, boom after the key word, one tempo grid, ambience beds, stems levelled separately, look-ahead limiter. −14.0 LUFS, −1.0 dBTP.
 - **QA tools**: `kit/tools/qa-motion.cjs` (still share, pops) and `kit/tools/grab.cjs` (contact sheet), both run against the film page with Chrome.
 - Not rendered yet. Before rendering, make sure the render uses the new `audio/mix.wav`, not v1's track.
+
+## Visual style decided (2026-11-14)
+
+Vasanth chose the look for **city-series** code films (other series: look undecided, show frames first): **paper cut-out as the main look, isometric miniature for places, matchbox print only on 1–2 peak moments** (hook, reveal, verdict). Rules: `kit/style-sheet.md` §3d. Reference frames: `kit/style-frames/`. Still to do: design paper Mani and Paati properly, and build the reusable film starter with the three modes.
+
+**Ep 02 first numbers (read 2026-11-14, ~13 h after publish):** 158 views, 42.6 % stayed to watch (57.4 % swiped away), average view 0:20 of 0:39, 3 likes, 0 subscribers. Logged in `kit/metrics-sheet.csv`. The retention curve was not ready yet.
 
 ## Knowledge base (newest first)
 

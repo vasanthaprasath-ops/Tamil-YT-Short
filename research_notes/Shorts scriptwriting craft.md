@@ -48,6 +48,28 @@ Source: a one-page sales sheet (`D:\Shorts\Copy of Top Short-Form Video Collecti
   - **Beat-matched switch:** the picture changes exactly on a music beat (ours: one tempo grid per episode).
 - **Formats seen there that fit us:** breakdowns/explainers (our core), A-vs-B comparisons (good for city and "Paati vs science" episodes), and case studies. Skip "car yap", "about me" and challenge formats, which need a real face.
 
+## Added 2026-11-14: "Viral content" (borrow a proven idea from another market)
+
+Source: a two-page creator handout (`C:\Users\vasan\Downloads\Viral content.pdf` on the current laptop) on taking ideas that went viral in the US and remaking them for India. Half of it is a how-to for a scraping tool and two affiliate links. It gives **no data**. *Grade: PRACTITIONER opinion; the outlier idea matches what `/yt-viral` and our Zack D. Films teardown already do.*
+
+**What is worth keeping: a way to find topics**
+24. **Hunt outliers, not big channels.** A video is a signal when it did far better than its own channel normally does: views 10× the follower count, or several times the channel's own median. Pick 3–5 creators who do this **repeatedly**, never one lucky video. *We already measure this as "multiple over the channel's own median" (`/yt-viral`, `/ig-viral`).*
+25. **Tear down each outlier with the same six questions**, then look across them:
+    1. **Hook:** the exact opening line, its type (bold claim, question, curiosity gap…), why it stops the scroll.
+    2. **Purpose:** educate, entertain, build trust or sell; what the viewer walks away with.
+    3. **Structure:** beat by beat (hook → tension → payoff).
+    4. **Key words:** the words that carry the emotion.
+    5. **Psychology:** curiosity, relatability, identity, social proof, fear of missing out, controversy.
+    6. **Patterns:** what the best ones share.
+26. **Adapt the idea, three ways:** change the **angle** (put it in a Tamil home, street or family), change the **focus** (who is it for now, and what is their problem), and **raise the tension** only where it is true (higher stakes, before/after, contrast). Then write a new hook in spoken Tamil.
+
+**Our limits on this method**
+- **Borrow the idea and the structure, never the script, footage or audio.** Translating someone's video line by line is reused content (a demonetisation risk) and copying.
+- **Re-source every fact.** A viral video is not a source; the adapted Short still needs its two credible sources and passes the topic filter (body, house, street, family memory).
+- **No fear or money stakes invented for tension.** "Add higher stakes" applies only to stakes the sources support.
+- **Don't run the Instagram scraper it recommends.** Scraping Instagram breaks its terms and risks the account. Collect by hand at human speed (`/ig-viral`), or read public YouTube titles and view counts (`/yt-viral`, or yt-dlp for titles and counts only). Never download others' videos.
+- The two tools it links (Sandcastles, 1of10) are paid affiliate links; not needed.
+
 ## Checklist for every script
 
 - One question in the hook, and nothing in the video that doesn't answer it. Save a second great hook for its own episode.
