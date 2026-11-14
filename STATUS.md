@@ -46,6 +46,9 @@ v1 is public, so v2 is practice for the kit. Working copy: `C:\Users\vasan\Docum
 
 ## Knowledge base (newest first)
 
+- **Installed skill packs (2026-11-14, in `~/.claude/skills`, not in this repo):** all 11 `yt-*` skills and six `ig-*` skills (`ig-caption`, `ig-profile`, `ig-audit`, `ig-viral`, `ig-reply`, `ig-comment`), both by Jake Schincariol (MIT). Run their Python tools as `python -X utf8`. Their hook and title scores only understand English.
+- `future-english/`: parked toolkit for possible English videos later (English hook formulas and scorers, beat timer, humanizer, repurposing). Not active; see its `README.md`.
+
 - `kit/film-craft.md`: the rulebook for directing code-animated Shorts. It covers script, camera, characters, light, sound and QA, has an **ep 02 gap scorecard**, and ends with **7 decisions for Vasanth**. Built from `research_notes/Animated shorts repo teardown/` (5 notes, including `competitor_gap.md`).
 - `reports/Short form video craft playbook.md`: evidence-graded craft rules, a myths table, and a per-Short checklist (already applied to the kit).
 - `research_notes/Shorts scriptwriting craft.md`: Hoyos, Kallaway, Zack D. Films and but/therefore rules.

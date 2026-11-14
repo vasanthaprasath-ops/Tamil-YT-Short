@@ -77,6 +77,9 @@ Tool picks and the bake-off test plan (run it before paying for anything): `repo
 ## C2. Code film only (VideoHub)
 - [ ] Every shot and sound is keyed from the voice's word times (`alignment.json`), not hand-typed seconds.
 - [ ] QA run before sending for notes: no frozen run of ≥ 12 frames, no unplanned pops, hits on the contact frame or ≤ 1 frame early (never > 3 late), per-stem LUFS and voice margin printed. Details: `kit/film-craft.md` §6.
+- [ ] **Sound cues measured, not assumed** (needs earshot): run `earshot timeline audio/mix.wav --cues "t1,t2,…" --out tl.json`, then `python kit/tools/cue_check.py tl.json id1,id2,…`. Each key effect passes when it is heard **within 40 ms of its cue** and **at least 6 dB over the bed**. Fix only what fails, by the measured amount.
+- [ ] True peak ≤ −1 dBTP read with `earshot measure` (ffmpeg's "Peak" is the sample peak and reads about 0.3 dB lower).
+- [ ] Any real recorded sound is **CC0**, fetched with `python kit/tools/fetch_cc0.py "<words>" <film>/audio/sfx/<kind>`, and its row in `sources.json` (title, creator, source page) is kept with the film. Open the source page once before publishing: Openverse does not guarantee the licence.
 
 ## D. Publish
 - [ ] Title: Tamil-script question + 1 English keyword + 1 emoji + "| Series".
@@ -86,6 +89,7 @@ Tool picks and the bake-off test plan (run it before paying for anything): `repo
 - [ ] Not made for kids. Altered-content toggle set correctly. Clips from Veo or Omni carry a permanent AI label in the expanded description; that's expected.
 - [ ] Optional: English/Hindi dub uploaded as a multi-language audio track.
 - [ ] YouTube first, then a **native** upload of the clean master to Instagram (try Trial Reels for hook tests) and to the Facebook Page, the same day.
+- [ ] Instagram caption: the first ~125 characters are all the feed shows before "more", so the subject and the surprise go there, never a hashtag or a mention. One ask only. **At most 5 hashtags** (Instagram's cap since 18 Dec 2025, per the `ig-caption` skill; re-check if Instagram changes it). Lint with `/ig-caption`.
 - [ ] Never delete and re-upload a Short (YouTube may treat it as spam), and never re-upload a near-duplicate to test a hook.
 - [ ] Pin a comment asking for real information, e.g. "Unga paati idhukku enna solluvaanga?". Never "comment YES / tag a friend".
 - [ ] Reply to comments in the first hour (community building; no evidence it lifts reach).
