@@ -1,0 +1,15 @@
+{
+  "_note": "v8 (2026-11-13): v7 rewritten in natural spoken Tamil; hook line and 'நம்ம' from Vasanth. Each segment with 'shot' starts that shot. 'text' = captions; 'say' = what the voice reads when it must differ. vo/tts.mjs reads this; make-audio.js times the shots from the voice.",
+  "segments": [
+    { "shot": "hook",       "text": "நம்ம பாண்டிச்சேரி தெரு எல்லாம் ஏன் chess board மாதிரி இருக்கு தெரியுமா?" },
+    { "shot": "foreshadow", "text": "இது எல்லாம் முதல்ல ஒரு map-ல தான் பொறந்துச்சு." },
+    {                       "text": "ஆனா அத வரைஞ்சது… French-ஏ இல்ல!" },
+    { "shot": "contrast",   "text": "தமிழ்நாட்டுல நிறைய ஊரு, கோவிலை சுத்தி தானா வளர்ந்துச்சு. ஆனா பாண்டி அப்படி இல்ல." },
+    { "shot": "ruler",      "text": "இங்க யாரோ map-ல ruler வெச்சு நேரா கோடு போட்டு, தெருவையே plan பண்ணிருக்காங்க." },
+    { "shot": "guess",      "text": "சரி, அந்த கோடு போட்டது யாருன்னு நினைக்கிறீங்க? எல்லாரும் French-னு தான் சொல்லுவாங்க." },
+    { "shot": "twist",      "text": "ஆனா இந்த grid முதல் முதல்ல வர்றது, 1693-ல கொஞ்ச நாள் பாண்டிய புடிச்சு வெச்சிருந்த Dutch காரங்க map-ல தான்!", "say": "ஆனா இந்த grid முதல் முதல்ல வர்றது, Sixteen ninety three-ல கொஞ்ச நாள் பாண்டிய புடிச்சு வெச்சிருந்த Dutch காரங்க map-ல தான்!" },
+    { "shot": "french",     "text": "அப்புறம் French காரங்க திரும்பி வந்து, அதே கோட்டு மேல ஊரை கட்டி முடிச்சாங்க." },
+    { "shot": "card",       "text": "So, plan போட்டது Dutch. கட்டினது French." },
+    { "shot": "loop",       "text": "அதான்… எந்த பக்கம் திரும்புனாலும் ஒரே மாதிரி இருக்கு." }
+  ]
+}

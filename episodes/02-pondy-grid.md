@@ -1,5 +1,5 @@
 # 02 — பாண்டி தெருக்கள் ஏன் chess board மாதிரி?
-Series: Why is Tamil Nadu like this? (City) | Status: scripted | Date: 2026-11-13 | Target length: ~45 s
+Series: Why is Tamil Nadu like this? (City) | Status: film built (v8) | Date: 2026-11-13 | Target length: ~45 s
 
 ## Takeaway
 Pondy's straight, chessboard streets are usually credited only to the French. But the grid first shows up on **Dutch** maps from 1693–94, when the Dutch briefly held the town. The French took it back and completed that plan. Later the French dug a canal through the middle: a storm-water drain that also split the town into a French side and a Tamil side.
@@ -30,7 +30,31 @@ Mani: a friendly Tamil man about 25, medium-dark brown skin, round face, short b
 ```
 **Episode look:** a toy-town Pondicherry made of clay. Pastel yellow and white colonial houses with bougainvillea, and Tamil-side houses with thinnai verandahs and tiled roofs. Old-map scenes use the same clay style on a parchment-coloured table. Keep everything stylised and miniature, like a tabletop model city, never photoreal.
 
-## Script (~115 words; VO in Tanglish, on-screen text in Tamil)
+## Script v7 (2026-11-13, built in VideoHub; replaces v2)
+
+**v8 update (same day):** every VO line is rewritten in natural spoken Tamil. The hook, from Vasanth, is now "நம்ம பாண்டிச்சேரி தெரு எல்லாம் ஏன் chess board மாதிரி இருக்கு தெரியுமா?". Line 3 now starts "தமிழ்நாட்டுல நிறைய ஊரு…". The exact lines are in the film's `vo/script.json`; the table below shows v7 wording.
+
+Rules: `research_notes/Shorts scriptwriting craft.md`. One question, answered and nothing else. Foreshadow by 5 s, the body built from but/therefore, a twist, end on the high point, then a loop.
+The canal and White Town material moves to **episode 03: White Town-க்கு ஏன் அந்த பேரு?**
+
+Voice: ElevenLabs **Prashant V, Calm, Friendly and Clear** (yIFUVClxedWzoMYhk15k), Eleven v3. Take 3 of 3, sped up 1.08× with pitch kept. 37.5 s.
+This departs from the style sheet's own-voice rule (§4); decide before publishing. Source of truth: the film's `vo/script.json`.
+
+| # | Shot | Visual | On-screen text | VO |
+|---|---|---|---|---|
+| 1 | hook | Top-down grid; Mani's scooter turns identical corners | **பாண்டி தெரு ஏன் chess board மாதிரி?** | பாண்டி தெரு ஏன் chess board மாதிரி? |
+| 2 | foreshadow | The town becomes an old map with a "?" seal; the French flag gets a red ✗ | map வரைஞ்சது யாரு? | ஏன்னா இந்த தெருக்கள் முதல்ல ஒரு map-ல தான் பொறந்தது. அந்த map-ஐ வரைஞ்சது… French இல்ல. |
+| 3 | contrast | A temple town grows ring by ring (left); a ruled map (right) takes over on "ஆனா" | — | நிறைய நம்ம ஊருங்க, கோவிலை சுத்தி கொஞ்சம் கொஞ்சமா வளர்ந்தது. ஆனா பாண்டி அப்படி இல்ல. |
+| 4 | ruler | A ruler and pencil draw straight lines; houses pop up along each line | — | இங்க, யாரோ map-ல ruler வெச்சு நேர் கோடு போட்டு, தெருவை plan பண்ணாங்க. |
+| 5 | guess | Nodding tourists; tags French? / British? / ???; French glows | French? British? ??? | சரி, அந்த கோடு போட்டது யாரு? எல்லாரும் French-னு சொல்லுவாங்க. |
+| 6 | twist | A ship with its flag hidden by a "?" patch; on "Dutch" the patch rips off, flash | 1693 → **Dutch!** | ஆனா இந்த grid முதல்ல தெரியுறது, 1693-ல பாண்டிய கொஞ்ச நாள் புடிச்ச Dutch-ஓட map-ல! |
+| 7 | french | French ship arrives; builders lay the streets on the same lines | French ✔ | அப்புறம் French திரும்ப வந்து, அதே கோட்டு மேல ஊரை கட்டி முடிச்சாங்க. |
+| 8 | card | Kolam card | Plan: Dutch · கட்டினது: French | So, plan Dutch-ஓடது. கட்டினது French. |
+| 9 | loop | Camera comes down onto frame 1's corner | — | அதான்… எந்த பக்கம் திரும்பினாலும் ஒரே மாதிரி. |
+
+**Check:** line 3 ("many of our towns grew around a temple") is general knowledge, not from the sources. It says "நிறைய" (many), not "எல்லா" (all).
+
+## Script v1 (superseded) (~115 words; VO in Tanglish, on-screen text in Tamil)
 
 | # | Time | Visual | On-screen text | VO |
 |---|---|---|---|---|

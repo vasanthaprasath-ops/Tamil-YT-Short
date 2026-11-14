@@ -2,7 +2,7 @@
 
 Everything for Vasanth's faceless, AI-animated Tamil YouTube Shorts channel, cross-posted to Instagram Reels and Facebook. It holds the research, decisions, production kit, a Claude skill, and the finished episode scripts.
 
-**New laptop or new Claude session? Read [`PROJECT-CONTEXT.md`](PROJECT-CONTEXT.md) first.** It holds every decision, the reasoning behind it, and what's still open.
+**New laptop or new Claude session? Read [`STATUS.md`](STATUS.md), then [`PROJECT-CONTEXT.md`](PROJECT-CONTEXT.md).** It holds every decision, the reasoning behind it, and what's still open.
 
 ## What's where
 
@@ -38,7 +38,6 @@ Everything for Vasanth's faceless, AI-animated Tamil YouTube Shorts channel, cro
 3. **The skill has absolute paths.** `SKILL.md` refers to `D:\Personal\Health\Records\...`. If the clone lives anywhere else, edit those paths in `SKILL.md` to point at the clone.
 4. Open Claude Code in the clone folder and say: *"Read PROJECT-CONTEXT.md, then make the next Short"* (or name a title from `kit/title-bank.md`).
 
-## Status (2026-11-13)
+## Status
 
-- Episodes scripted: **01 Kaal maraththu** (body series) and **02 Pondy grid** (city series).
-- **Not started yet:** channel name, Mani and Paati reference packs, the bake-off weekend, buying the mic, creating the accounts. See the "Next steps" section of `PROJECT-CONTEXT.md`.
+See [`STATUS.md`](STATUS.md): the current state, the open decisions and the next steps (updated 2026-11-14).

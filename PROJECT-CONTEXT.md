@@ -1,6 +1,6 @@
 # Project context: everything decided so far
 
-This file consolidates the planning conversations from 2026-11-04 to 2026-11-13. When something here conflicts with an older file, **this file and the newest report win**. Details and sources are in the linked files.
+This file consolidates the planning conversations from 2026-11-04 to 2026-11-14. When something here conflicts with an older file, **this file and the newest report win**. Details and sources are in the linked files.
 
 ---
 
@@ -105,7 +105,7 @@ Title formula: `How X Works` / `Why X …` / `What Is X?` / `Could/Can …?` / a
 
 ## 8. Production process and cadence
 
-- **Per Short:** idea → 2 credible sources → one-line true takeaway written first → script (90–140 words, the template beats) → 8–12 shots → prompts (prefix + character add-on) → stills → 3–5 animated clips → VO → edit and captions → publish to YouTube first, then native uploads to Instagram and Facebook the same day.
+- **Per Short:** idea → 2 credible sources → one-line true takeaway written first → script (30–45 s of measured voice-over, the template beats; see kit/film-craft.md) → 8–12 shots → prompts (prefix + character add-on) → stills → 3–5 animated clips → VO → edit and captions → publish to YouTube first, then native uploads to Instagram and Facebook the same day.
 - **Time:** about 5.3–6.5 hours per Short for the first 10, then 3.3–4.5 hours.
 - **Cadence gate** (replaces the earlier 4–5 a week):
   - **Start at 2 a week.**
@@ -131,6 +131,17 @@ Title formula: `How X Works` / `Why X …` / `What Is X?` / `Could/Can …?` / a
 | The Feb 2027 YPP change is unverified | Confirmed by multiple outlets |
 | The July 2026 policy "restructure" | Wording reorganised only; no practical change |
 | City series = "Madurai la mattum…" fact lists | One "why is X like this?" question per city |
+| @YENAPPADI is an active Tamil explainer competitor (§11) | 2026-11-14: its 33.7K subs come from 2017–18 pregnancy/gossip videos; it has no Shorts and its one new explainer has 39 views. The name is still taken, but it is not a benchmark |
+| "Human-body animation is under-supplied in Tamil" | 2026-11-14: out of date; supply grew through 2026 (Roo, AI2Learn, Healthix and others) |
+
+### 2026-11-14: animated-shorts teardown (headline findings)
+
+Notes: `research_notes/Animated shorts repo teardown/` (5 files). Rules distilled into `kit/film-craft.md`, which also lists the open decisions for Vasanth (Mani's colours, volume, topic mix, packaging, music level, rim light, squash/stretch).
+- **Real Tamil benchmarks:** Roo Explains (243K subs, best Tamil median ~205K, health habits as comedy, named character), AI2Learn (69K subs from 37 videos, median ~149K, "X ஏன் வருது?" body questions) and Chitti – Tamil (576K, local "unnoticed things" at 117K–299K). Only Chitti and Roo are animated Tamil explainers above 100K.
+- **Body and daily habits dominate** every strong Tamil median; city/local topics cap lower. Suggested mix: about 3 in 4 body/habit with a Tamil home angle (Vasanth to decide).
+- **Volume:** winners post a lot (Zack ~5/day, Tamil winners 1–3/week) and one hit can make a channel, but volume without topic strength gets nothing. The teardown suggests 4–5/week; the §8 time gate still stands until Vasanth decides.
+- **"Why" niche is crowding:** three "Yen Theriyuma" channels launched in Oct 2026. Nobody in Tamil uses a verdict stamp, so it remains our point of difference.
+- **Craft:** measured numbers from a top animated channel (camera moving ~90 % of the time, slow constant push-ins, reactions ~2 frames before the word, music stopping on the pivot word, ambience always on) now sit in `kit/film-craft.md`, with an ep 02 gap scorecard. Ep 02's loudness, tone and SFX density already match; its main gaps are a still camera (~38 % of runtime), the surprise arriving at 6 s instead of sentence 1, and a sting on the key word.
 
 ## 10. Episodes produced
 
@@ -141,14 +152,17 @@ Title formula: `How X Works` / `Why X …` / `What Is X?` / `Could/Can …?` / a
 
 ## 11. Open items (Vasanth decides)
 
-- Channel name. Ideas: **Yen Appadi?**, **Unmaiya?**, Kelvi Kutty, Ulle Enna?, Yosichirukkeengala?, Paati Lab, Namma Yen, Theriyaadha Pakkam. Avoid "Facts" in the name.
+- ~~Channel name~~ **Decided 2026-11-13: "Adhu Yen?" (அது ஏன்?), handle @adhuyen.** "Yen Appadi" was rejected because the name is taken by @YENAPPADI (33.7K subscribers from old 2017–18 videos; renamed "Yen Appadi?" in 2026, no Shorts, so not a real Shorts competitor — see the 2026-11-14 teardown — but the name clash still matters). Also rejected: Unmaiya? (taken), Yen Ippadi? (taken), Yen Theriyuma? (taken), Appadiya / Edhukku (several channels with the same name). Before naming anything new, check the YouTube handle and channel search for collisions.
 - The final names of Mani and Paati.
 - Series label wording, for example "உடம்பு" for the body series.
 - Whether a borderline health topic goes ahead (decided case by case).
 
 ## 12. Next steps (in order)
 
-1. Pick the channel name and check the handle on YouTube, Instagram, Facebook, X and Threads.
+> **Current next steps and open decisions live in [`STATUS.md`](STATUS.md) (2026-11-14).** The list below is the original plan.
+
+
+1. ~~Pick the channel name~~ Done: Adhu Yen? (@adhuyen). Still to do: confirm @adhuyen is free on Instagram, Facebook, X and Threads.
 2. Run the **bake-off weekend** (toolstack report). Fill in the "Bake-off date / stack chosen" line in style-sheet §7.
 3. Make the **Mani and Paati reference packs** and save them to `kit/characters/v1/`.
 4. Buy the Fifine K669B and record the 30-second voice test.

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<title>Adhu Yen? brand</title>
+<style>
+  body { margin: 0; background: #11141c; color: #ddd; font: 14px "Segoe UI", sans-serif; padding: 16px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+  .card { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+  canvas.logo { width: 260px; height: 260px; }
+  canvas.round { border-radius: 50%; }
+  canvas.tiny { width: 98px; height: 98px; border-radius: 50%; }
+  canvas.banner { width: 100%; max-width: 1280px; }
+</style>
+</head>
+<body>
+<!-- Brand drawings for "Adhu Yen?" (அது ஏன்?) in the channel palette (kit/style-sheet.md).
+     Each logo is drawn on an 800x800 canvas (YouTube/Instagram profile picture; YouTube crops it to a circle).
+     The banner is 2560x1440 with everything important inside YouTube's 1546x423 safe area. -->
+<div class="row" id="logos"></div>
+<h3>Banner (2560×1440, safe area outlined)</h3>
+<canvas class="banner" id="banner" width="2560" height="1440"></canvas>
+<script>
+'use strict';
+const P = { tur: '#E3A72F', kol: '#F7F3EA', red: '#B23A2E', leaf: '#4C8C3A', ind: '#1F2A44' };
+const TA = '"Nirmala UI", "Latha", sans-serif';
+function shade(hex, k) { const n = parseInt(hex.slice(1), 16), c = [n >> 16 & 255, n >> 8 & 255, n & 255], m = k > 0 ? 255 : 0, a = Math.abs(k); return `rgb(${c.map(v => Math.round(v + (m - v) * a)).join(',')})`; }
+function clayBg(g, S, col) {   // soft radial "clay" background
+  const r = g.createRadialGradient(S * 0.38, S * 0.32, S * 0.05, S / 2, S / 2, S * 0.75);
+  r.addColorStop(0, shade(col, 0.18)); r.addColorStop(1, shade(col, -0.22));
+  g.fillStyle = r; g.fillRect(0, 0, S, S);
+}
+function kolamFlower(g, x, y, r, col) {
+  g.save(); g.translate(x, y); g.strokeStyle = col; g.lineWidth = r * 0.16; g.lineCap = 'round';
+  for (let k = 0; k < 8; k++) { g.rotate(Math.PI / 4); g.beginPath(); g.ellipse(0, -r * 0.62, r * 0.26, r * 0.55, 0, 0, Math.PI * 2); g.stroke(); }
+  g.fillStyle = col; g.beginPath(); g.arc(0, 0, r * 0.22, 0, Math.PI * 2); g.fill(); g.restore();
+}
+function dotRing(g, S, rad, n, col, r) { g.fillStyle = col; for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2; g.beginPath(); g.arc(S / 2 + Math.cos(a) * rad, S / 2 + Math.sin(a) * rad, r, 0, Math.PI * 2); g.fill(); } }
+// points along a question-mark curve (hook arc + stem), for the kolam-dot "?"
+function qPoints(cx, cy, s) {   // hand-placed classic "?" (hook over the top, curl in, short stem)
+  return [[-0.6, -0.4], [-0.5, -0.72], [-0.22, -0.92], [0.12, -0.92], [0.42, -0.75], [0.55, -0.45], [0.42, -0.15], [0.15, 0.02], [0, 0.25], [0, 0.48]]
+    .map(([x, y]) => [cx + x * s, cy + y * s]);
+}
+// A: "?" made of kolam dots, the full stop is a kolam flower, on night indigo
+function logoA(g, S = 800) {
+  clayBg(g, S, P.ind);
+  dotRing(g, S, S * 0.43, 48, 'rgba(247,243,234,0.35)', 6);
+  g.save(); g.shadowColor = 'rgba(0,0,0,0.45)'; g.shadowBlur = 24; g.shadowOffsetY = 10;
+  const cx = S / 2 + 6, cy = S / 2 - 20, sc = 230;
+  for (const [x, y] of qPoints(cx, cy, sc)) {
+    const r = g.createRadialGradient(x - 12, y - 12, 4, x, y, 40); r.addColorStop(0, shade(P.tur, 0.35)); r.addColorStop(1, shade(P.tur, -0.2));
+    g.fillStyle = r; g.beginPath(); g.arc(x, y, 34, 0, Math.PI * 2); g.fill();
+  }
+  g.restore();
+  kolamFlower(g, cx, cy + 0.98 * sc, 60, P.kol);
+}
+// B: the word "ஏன்?" in chunky clay type: indigo letters on turmeric, a red "?"
+function logoB(g, S = 800) {
+  clayBg(g, S, P.tur);
+  dotRing(g, S, S * 0.44, 56, 'rgba(31,42,68,0.35)', 6);
+  g.textBaseline = 'middle'; g.textAlign = 'left'; g.lineJoin = 'round';
+  g.font = `900 230px ${TA}`; const w1 = g.measureText('ஏன்').width;
+  g.font = `900 250px "Segoe UI", sans-serif`; const w2 = g.measureText('?').width;
+  const x0 = S / 2 - (w1 + w2 * 0.8) / 2, y = S / 2 + 15;   // whole word + "?" stays inside the circle crop
+  g.save(); g.shadowColor = 'rgba(0,0,0,0.35)'; g.shadowBlur = 20; g.shadowOffsetY = 12;
+  g.font = `900 230px ${TA}`; g.strokeStyle = P.kol; g.lineWidth = 22; g.strokeText('ஏன்', x0, y); g.fillStyle = P.ind; g.fillText('ஏன்', x0, y);
+  g.translate(x0 + w1 + w2 * 0.38, y - 8); g.rotate(0.18);
+  g.font = `900 250px "Segoe UI", sans-serif`; g.textAlign = 'center'; g.strokeStyle = P.kol; g.lineWidth = 26; g.strokeText('?', 0, 0); g.fillStyle = P.red; g.fillText('?', 0, 0);
+  g.restore();
+}
+// C: a clay speech bubble asking "?", with three kolam dots, on temple red
+function logoC(g, S = 800) {
+  clayBg(g, S, P.red);
+  dotRing(g, S, S * 0.44, 48, 'rgba(247,243,234,0.3)', 6);
+  const bx = S / 2, by = S / 2 - 30;
+  g.save(); g.shadowColor = 'rgba(0,0,0,0.4)'; g.shadowBlur = 30; g.shadowOffsetY = 14;
+  // one outline: ellipse body with the tail grown out of its lower-left edge
+  g.beginPath();
+  const a0 = Math.PI * 0.62, a1 = Math.PI * 0.78;
+  g.ellipse(bx, by, 250, 215, 0, a1, a0 + Math.PI * 2);
+  g.quadraticCurveTo(bx - 150, by + 250, bx - 215, by + 300);
+  g.quadraticCurveTo(bx - 175, by + 235, bx + Math.cos(a1) * 250, by + Math.sin(a1) * 215);
+  g.closePath();
+  const r = g.createLinearGradient(0, by - 215, 0, by + 300); r.addColorStop(0, shade(P.kol, 0.1)); r.addColorStop(1, shade(P.kol, -0.12));
+  g.fillStyle = r; g.fill(); g.restore();
+  g.font = `900 330px "Segoe UI", sans-serif`; g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillStyle = P.tur; g.strokeStyle = P.ind; g.lineWidth = 18; g.lineJoin = 'round'; g.strokeText('?', bx, by + 10); g.fillText('?', bx, by + 10);
+}
+const LOGOS = [['A', 'Kolam-dot ?', logoA], ['B', 'ஏன்? clay type', logoB], ['C', 'Speech bubble ?', logoC]];
+const holder = document.getElementById('logos');
+for (const [id, label, fn] of LOGOS) {
+  const card = document.createElement('div'); card.className = 'card';
+  const big = document.createElement('canvas'); big.width = big.height = 800; big.className = 'logo round'; big.id = 'logo' + id; fn(big.getContext('2d'));
+  const tiny = document.createElement('canvas'); tiny.width = tiny.height = 800; tiny.className = 'tiny'; tiny.getContext('2d').drawImage(big, 0, 0);
+  const t = document.createElement('div'); t.textContent = `${id}: ${label}  (big · and at real 98px size)`;
+  card.append(big, tiny, t); holder.append(card);
+}
+// banner, "premium" pass: restraint over pattern. Deep indigo with one warm spotlight, faint kolam linework only at
+// the far edges (outside the safe area), a gold-ringed logo, a metallic-gold wordmark with a soft shadow instead of a
+// thick outline, a thin kolam divider, and a quiet letter-spaced tagline. Gold is the only accent (about 10%).
+function banner(g, logo, safe) {
+  const W = 2560, H = 1440, sx = (W - 1546) / 2, sy = (H - 423) / 2;   // YouTube's safe area (visible on every device)
+  // ground: deep indigo, warm spotlight behind the mark, vignette
+  g.fillStyle = shade(P.ind, -0.35); g.fillRect(0, 0, W, H);
+  const spot = g.createRadialGradient(W / 2 - 120, H / 2, 40, W / 2 - 120, H / 2, 1250);
+  spot.addColorStop(0, 'rgba(70,88,140,0.85)'); spot.addColorStop(0.45, 'rgba(38,50,84,0.55)'); spot.addColorStop(1, 'rgba(10,13,22,0)');
+  g.fillStyle = spot; g.fillRect(0, 0, W, H);
+  const warm = g.createRadialGradient(sx + 210, H / 2, 10, sx + 210, H / 2, 520);
+  warm.addColorStop(0, 'rgba(227,167,47,0.18)'); warm.addColorStop(1, 'rgba(227,167,47,0)');
+  g.fillStyle = warm; g.fillRect(0, 0, W, H);
+  // faint kolam chains at the far left and right (decoration lives outside the safe area)
+  g.save(); g.strokeStyle = 'rgba(227,167,47,0.10)'; g.lineWidth = 3;
+  for (const side of [0, 1]) for (let col = 0; col < 3; col++) for (let row = 0; row < 13; row++) {
+    const cx = side ? W - 90 - col * 120 : 90 + col * 120, cy = 60 + row * 110, rr0 = 44;
+    g.beginPath(); g.arc(cx, cy, rr0, 0, Math.PI * 2); g.stroke();
+    g.beginPath(); g.moveTo(cx - rr0, cy); g.quadraticCurveTo(cx, cy + rr0 * 1.6, cx + rr0, cy); g.stroke();
+    g.fillStyle = 'rgba(247,243,234,0.12)'; g.beginPath(); g.arc(cx, cy, 4, 0, Math.PI * 2); g.fill();
+  }
+  g.restore();
+  const vig = g.createRadialGradient(W / 2, H / 2, 600, W / 2, H / 2, 1500); vig.addColorStop(0, 'rgba(0,0,0,0)'); vig.addColorStop(1, 'rgba(0,0,0,0.55)');
+  g.fillStyle = vig; g.fillRect(0, 0, W, H);
+  // fine grain (seeded, so every export is identical): a printed, not flat, feel
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 160000; i++) { g.fillStyle = rnd() > 0.5 ? 'rgba(255,255,255,0.035)' : 'rgba(0,0,0,0.05)'; g.fillRect(rnd() * W, rnd() * H, 2, 2); }   // also dithers gradient banding
+  // the mark: logo in a thin gold ring with a soft glow
+  const lx = sx + 200, ly = H / 2, lr = 170;
+  g.save(); g.shadowColor = 'rgba(227,167,47,0.45)'; g.shadowBlur = 60; g.beginPath(); g.arc(lx, ly, lr, 0, Math.PI * 2); g.fillStyle = '#141a2b'; g.fill(); g.restore();
+  g.save(); g.beginPath(); g.arc(lx, ly, lr, 0, Math.PI * 2); g.clip(); g.drawImage(logo, lx - lr * 1.08, ly - lr * 1.08, lr * 2.16, lr * 2.16); g.restore();
+  const ring = g.createLinearGradient(lx - lr, ly - lr, lx + lr, ly + lr); ring.addColorStop(0, '#F6D27A'); ring.addColorStop(0.5, '#C98F22'); ring.addColorStop(1, '#F2C55C');
+  g.strokeStyle = ring; g.lineWidth = 7; g.beginPath(); g.arc(lx, ly, lr + 10, 0, Math.PI * 2); g.stroke();
+  // wordmark: metallic gold, soft shadow, no heavy outline
+  const tx = sx + 450, wy = H / 2 - 45;
+  g.textBaseline = 'middle'; g.textAlign = 'left';
+  g.font = `900 176px ${TA}`; const ww = g.measureText('அது ஏன்?').width;
+  const gold = g.createLinearGradient(0, wy - 95, 0, wy + 95); gold.addColorStop(0, '#FBE3A0'); gold.addColorStop(0.45, '#E9B23E'); gold.addColorStop(0.55, '#D99A26'); gold.addColorStop(1, '#A8711A');
+  g.save(); g.shadowColor = 'rgba(0,0,0,0.55)'; g.shadowBlur = 28; g.shadowOffsetY = 12; g.fillStyle = gold; g.fillText('அது ஏன்?', tx, wy); g.restore();
+  // divider: hairline with a small kolam diamond in the middle
+  const dy = H / 2 + 62, dx0 = tx + 6, dx1 = tx + ww;
+  const line = g.createLinearGradient(dx0, 0, dx1, 0); line.addColorStop(0, 'rgba(227,167,47,0)'); line.addColorStop(0.15, 'rgba(227,167,47,0.7)'); line.addColorStop(0.85, 'rgba(227,167,47,0.7)'); line.addColorStop(1, 'rgba(227,167,47,0)');
+  g.strokeStyle = line; g.lineWidth = 2.5; g.beginPath(); g.moveTo(dx0, dy); g.lineTo(dx1, dy); g.stroke();
+  const mx = (dx0 + dx1) / 2; g.save(); g.translate(mx, dy); g.rotate(Math.PI / 4); g.fillStyle = shade(P.ind, -0.35); g.fillRect(-13, -13, 26, 26); g.strokeStyle = '#E3A72F'; g.lineWidth = 3; g.strokeRect(-11, -11, 22, 22); g.fillStyle = '#E3A72F'; g.fillRect(-4, -4, 8, 8); g.restore();
+  // tagline: quiet, centred under the wordmark (no letter-spacing: it pulls Tamil letter clusters apart)
+  const tag = 'சின்ன கேள்வி. பெரிய காரணம்.';
+  let ts = 54; g.font = `600 ${ts}px ${TA}`;
+  while (g.measureText(tag).width > ww && ts > 30) { ts -= 2; g.font = `600 ${ts}px ${TA}`; }
+  g.textAlign = 'center'; g.fillStyle = 'rgba(247,243,234,0.78)'; g.fillText(tag, tx + ww / 2, H / 2 + 132);
+  if (safe) { g.strokeStyle = 'rgba(255,80,80,0.8)'; g.lineWidth = 4; g.setLineDash([20, 14]); g.strokeRect(sx, sy, 1546, 423); g.setLineDash([]); }
+}
+const bannerLogo = document.createElement('canvas'); bannerLogo.width = bannerLogo.height = 800; logoA(bannerLogo.getContext('2d'));
+banner(document.getElementById('banner').getContext('2d'), bannerLogo, true);
+// for export: clean versions (no safe-area outline)
+window.exportPNG = () => {
+  const out = {};
+  for (const [id, , fn] of LOGOS) { const c = document.createElement('canvas'); c.width = c.height = 800; fn(c.getContext('2d')); out['logo-' + id] = c.toDataURL('image/png'); }
+  const b = document.createElement('canvas'); b.width = 2560; b.height = 1440; banner(b.getContext('2d'), bannerLogo, false); out['banner-A'] = b.toDataURL('image/png');
+  return out;
+};
+window.READY = true;
+</script>
+</body>
+</html>

@@ -2,13 +2,13 @@
 
 This sheet fixes how the channel looks and sounds so every Short is recognisable at a glance. Topics change freely. **This sheet does not change** without a deliberate decision.
 
-Why it matters: research found recurring characters and one consistent style drive follows (Tamil "muthupandi" series, Part 41 at 7.9M). It also found that templated sameness in *stories* gets channels demonetised. So the **look** is fixed and the **story** is always new.
+Why it matters: big channels show a recurring look and cast (Tamil "muthupandi" series, Part 41 at 7.9M; Zack D. Films' fixed style), but no data proves recurring characters raise follow rate. Treat the fixed look as cheap brand-building, not a guaranteed lever. It also found that templated sameness in *stories* gets channels demonetised. So the **look** is fixed and the **story** is always new.
 
 ---
 
 ## 1. Look
 
-- **Style:** warm, slightly stylised 3D "clay / soft-toy" look. Rounded shapes, soft rim light, shallow depth of field. It must **not** be photoreal, for two reasons:
+- **Style:** warm, slightly stylised 3D "clay / soft-toy" look. Rounded shapes, soft rim light, shallow depth of field. (Rim light is an open decision for code films: the measured reference uses none. See `kit/film-craft.md` "Decisions for Vasanth".) It must **not** be photoreal, for two reasons:
   - Fully animated visuals need no AI label on YouTube.
   - It keeps us clearly different from Zack D. Films' realistic 3D look.
 - **Frame:** vertical 9:16, 1080×1920. Close-ups and medium shots. The subject fills the frame. Avoid wide establishing shots unless the place itself is the topic (city series).
@@ -37,6 +37,16 @@ Write the skin tone into every prompt and compare each batch against the sheet, 
 - Tamil man, about 25. Medium-dark brown skin, round friendly face, short black hair with a side parting, thin moustache.
 - **Fixed outfit:** mustard-yellow half-sleeve shirt (`#E3A72F`), grey trousers, black analogue watch on his left wrist. At home: white veshti and the same shirt.
 - Role: the everyday "this could be you" person. The splinter, the flooded car, the ear pop on the ghat road all happen to him. He never explains anything; the narrator does.
+
+### Face readability (all characters, stills and code films; added 2026-11-14)
+Faces are read in about half a second on a phone, so big, high-contrast features beat subtle ones. Numbers are in head-widths (W); evidence in `kit/film-craft.md` §3.
+- **Features stand out from the skin:** eyes, brows and mouth at least 3:1 contrast against the skin; shocked eyes and open mouths at least 4.5:1. On Mani's dark skin that means **eye whites** (kolam white `#F7F3EA`), a near-black mouth line and **near-black brows**, not hair-coloured ones.
+- **Brows carry the emotion:** thick (about 0.05 W) tapering to thin, about 0.17 W long, set well above the eyes.
+- **Eyes** about 0.26–0.28 W apart. Shocked = big white circles almost touching, tiny pupils.
+- **Moustache** = two short tapered strokes with a clear gap above the mouth, so the two never merge.
+- **Paati's spectacles:** thin gold rims, eyes and brows clearly visible, no glare over the pupils.
+- **The expression row** (curious, shocked, relieved, happy, worried, amused) is defined by eye shape + brow angle + mouth shape. Make shocked and happy big; never rely on a small mouth-corner change.
+- **Size:** when an expression changes, the face fills at least 25 % of the frame width.
 
 ### Paati (appears in the Paati series and whenever a household rule comes up)
 - Tamil grandmother, about 70. Silver hair in a low bun, small round spectacles, maroon cotton saree with a mustard border, thin gold chain.
@@ -75,16 +85,27 @@ Inside-the-body shots: "cutaway cross-section, translucent skin, glowing nerves 
 ## 3b. Animation
 
 - Animate only **3–5 character-moment shots** per Short: image-to-video, 5 s, 720p, **audio off**.
-- Move every other shot with a slow push-in or parallax in Resolve.
+- Move every other shot with a slow push-in or parallax in Resolve. "Slow" means 0.15–0.35 % zoom per frame (about 5–10 % per second), steady through the shot rather than easing to a stop; the camera should be moving on at least 85 % of the runtime. No hand-held wobble. (Measured on a top animated channel; `kit/film-craft.md` §2.)
 - Build diagrams and maps as keyframed graphics over a clean AI background still.
 - Check the **last frame** of every clip for face and outfit drift.
 - Tool: the bake-off winner. Candidates: Omni Flash in YouTube Create (free), Veo 3.1 Lite in Flow (AI Pro), or Kling 3.0 (STANDARD stack).
+
+## 3c. Code-film look (VideoHub 2D canvas; added 2026-11-14)
+
+The clay look drawn in code, in place of the AI prefix. Full rules and canvas hints: `kit/film-craft.md` §4.
+- **Shadows** are a darker, slightly richer version of the surface's own colour (about half as bright), mixed toward night indigo `#1F2A44`, **never toward black**. Drop shadows are indigo-tinted, not near-black.
+- **One key light per shot**, upper-left by default: highlights, body gradients and shadow offsets all agree.
+- **Outline policy:** characters get one thin warm dark outline (`#2A1A14`, 3–5 % of head width, thicker on the bottom/shadow side), drawn once around the whole silhouette. Background lines are thinner and fainter than character outlines. No outline on graphics or cards.
+- **Depth of field** on about 1 shot in 3 (close and medium character beats), not every shot; wides, maps and cards stay sharp. Characters and text are always sharp. *(Replaces "shallow depth of field" for code films; the AI prefix keeps it.)*
+- **Glow** only on things that give off light (lamps, glowing lines), never on faces or white text.
+- **No grain or texture** on characters; the clay feel comes from soft gradients and soft shadows.
 
 ## 4. Voice
 
 - Your own voice, off-screen, every video. It is the strongest protection against "inauthentic content" flags. Cloning your own voice later for dubs needs no disclosure.
 - Spoken Tamil, not formal written Tamil. Speak in the second person ("unga veetla…", "neenga…").
 - Calm and plain, like explaining to a cousin. No shouting and no fake hype.
+- Pace: no Shorts speaking-speed target has evidence. Speak at natural speed and prefer cutting words over speeding up. A pitch-preserving speed-up of 1.1x or less is fine; never go higher. Older viewers are hurt most by fast speech (UCLA, Applied Cognitive Psychology 2022), and the real risk is jargon, not tempo.
 - Record in a quiet room with soft furnishings, mic 10–15 cm from the mouth, one clean take per line.
 - **One narrator voice only (yours).** Characters don't speak:
   - Mani reacts with faces and sound effects only.
@@ -120,8 +141,9 @@ Inside-the-body shots: "cutaway cross-section, translucent skin, glowing nerves 
   - Don't use Text+ for Tamil unless it passed the export test.
   - Fallback: pre-render captions and the stamp as transparent PNGs from a browser.
 - **Always check Tamil in an exported frame**, not the preview. Zoom in on கை, கொ and ஸ்ரீ.
-- Burn the captions in on every Short. A review of 100+ studies found captions improve comprehension, attention and memory for everyone.
-- Opening question: shown on screen in Tamil script during seconds 0–3.
+- Burn the captions in on every Short. A review of 100+ studies found captions improve comprehension, attention and memory, most of all for second-language viewers (the 'for everyone' claim is disputed). Never justify captions with '85% watch muted'. That is a 2016 publisher claim, not a platform figure.
+- Show captions as short phrases of 2–4 words timed to the narration, never one flashing word at a time (faster subtitles cut comprehension). Highlighting one keyword per line in turmeric `#E3A72F` is optional and untested, so A/B it.
+- Opening question: on screen in Tamil script **from frame 0** through second 3. No black, fade-in or logo frame before it. Frame 0 doubles as the Shorts thumbnail and the Reels cover, and with the sound off it must name the subject by itself.
 - English keywords may sit beside the Tamil (for example "Nerve") to help search.
 
 ## 6. Sound
@@ -130,8 +152,18 @@ Inside-the-body shots: "cutaway cross-section, translucent skin, glowing nerves 
   - Claimed music blocks monetisation of Shorts over one minute.
   - It invites Content ID disputes.
   - It may not be cleared on Instagram or Facebook, where the same master goes.
-- **Beds:** none, or YouTube Audio Library tracks marked "attribution not required" (check each before cross-posting). Never use Pixabay music, the Meta Sound Collection, or Freesound CC BY-NC.
-- **Fixed sounds:** one "question" whoosh at the start and the verdict sting. Nothing else is fixed. Take both from Freesound CC0 or make them yourself, so they're cleared on every platform. Log every audio asset (URL, licence, download date).
+- **Beds:** none, music synthesized in code (`make-audio.js`, code films), or YouTube Audio Library tracks marked "attribution not required" (check each before cross-posting). Never use Pixabay music, the Meta Sound Collection, or Freesound CC BY-NC.
+- **Fixed sounds:** one "question" whoosh at the start and the verdict sting. Nothing else is fixed. Take both from Freesound CC0 or make them yourself, so they're cleared on every platform. Log every audio asset (URL, licence, download date). The verdict sting stays under 1 second. Nothing (sting, logo, title card) plays before the hook. The 'question' whoosh lands under the first spoken word, not before it. If music is used, keep it **10–14 LU under the voice** after ducking (about −24 to −28 LUFS with the voice at −14). *Changed 2026-11-14:* the old "−25 to −30 LUFS" had no source; the measured reference channel sits louder (5–10 dB under), accessibility guidance wants 20 dB or more, and older listeners need at least ~7, so 10–14 is the middle for an audience that includes Paati's generation. Whether to go louder is in `kit/film-craft.md` "Decisions for Vasanth".
+- **Ducking:** dip the music only 3–4 dB, keyed from the voice's word times, not from the audio (which pumps on every syllable).
+- **Ambience:** one ambience bed per place, always on, about 26–30 LU under the voice, so silence means "no music", never "no sound".
+- **Hits and music:** no loud hit on a key word (put it in the gap after the line); the music stops dead on the pivot word and comes back after the answer lands; every boom has a mid-range layer so it exists on phone speakers.
+
+## 6b. Channel brand (decided 2026-11-13)
+
+- **Name:** Adhu Yen? (அது ஏன்?). **Handle:** @adhuyen. Use the same handle on every platform.
+- **Logo:** option A, a "?" made of turmeric clay kolam dots, with a kolam flower as the dot, on night indigo: `kit/brand/logo.png` (800×800). It reads at the 98px circle size.
+- **Banner:** `kit/brand/banner.png` (2560×1440, text inside the 1546×423 safe area). Tagline: "சின்ன கேள்வி. பெரிய காரணம்." (small question, big reason).
+- **Source:** `kit/brand/brand.html` draws both; edit it and re-export rather than redrawing. Options B and C are kept as `logo-B.png` / `logo-C.png`.
 
 ## 7. Toolstack
 
