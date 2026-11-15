@@ -70,6 +70,51 @@ Source: a two-page creator handout (`C:\Users\vasan\Downloads\Viral content.pdf`
 - **Don't run the Instagram scraper it recommends.** Scraping Instagram breaks its terms and risks the account. Collect by hand at human speed (`/ig-viral`), or read public YouTube titles and view counts (`/yt-viral`, or yt-dlp for titles and counts only). Never download others' videos.
 - The two tools it links (Sandcastles, 1of10) are paid affiliate links; not needed.
 
+## Added 2026-11-15: rehooks, hook failures, story formats (Instagram creator handouts)
+
+Sources Vasanth collected from Instagram creators. None of them gives data; every rule below is *PRACTITIONER* unless marked. Checked against our own ep 01 timings.
+- "20 rehook lines" (doagenticly, an 11-page Hinglish handout, `C:\Users\vasan\Downloads\Copy of doagenticly-20-rehook-lines.pdf`): the most useful of the set.
+- "Storytelling Template Database" (Kallaway, Short Form Academy sales extract, 14 pages): ten story formats, all told by the creator in first person.
+- [Hook Master skill](https://github.com/Liamrjohnston/hook-master-skill) (MIT, nine English Claude skills; credits Kallaway, Mino Lee, Jonah Berger, the Heath brothers). Read, not installed: it is English-only and assumes a talking head and filmed footage. The useful parts are borrowed below.
+- A Google Doc of two lead-magnet prompts, the [ootto.ai blog](https://ootto.ai/blog/make-viral-instagram-reels-with-claude) (mostly a product pitch) and [its-applied-ai "Pro Motion Graphic Skill"](https://www.its-applied-ai.com/r/pro-motion) (a motion-graphics prompt catalogue). Little for us; see "Not taken".
+
+**Where the answer goes**
+27. **The answer line sits in the last third.** Retention falls when the line after the hook gives the answer away, because nothing is left to wait for. The hook may state the surprise (*what*: "நல்ல sign!"); the *why* waits. Before locking a script, mark the line that answers the hook. If it is in the first two thirds, move it later and put a question where it was. *Grade: PRACTITIONER; consistent with information-gap curiosity (rule 14) and with our reference channel (mechanism at ~60 %, payoff at the end).* Ep 01 passes: the analogy starts at 64 % and the answer ("டிங் டிங் டிங் தான்… ஊசி குத்துறது!") lands at 33.6 s of 40.9 s, which is 82 %.
+28. **One rehook in the middle, at about 40–55 %.** Under 45 s, exactly one; a second only past 45 s. For us it is the mystery beat. It must name this video's next thing, never "கடைசி வரைக்கும் பாருங்க" (stay till the end). Keep it to about 2.5 s spoken. It replaces any "rehook every N seconds" idea (rule 11). Ep 01's mystery line ("சரி, எழுந்ததும் ஏன் ஊசி குத்துது?") starts at 24.4 s, which is 60 %, a little late; its joke at 50 % helps. Next episode: aim the mystery at 45–55 %.
+   Rehook lines in spoken Tamil (fill the [blank], pick one per video, don't repeat the same one in back-to-back episodes):
+   - **Turn** (when the setup is done): "ஆனா இது பாதி கதை தான்." · "ஆனா இங்க தான் ஒரு twist." · "ஆனா இதுல ஒரு problem இருக்கு: [problem]."
+   - **Noticing question** (right after a visual or a number; answer it in the next line): "இதுல ஒரு விஷயம் கவனிச்சீங்களா? [observation]." · "இதுல weird-ஆன விஷயம் என்ன தெரியுமா? [twist]." · "இந்த [number] பாத்தீங்களா? ஏன்னு யோசிங்க."
+   - **Reminder** (what they are waiting for): "சரி, அப்போ [hook question]?" · "இப்போ [A] தெரியும். ஆனா [B] ஏன்?"
+   - **Stakes** only when a source supports them, and never as fear on a health topic. Default: don't use.
+29. **After the payoff, only the twist line.** No recap, no "அதாவது…", no bonus tip; the recap is where the graph drops (rule 8). Delay with a question or a real step, never with filler words. A "here's the best part" line belongs before the payoff as a rehook, not after it.
+
+**Checking a hook before showing it to Vasanth**
+30. **Four ways a hook fails** (Hook Master, after Kallaway). Check every hook option against all four, and fix them in this order:
+    1. **Delay:** the topic is not clear in the first line. Throat-clearing such as "வணக்கம் friends", "இன்னைக்கு நாம பாக்க போறது…" or a channel intro.
+    2. **Confusion:** the viewer can't say in a few words what the video is about.
+    3. **Irrelevance:** the viewer doesn't see why it is about them (no Tamil home, body or street they recognise).
+    4. **Disinterest:** there is no question the viewer wants answered.
+    Then a quick panel: would a fast scroller, a sceptic, a beginner, an expert (doctor or historian), an elder in the family and a rival creator each stay or swipe, and why? Show Vasanth only hooks that pass.
+31. **Hook formats that fit a faceless Tamil explainer** (Hook Master names; examples ours):
+    - **Investigator:** "உங்க [thing] ஏன் [problem]? காரணம் நீங்க நினைக்குறது இல்ல." This is the channel's own "அது ஏன்?" shape.
+    - **Fortune teller:** "அடுத்த தடவை [situation], [what will be different]." Ep 01's ending uses it; it also works as a hook.
+    - **Contrarian:** "[common habit] பண்ணாதீங்க." Only when health-authority guidance says so; safer on city and daily-life topics.
+    - Not for us: Teacher ("how to X without Y") is advice, which we avoid on health; Experimenter needs a creator on camera (Mani can stand in only for harmless tests).
+32. **Words that make viewers swipe or that invent authority.** Never use: "யாருமே சொல்ல மாட்டாங்க" (nobody tells you), "ரகசியம்" (secret), "scientists சொல்றாங்க" without naming who, "எல்லாரும்…" claims with no source, round numbers with no source, "100 %", "guaranteed", "miracle", and health promises such as "வலியே இருக்காது" or "safe". *Grade: PRACTITIONER; the no-invented-authority part matches our sourcing rule.*
+
+**Story formats**
+33. **Kallaway's ten story formats are all first-person creator stories.** Most need a face (About me, Day in the life, Win, Personal update, Challenge, Goal journey): skip them. Three fit a faceless narrator:
+    - **Lesson from others:** tell a real, named person's story (the engineer who planned a town, the doctor who found a cause). Make them a vivid character in a specific situation, and land the lesson as a moment or a quote. **The quote must come from a credible source, never invented.** Good for the city series.
+    - **Before and after:** the size of the gap is the whole effect; the switch lands on a beat; 15–30 s is enough. Good for city "then vs now" with an old map against today.
+    - **Failed attempts (from the hero's journey):** before the explanation, Mani tries the common wrong fixes (stamping the leg, rubbing it). This doubles as the exaggeration joke. Show the myth once only (rule 17).
+
+**Not taken, and why**
+- **Comment-a-keyword to get a DM or a PDF** (all four Instagram sources end this way): we have no offer, YouTube has no DMs, and Meta demotes engagement bait. Our pinned comment asks for real information instead.
+- **Scraping Instagram with Apify** (ootto): breaks Instagram's terms; same ruling as rule 24's limits.
+- **The Pro Motion skill:** three.js, Blender and physics prompts at 60 fps. Our films already do its useful parts (frames driven by time, one highlighted element, paper texture, parallax push-in in `kit/film-craft.md` §4). One idea worth trying on a number beat: the value label counts up as its bar fills.
+- **Installing Hook Master:** English-only word counts (3–7 words on screen does not carry over to Tamil), and it assumes filmed footage. Its checks are in rules 30–32 instead.
+- **Instagram Trial Reels to test two hooks** (ootto): a real feature (shown to non-followers first), but its effect is unmeasured and each extra hook costs a short ElevenLabs take. Vasanth's call, later.
+
 ## Checklist for every script
 
 - One question in the hook, and nothing in the video that doesn't answer it. Save a second great hook for its own episode.
@@ -85,3 +130,7 @@ Source: a two-page creator handout (`C:\Users\vasan\Downloads\Viral content.pdf`
 - One target emotion named; no manufactured fear (rule 21).
 - Sentence lengths vary: mostly short, a few medium, no run-ons (rule 22).
 - Walkaway test: the viewer can repeat the fact in one sentence to their family (rule 19).
+- The answer line is marked and sits in the last third; a question, not the answer, follows the hook (rule 27).
+- One rehook at about 40–55 % that names this video's next thing (rule 28).
+- Nothing after the payoff except the twist line: no recap, no bonus tip, no filler (rule 29).
+- Every hook option passes the four-failure check and uses none of the banned words (rules 30, 32).

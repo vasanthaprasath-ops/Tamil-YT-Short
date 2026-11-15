@@ -20,7 +20,9 @@ Tool picks and the bake-off test plan (run it before paying for anything): `repo
 - [ ] Measured voice-over 30–45 s. One idea per sentence, spoken colloquial Tamil, second person, every technical word explained in one breath or cut.
 - [ ] Sentence 1 states the surprise as a fact (not a question), landing by second 3.
 - [ ] Every body line is a 'but' or a 'therefore'. Cut every 'and then'. At least 3 escalation beats, one an exaggeration joke.
-- [ ] Exactly one mystery beat (question to the viewer) before the reveal.
+- [ ] Exactly one mystery beat (question to the viewer) before the reveal, at about 40–55 % of runtime, naming this video's next thing (never "watch till the end").
+- [ ] The line that answers the hook is marked and sits in the last third. The hook may state the surprise, not the why.
+- [ ] Each hook option passes the four-failure check (delay, confusion, irrelevance, disinterest) and has no swipe words ("யாருமே சொல்ல மாட்டாங்க", "ரகசியம்", unnamed "scientists", unsourced numbers). See `research_notes/Shorts scriptwriting craft.md` rules 27–32.
 - [ ] A mechanism line with an everyday Tamil analogy ("ஏன்னா…") at about 55–65 % of runtime.
 - [ ] The last line is the twist and the video ends on its last word. No recap.
 - [ ] Pace: every sentence ≤ 3.6 s; pauses over 0.25 s add up to ≤ 1 s per 40 s. Sentence lengths vary (mostly short, some medium, no run-ons). Cut words before speeding the voice; any speed-up (≤ 1.08×) is Vasanth's call.
@@ -100,6 +102,7 @@ Tool picks and the bake-off test plan (run it before paying for anything): `repo
 ## E. Sunday review (30 min)
 - [ ] Fill in `metrics-sheet.csv` for every Short from this week.
 - [ ] Read each Short in three steps against your own median, using engaged views: stop (YouTube Viewed%, Instagram skip rate) → stay (where the retention curve drops) → share (sends/shares per reach). Add Instagram skip rate and share rate to `metrics-sheet.csv`.
+- [ ] For each Short, find the second where the retention curve falls hardest and write down the line spoken there. Also note the second the hook's question was answered and how much video ran after it.
 - [ ] Apply the decision rules (report section 7):
   - Bottom-quartile Viewed% (or under 60%) → rewrite the first frame and line. Re-test only through Instagram Trial Reels, or YouTube's video-cut A/B test once Studio shows it. Never by re-uploading.
   - A Short at 5× the channel median → make 3 follow-ups on the same topic within 2 weeks.
