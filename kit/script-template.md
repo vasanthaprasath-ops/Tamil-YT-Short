@@ -7,7 +7,7 @@ Target: **30–45 seconds of measured voice-over** by default (go longer only wh
 | Time | Beat | What's on screen | What's said |
 |---|---|---|---|
 | 0–1 s | **Thing happening** | The thing is *already* happening to Mani, **plus the Tamil question on screen from frame 0**. No intro, no title card, no black frame | Narration starts within the first second (the whoosh sits under it) |
-| 0–3 s | **Surprise as a fact** | Tamil question in on-screen text | Sentence 1 **states** the surprise as a fact: the belief or fact plus the thing that breaks it. The spoken paradox lands by second 3 |
+| 0–2 s | **Surprise as a fact** | Tamil question in on-screen text from frame 0; frame 0 shows the contradiction | Sentence 1 **states** the surprise as a fact: the belief or fact plus the thing that breaks it. The spoken paradox lands by **2.0 s** (about 14 syllables); speak the question first only if it fits in ~1.5 s |
 | 2–4 s | **Foreshadow** *(other series)* | Hint of the payoff image | One line saying what the viewer will get by the end. In the Paati series the guess beat does this job |
 | 2–4 s | **Guess beat** *(Paati series only)* | Three stamps flash: உண்மை / பாதி உண்மை / பொய் | "Guess pannunga…" |
 | ~10–50 % | **Escalation** | One visual per beat, each a bit bigger | At least 3 "but / therefore" beats; one is an exaggeration joke ("so slow that…") |

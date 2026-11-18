@@ -11,9 +11,9 @@ Status values: `idea` → `researched` → `scripted` → `made` → `posted`.
 ## 1. Body, Tamil life (rank 1)
 | # | Title | Status |
 |---|---|---|
-| 1 | Kaal maraththu pona ulla enna nadakkudhu? 😵 | scripted (v2 locked 2026-11-14) → episodes/01-kaal-maraththu.md |
+| 1 | Kaal maraththu pona ulla enna nadakkudhu? 😵 | published 2026-11-14 (ep 01) → episodes/01-kaal-maraththu.md |
 | 2 | Ghat road-la kaadhu yen adaikkudhu? 👂 | idea |
-| 3 | Vengaayam vettina yen kannula thanni? 🧅 | scripted (v5 locked 2026-11-16) → episodes/03-vengaayam.md |
+| 3 | Vengaayam vettina yen kannula thanni? 🧅 | published 2026-11-18 (ep 03) → episodes/03-vengaayam.md |
 | 4 | Pullarikkudhu-nu solrome — adhu ennadhu? 😮 | idea |
 | 5 | Oruthar kottavi vitta namakkum yen varudhu? 🥱 | idea |
 | 6 | Thummum bodhu kann yen moodudhu? 🤧 | idea |

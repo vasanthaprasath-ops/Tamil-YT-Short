@@ -1,5 +1,5 @@
 # 03 — வெங்காயம் வெட்டினா ஏன் கண்ணுல தண்ணி?
-Series: உடம்பு #2 | Status: RENDERED v1 2026-11-18 (42.2 s, -14.3 LUFS, -1.4 dBTP), ready to upload | Date: 2026-11-16
+Series: உடம்பு #2 | Status: POSTED 2026-11-18 (rendered v1: 42.2 s, -14.3 LUFS, -1.4 dBTP) | Date: 2026-11-16
 
 ## Takeaway
 Cutting an onion breaks its cells, so two substances that were kept apart mix and make an irritating gas. The gas reaches your eyes, and the tears are your eyes washing it out. A sharp knife, cutting slowly, breaks fewer cells and throws up far fewer droplets; chilling does not help (2025 study).

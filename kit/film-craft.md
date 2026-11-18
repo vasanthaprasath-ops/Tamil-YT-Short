@@ -18,7 +18,7 @@ Distilled on 2026-11-14 from the teardown notes in `research_notes/Animated shor
 
 ## 1. Script and pacing
 
-1. Sentence 1 states the surprise as a **fact**, not a question: the belief or fact plus the thing that breaks it. The spoken paradox lands by second 3. The on-screen Tamil question can stay. [MEASURED-ref, 20 of 20 videos; question vs statement is otherwise unproven]
+1. Sentence 1 states the surprise as a **fact**, not a question: the belief or fact plus the thing that breaks it. The spoken paradox lands by **2.0 s** (tightened from 3 s on 2026-11-18: ep 01–03 landed it at ~4.5 s and 57 % swiped away before choosing to watch). The on-screen Tamil question stays from frame 0; speak it first only if it fits in ~1.5 s. [MEASURED-ref, 20 of 20 videos; MEASURED-ours; question vs statement is otherwise unproven]
 2. A foreshadow line follows right after: what the viewer gets by the end. [PRACTITIONER-DATA, playbook]
 3. The middle has **at least 3 "but / therefore" beats**, each a bit bigger. One of them is an exaggeration joke ("so slow that…"). [MEASURED-ref, 3–6 beats and 1–2 jokes]
 4. Exactly **one mystery beat** (a question to the viewer) before the reveal. In the Paati series the guess beat is it. [MEASURED-ref]
@@ -151,7 +151,7 @@ Distilled on 2026-11-14 from the teardown notes in `research_notes/Animated shor
 | Length | median ~60 s (31–78) | 39.1 s | 30–45 s (new channel) |
 | Voice starts | ≤ 0.13 s | 0.12 s | ✓ keep |
 | Tail after last word | ends on the word | 0.50 s | ≤ 0.5 s ✓ |
-| Surprise stated | sentence 1 | at 6.0 s (a question first) | by 3 s |
+| Surprise stated | sentence 1 | at 6.0 s (a question first) | by 2 s (was 3 s) |
 | Escalation beats | 3–6, 1–2 jokes | 2, no joke | ≥ 3, one joke |
 | Mechanism + analogy beat | 14 of 20 videos, ~60 % | none | one, at 55–65 % |
 | Ending | one ironic line | recap + callback (6.4 s after reveal) | one twist line, no recap |

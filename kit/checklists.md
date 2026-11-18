@@ -9,7 +9,8 @@ Tool picks and the bake-off test plan (run it before paying for anything): `repo
 These are the fixes Vasanth had to ask for once. Build them in from the start so he never has to ask again. Sources and reasons: `kit/improvement-log.md` (ep 03 entry), `kit/film-craft.md` §1, §2, §7, `research_notes/Shorts scriptwriting craft.md` rules 27–33, `research_notes/ElevenLabs v4 voice direction.md`.
 
 **Script**
-- [ ] Hook = the question people actually search ("…ஏன்…?"), spoken AND on screen from frame 0, then the surprise stated as a fact within ~4.5 s (ep 03: Vasanth's question beat my statement-only hook).
+- [ ] **2-second opening (from ep 04).** Ep 01–03 lost 57 % of viewers before choosing to watch, and their spoken surprise landed at ~4.5 s. Now: the **surprise is spoken by 2.0 s** (about 14 syllables) and **visible from frame 0**. The searchable question ("…ஏன்…?", Vasanth's ep 03 pick) stays **on screen** from frame 0 and in the title; speak it first only if it fits in ~1.5 s, otherwise open the voice with the surprise. Frame 0 shows the contradiction itself, not a mood shot. Evidence: `research_notes/Gap review 2026-11-18.md`, gap 1.
+- [ ] **One change per episode.** Before building, name the one thing this episode tests in `kit/improvement-log.md` (ep 04: the 2-second opening). Everything else copies the previous film, so the numbers can show what helped. Ep 03 changed five things at once, so its numbers can't.
 - [ ] Interactive by design: one guess for the viewer, one thing they can try at home, "you" in most lines, a twist that turns the hook around, a pinned comment asking for their own experience.
 - [ ] Rehook at 40–55 %, answer in the last third, nothing after the twist.
 - [ ] Natural spoken Tamil pass: no bookish words (பொருள், குறைவான, தன்னை, …ஆகும்); real particles and idioms (`helmet-லாம்`, `வெட்டி பாத்தாரு`, `கழுவி விடுது`, `என்ன தான்`). Read every line as a friend talking.
@@ -48,7 +49,7 @@ These are the fixes Vasanth had to ask for once. Build them in from the start so
 - [ ] Mute test: frame 0 plus the on-screen text alone name the subject.
 - [ ] Visual, spoken and on-screen hooks say the same thing, and a foreshadow line lands by about 3 s.
 - [ ] Measured voice-over 30–45 s. One idea per sentence, spoken colloquial Tamil, second person, every technical word explained in one breath or cut.
-- [ ] Sentence 1 states the surprise as a fact (not a question), landing by second 3.
+- [ ] The surprise is spoken as a fact by 2.0 s and visible from frame 0; the question stays on screen (§0 "2-second opening").
 - [ ] Every body line is a 'but' or a 'therefore'. Cut every 'and then'. At least 3 escalation beats, one an exaggeration joke.
 - [ ] Exactly one mystery beat (question to the viewer) before the reveal, at about 40–55 % of runtime, naming this video's next thing (never "watch till the end").
 - [ ] The line that answers the hook is marked and sits in the last third. The hook may state the surprise, not the why.
@@ -65,7 +66,11 @@ These are the fixes Vasanth had to ask for once. Build them in from the start so
 - [ ] Script locked with Vasanth before any voice is generated.
 - [ ] Paati series: guess beat early; order is fact → myth once → why people believed it → fact; the stamp matches the evidence.
 - [ ] The final line and card state the **fact**, not the myth.
-- [ ] Health: explanatory, not prescriptive; authority named; a "see a doctor if…" line where relevant.
+- [ ] **Health guard.** YouTube does not monetize channels whose AI personas give health advice ("an AI 'doctor' providing… health advice, or wellness remedies", YouTube monetization policy; `research_notes/Gap review 2026-11-18.md`, gap 3). So:
+  - Explain why, never prescribe: no remedies, doses or cures; at most a "see a doctor if…" line.
+  - The narrator never claims to be a doctor or expert, and no character is shown as one.
+  - Authority named, and every health claim sourced in the description.
+  - Alternate health and non-health topics, so the channel never reads as "an AI voice giving health information".
 - [ ] No source text read out word for word (that counts as reused content).
 - [ ] The video ends within ~0.5 s of the payoff. No outro or spoken subscribe ask. A loop line is optional and untested.
 
@@ -122,11 +127,12 @@ These are the fixes Vasanth had to ask for once. Build them in from the start so
 - [ ] **Location:** Instagram/Facebook "Tamil Nadu" for general topics (a small, unproven signal); the actual city for city-series episodes (that is where a tag helps); never the creator's own area.
 - [ ] Title: Tamil-script question + 1 English keyword + 1 emoji + "| Series".
 - [ ] Description: one-line takeaway, sources line, #tamil #shorts.
-- [ ] Added to the series playlist; "related video" set to the series' best-performing episode (the previous episode until there's a clear winner). Once a series has 4+ episodes, register it as a Shorts series in Studio if the feature shows.
+- [ ] Added to the series playlist; "related video" set to the series' best-performing episode (the previous episode until there's a clear winner). Once a series has 4+ episodes, register it as a Shorts series in Studio if the feature shows (it is for Partner Program channels only, since Sep 2026). Set these in desktop YouTube Studio and confirm they show on the Short.
+- [ ] **A reason to follow:** the pinned comment or the caption names the series' next question ("அடுத்த உடம்பு கேள்வி: …"). Keep the best-shared Reel pinned to the top of the Instagram grid (now ep 02).
 - [ ] Select frame 0 as the Shorts thumbnail and the Reels cover.
 - [ ] Not made for kids. Altered-content toggle set correctly. Clips from Veo or Omni carry a permanent AI label in the expanded description; that's expected.
 - [ ] Optional: English/Hindi dub uploaded as a multi-language audio track.
-- [ ] YouTube first, then a **native** upload of the clean master to Instagram (try Trial Reels for hook tests) and to the Facebook Page, the same day.
+- [ ] YouTube first, then a **native** upload of the clean master to Instagram (Trial Reels for hook tests once the account qualifies: guides say about 200–1,000 followers; not available yet) and to the Facebook Page, the same day.
 - [ ] Instagram caption: the first ~125 characters are all the feed shows before "more", so the subject and the surprise go there, never a hashtag or a mention. One ask only. **At most 5 hashtags** (Instagram's cap since 18 Dec 2025, per the `ig-caption` skill; re-check if Instagram changes it). Lint with `/ig-caption`.
 - [ ] Never delete and re-upload a Short (YouTube may treat it as spam), and never re-upload a near-duplicate to test a hook.
 - [ ] Pin a comment asking for real information, e.g. "Unga paati idhukku enna solluvaanga?". Never "comment YES / tag a friend".
@@ -134,8 +140,8 @@ These are the fixes Vasanth had to ask for once. Build them in from the start so
 - [ ] Log the time **per stage** (script, VO, stills, video, edit, publish) and the credits used in `metrics-sheet.csv`.
 
 ## E. Sunday review (30 min)
-- [ ] Fill in `metrics-sheet.csv` for every Short from this week.
-- [ ] Read each Short in three steps against your own median, using engaged views: stop (YouTube Viewed%, Instagram skip rate) → stay (where the retention curve drops) → share (sends/shares per reach). Add Instagram skip rate and share rate to `metrics-sheet.csv`.
+- [ ] Read every Short at **48 h and at 7 days** after posting (never at other ages, so Shorts compare), and fill the `metrics-sheet.csv` **columns**, not the notes: `read_age_h`, YouTube stayed-to-watch in `yt_viewed_pct`, Instagram skip rate in `ig_skip_rate_pct`, sends per reach, follows. One row per reading.
+- [ ] Read each Short in three steps against your own median, using engaged views: stop (YouTube Viewed%, Instagram skip rate) → stay (where the retention curve drops) → share (sends/shares per reach).
 - [ ] For each Short, find the second where the retention curve falls hardest and write down the line spoken there. Also note the second the hook's question was answered and how much video ran after it.
 - [ ] Update `kit/improvement-log.md`: what each Short improved over the last one, what fell short, and the next 1% for the "Carry forward" list.
 - [ ] Apply the decision rules (report section 7):

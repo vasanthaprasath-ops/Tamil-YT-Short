@@ -4,13 +4,17 @@ Every episode must beat the last one somewhere: script, hook, voice, animation, 
 
 Rules for improving:
 - Improve at the right stage: wording before the script lock; voice fixes with free tools (pauses, emphasis, tone) before any re-record; animation, sound and layout after the voice. No loops on a locked script, no re-records for tiny gains (ElevenLabs credits).
-- Change a few things per episode and name them here, so the numbers can tell us what helped.
+- **One main change per episode**, named here before the build; everything else copies the previous film, so the numbers can tell us what helped. (Ep 03 changed five things at once.)
+- Read every Short at 48 h and 7 days, into the `metrics-sheet.csv` columns (checklists §E).
 - Compare on the same yardsticks: YouTube "stayed to watch" and average view duration, where the retention curve falls hardest, Instagram views and shares per viewer.
 
 ## Carry forward (open items)
 | Area | Next 1% | From |
 |---|---|---|
+| Hook | **Ep 04's one change: the 2-second opening** (surprise spoken by 2.0 s, visible from frame 0; question on screen). Target: stayed-to-watch above ep 01–03's 42–43 % at 48 h | ep 01–02 numbers, gap review 2026-11-18 |
 | Hook | Cut the first-6-s drop seen on ep 02's curve; compare ep 03's curve at the same second | ep 02 numbers |
+| Packaging | Related video + series playlist on every Short (confirm ep 01–03 in desktop Studio); next question named in the pinned comment; ep 02 pinned on the Instagram grid | 0 follows from ~9,500 Meta views |
+| Policy | Health guard on every உடம்பு episode; decide own voice vs Prashant V for the health series | gap review 2026-11-18, gap 3–4 |
 | Animation | Still-camera share ≤ 8 % and no empty holds (ep 01 18.3 %, ep 03 4.9 % after notes; parallax + reframes every 1.3 s) | ep 01, ep 03 notes |
 | Animation | Mani redesigned with hands and 4 expressions; stills shown before building | ep 01 notes |
 | Animation | New visual-hook type each episode (ep 01 impending disaster, ep 03 misdirection reveal) | collections menu |
@@ -29,7 +33,10 @@ Rules for improving:
 - Numbers at ~16 h: YouTube 1,351 views, stayed 42.5 %, avg 0:23 of 0:41. Instagram 1,801, Facebook 291.
 - Fell short: rehook at 60 % (target 40–55 %); still share 18.3 %; Facebook caption missing.
 
-### Ep 03 — Vengaayam (built 2026-11-18, in review)
+### Ep 04 — planned
+- One change: the 2-second opening. Everything else copies ep 03's film.
+
+### Ep 03 — Vengaayam (posted 2026-11-18)
 **Everything below is now a default in `kit/checklists.md` §0, so ep 04 starts with it.**
 - Script: Vasanth's searchable question hook + fact; interactive (guess, home test, twist that flips the hook, pinned-comment question); natural-Tamil pass (`helmet-லாம்`, `கழுவி விடுது`, `கம்மியா வரும்`); a 2025 study caught a wrong tip (fridge) before the voice; rule audit before showing.
 - Voice: Eleven v4 made by Vasanth in the web app; one base tone + 3 accents (the every-line version was a roller coaster); pace measured against top Tamil channels (they speak ~8.3 syl/s, we were 6.6); free word timings from pauses (`align-from-silence.cjs`); new tools `syllable-rate.cjs`, `pitch_check.py`.
