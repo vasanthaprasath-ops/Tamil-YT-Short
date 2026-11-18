@@ -1,8 +1,17 @@
-# Status and handoff (2026-11-14)
+# Status and handoff (2026-11-18)
 
 The one-page "where are we" for a new Claude session. Read this first, then `PROJECT-CONTEXT.md` (decisions and reasons). This file wins where the two disagree on current state.
 
-## Where we are right now (end of 2026-11-14) — read this first
+## Where we are right now (2026-11-18) — read this first
+
+- **Published:** ep 02 (Pondy grid, 2026-11-13) and ep 01 (Kaal maraththu, 2026-11-14) on YouTube, Instagram and Facebook. Ep 01's Facebook copy shows no caption (Vasanth to fix in the app).
+- **Ep 03 (Vengaayam, உடம்பு #2) is RENDERED, ready to upload:** in `C:\Users\vasan\Documents\VideoHub\outputs\2026-11-18` (42.2 s, −14.3 LUFS, −1.4 dBTP, 81 MB). Render tip: if a VideoHub render fails with "Failed to launch the browser process", it picked Edge; render with env `CHROME=C:/Program Files/Google/Chrome/Application/chrome.exe`. Script v5.1, voice made by Vasanth in the ElevenLabs web app (Eleven v4, Prashant V) at 1.1×, 42.2 s, all `check-film.cjs` checks pass (still share 4.9 %). Upload text is in `episodes/03-vengaayam.md`. Working copy `C:\Users\vasan\Documents\VideoHub\films\03-vengaayam` (id c578ba1fe15b); backup `films/03-vengaayam/`.
+- **Start every new Short from `kit/checklists.md` §0 "Defaults"** (everything learned on ep 01–03) and copy ep 03's film as the code starter.
+- **Rules now:** no ElevenLabs call of any size until Vasanth says so; no commit/push unasked; Claude runs the channel end to end and self-checks before showing (pass/fail); 1 % better every video (`kit/improvement-log.md`).
+- **Measured:** top Tamil facts Shorts ≈ 8.3 syllables/s; our target 7–7.5. ElevenLabs: about 7,200 of 40,000 credits used this period.
+- **Accounts:** the built-in browser was signed in to YouTube Studio and Meta Business Suite on 2026-11-15; the YouTube session had expired by 2026-11-18.
+
+## Earlier state (end of 2026-11-14)
 
 - **Ep 02 (Pondy grid) is PUBLIC** on YouTube, Instagram and Facebook since 2026-11-13. The "rendered, not uploaded" heading further down is old.
 - **Ep 01 (Kaal maraththu) is RENDERED and ready to upload**; Vasanth was about to post it. File: `C:\Users\vasan\Documents\VideoHub\outputs\2026-11-14\2026-11-14 01 Kaal maraththu - needle-prick is a good sign v1.mp4` (1080×1920, 30 fps, 40.9 s, −14.0 LUFS, 68 MB). Upload text (title, description, pinned comment, Instagram caption): `episodes/01-kaal-maraththu.md` → "Upload text v2". Chosen title: `கால் மரத்துப் போனா ஊசி குத்துதா? நல்ல sign! 😮 | உடம்பு #1`.

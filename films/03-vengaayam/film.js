@@ -90,10 +90,15 @@
       for (let k = 0; k < 2; k++) { const ph = ((o.t || 0) * 1.6 + k * 0.5 + (sx > 0 ? 0.25 : 0)) % 1; alpha(tr * (1 - ph), () => paper(['e', sx0 + sx * r * 0.02, y + r * (0.9 + ph * 1.1), r * 0.06, r * 0.09], C.tear, 0, 0)); }
     }
   }
-  function helmet(x, y, r) {   // a Chennai-yellow cricket helmet (CSK colours, no logo or name: the badge is a trademark); grille over the face
+  function helmet(x, y, r) {   // a Chennai-yellow cricket helmet with a lion crest (CSK fan style, drawn by us; no team name or official badge); grille over the face
     paper(['p', [[x - r * 1.12, y - r * 0.15], [x - r * 1.05, y - r * 0.9], [x, y - r * 1.32], [x + r * 1.05, y - r * 0.9], [x + r * 1.12, y - r * 0.15], [x + r * 0.95, y - r * 0.32], [x - r * 0.95, y - r * 0.32]]], '#F9CD05');
     strip([[x - r * 0.9, y - r * 0.62], [x + r * 0.9, y - r * 0.62]], r * 0.1, '#1D3E8A', 0);   // navy band
     strip([[x - r * 1.0, y - r * 0.32], [x + r * 1.12, y - r * 0.4]], r * 0.12, '#1D3E8A', 0.5);
+    { const ex = x, ey = y - r * 0.9, er = r * 0.3;   // a lion crest (our own paper lion, CSK style; not a copy of the team's badge)
+      paper(['c', ex, ey, er], '#1D3E8A', 0, 0.4);
+      const mane = []; for (let i = 0; i < 16; i++) { const a = i * Math.PI / 8, rr = i % 2 ? er * 0.62 : er * 0.86; mane.push([ex + Math.cos(a) * rr, ey + Math.sin(a) * rr]); } paper(['p', mane], '#E08A1E', 0, 0);
+      paper(['c', ex, ey + er * 0.04, er * 0.48], '#F9CD05', 0, 0); for (const sx of [-1, 1]) { paper(['c', ex + sx * er * 0.36, ey - er * 0.36, er * 0.14], '#F9CD05', 0, 0); paper(['c', ex + sx * er * 0.17, ey - er * 0.06, er * 0.07], C.hair, 0, 0); }
+      paper(['p', [[ex - er * 0.11, ey + er * 0.12], [ex + er * 0.11, ey + er * 0.12], [ex, ey + er * 0.26]]], '#7A3E10', 0, 0); }
     for (const yy of [0.12, 0.38, 0.62]) strip([[x - r * 0.78, y + r * yy], [x + r * 0.78, y + r * yy]], r * 0.07, C.grille, 0.3);
     for (const xx of [-0.4, 0, 0.4]) strip([[x + r * xx, y - r * 0.3], [x + r * xx * 0.9, y + r * 0.78]], r * 0.07, C.grille, 0.3);
   }
@@ -300,6 +305,7 @@
   }
 
   // ---------- screen-space graphics (1080 space, never moved by the camera) ----------
+  const TAG = 'உடம்பு #2';   // series + episode number (Vasanth, 2026-11-18)
   const CARD_Y = 364;
   function card(t, y, sz, k, col = C.kol, ink = C.ind) {   // a paper label that pops in
     if (k <= 0) return; g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.font = `800 ${sz}px ${TA}`; const tw = g.measureText(t).width + 90;
@@ -316,7 +322,7 @@
     if (n === 'cells') card('தீக்குச்சி + தீப்பெட்டி', CARD_Y, 50, pop(s, wordS('cells', 'தீக்குச்சி', d * 0.6)));
     if (n === 'tears') card('கண்ணு = auto wash 💧', CARD_Y, 50, pop(s, wordS('tears', 'கழுவி', d * 0.5)));
     if (n === 'sharp') card('கூர்மை 🔪 = கம்மி gas', CARD_Y, 50, pop(s, wordS('sharp', 'கூர்மையா', d * 0.2)), C.leaf, C.kol);
-    g.save(); g.setTransform(1, 0, 0, 1, 0, 0); claim('tag', 'series tag', 48, 150, 246, 56); paper(['r', 48, 150, 246, 56, 28], C.red, 0, 0.6); txt('உடம்பு series', 171, 179, 30, C.kol, 700); g.restore();   // series tag, on all film
+    g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.font = `800 40px ${TA}`; const tw = g.measureText(TAG).width + 56; claim("tag", "series tag", 48, 146, tw, 68); paper(["r", 48, 146, tw, 68, 34], C.red, 0, 0.6); txt(TAG, 48 + tw / 2, 182, 40, C.kol, 800); g.restore();   // series name + episode number, on all film
   }
 
   // ---------- shot list ----------

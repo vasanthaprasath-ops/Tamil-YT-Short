@@ -20,7 +20,7 @@ These are the fixes Vasanth had to ask for once. Build them in from the start so
 - [ ] No ElevenLabs call of any size until Vasanth says so. He usually makes the take himself in the web app.
 - [ ] Eleven v4, Prashant V. Delivery tags: ONE base tone set once at the top (`[warm, curious, conversational storyteller, quick pace]`) plus at most 2–3 short accents where the story turns. A tag on every line sounded like a roller coaster.
 - [ ] Stress the question word in Tamil questions (ஏன், என்ன); they do not need a final rise.
-- [ ] Pace target about 7–7.5 syllables/s (top Tamil facts channel ~8.3). Check with `kit/tools/syllable-rate.cjs`; check melody with `kit/tools/pitch_check.py`. Ep 03 mix speed 1.1x.
+- [ ] Pace: about 7–7.5 syllables/s is a guide only; Vasanth's ear decides (ep 03: he kept the natural pauses at 6.2 because the tightened cut felt rushed). Tighten only when a retention curve shows a drop in a pause. Check with `kit/tools/syllable-rate.cjs`; check melody with `kit/tools/pitch_check.py`. Ep 03 mix speed 1.1x.
 - [ ] A web-app take has no timestamps: build them free with `vo/align-from-silence.cjs` (copy from `films/03-vengaayam/vo/`).
 
 **Film (start by copying `films/03-vengaayam`: it already has all of this)**
@@ -30,6 +30,7 @@ These are the fixes Vasanth had to ask for once. Build them in from the start so
 - [ ] Comparison shots show the process on both sides (sawing, squashing, halves parting), not two still props.
 - [ ] Every pill and card measures its own text; cards at y ≈ 364; captions at y 1390 so props on the counter stay visible.
 - [ ] Characters: the redesigned Mani (hands, thick brows, 8 moods, real tears); props drawn in front of the face when held up.
+- [ ] The top-left tag shows the series AND the episode number ("உடம்பு #2"), bold 40 px, sized to its text, on all film; the title ends with the same "| உடம்பு #N".
 - [ ] Real brands and team logos stay out (CSK = yellow + navy colours only, no lion or name): trademarks risk claims.
 - [ ] `check-film.cjs` passes before Vasanth sees anything; open with `hub_live`, render only when he asks.
 
@@ -54,7 +55,7 @@ These are the fixes Vasanth had to ask for once. Build them in from the start so
 - [ ] Each hook option passes the four-failure check (delay, confusion, irrelevance, disinterest) and has no swipe words ("யாருமே சொல்ல மாட்டாங்க", "ரகசியம்", unnamed "scientists", unsourced numbers). See `research_notes/Shorts scriptwriting craft.md` rules 27–32.
 - [ ] A mechanism line with an everyday Tamil analogy ("ஏன்னா…") at about 55–65 % of runtime.
 - [ ] The last line is the twist and the video ends on its last word. No recap.
-- [ ] Pace: every sentence ≤ 3.6 s; pauses over 0.25 s add up to ≤ 1 s per 40 s. Sentence lengths vary (mostly short, some medium, no run-ons). Speed about 7–7.5 syllables a second (film-craft §1.7; `kit/tools/syllable-rate.cjs`). Cut words and pauses first, then raise `TEMPO`; the final speed is Vasanth's call by ear.
+- [ ] Pace: every sentence ≤ 3.6 s; pauses over 0.25 s add up to ≤ 1 s per 40 s. Sentence lengths vary (mostly short, some medium, no run-ons). Speed: about 7–7.5 syllables a second is a guide (film-craft §1.7; `kit/tools/syllable-rate.cjs`); natural pauses beat speed when Vasanth's ear says so.
 - [ ] Contrast mapped: common belief → true, sourced reality → one quick proof within ~5 s.
 - [ ] The key fact is said twice (plainly, then with the analogy); the myth only once.
 - [ ] One target emotion named for the episode; no manufactured fear.
@@ -117,6 +118,8 @@ These are the fixes Vasanth had to ask for once. Build them in from the start so
 - [ ] Any real recorded sound is **CC0**, fetched with `python kit/tools/fetch_cc0.py "<words>" <film>/audio/sfx/<kind>`, and its row in `sources.json` (title, creator, source page) is kept with the film. Open the source page once before publishing: Openverse does not guarantee the licence.
 
 ## D. Publish
+- [ ] **Poll test (from ep 03):** a 2-option guess poll sticker that the video answers later (ep 03: "வெங்காயம் ஏன் அழ வைக்குது? 💧 Juice / 💨 Gas"), placed on an empty patch away from cards and faces. YouTube polls do not work on Unlisted Shorts, so a poll Short goes straight to Public. Keep it only if comments, shares or stayed-to-watch beat ep 01–02 (evidence for polls is weak: platform ad claims only).
+- [ ] **Location:** Instagram/Facebook "Tamil Nadu" for general topics (a small, unproven signal); the actual city for city-series episodes (that is where a tag helps); never the creator's own area.
 - [ ] Title: Tamil-script question + 1 English keyword + 1 emoji + "| Series".
 - [ ] Description: one-line takeaway, sources line, #tamil #shorts.
 - [ ] Added to the series playlist; "related video" set to the series' best-performing episode (the previous episode until there's a clear winner). Once a series has 4+ episodes, register it as a Shorts series in Studio if the feature shows.

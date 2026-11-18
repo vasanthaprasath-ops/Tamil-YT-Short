@@ -1,5 +1,5 @@
 # 03 — வெங்காயம் வெட்டினா ஏன் கண்ணுல தண்ணி?
-Series: உடம்பு #2 | Status: film built (v5.1 script, Eleven v4 take by Vasanth at 1.1x, 42.2 s); in review in VideoHub | Date: 2026-11-16
+Series: உடம்பு #2 | Status: RENDERED v1 2026-11-18 (42.2 s, -14.3 LUFS, -1.4 dBTP), ready to upload | Date: 2026-11-16
 
 ## Takeaway
 Cutting an onion breaks its cells, so two substances that were kept apart mix and make an irritating gas. The gas reaches your eyes, and the tears are your eyes washing it out. A sharp knife, cutting slowly, breaks fewer cells and throws up far fewer droplets; chilling does not help (2025 study).
@@ -102,7 +102,7 @@ Pace rules for the take: keep the tags short; only line 4 is slower; no `[pause]
 
 | # | Beat | ~start | Shot | VO (spoken Tamil) | On screen |
 |---|---|---|---|---|---|
-| 1 | Hook: question, then the surprise as a fact | 0 s | Mani sobbing at the kitchen counter, sad violin; push out to reveal he is cutting an onion | வெங்காயம் வெட்டுனா ஏன் கண்ணுல தண்ணி வருது? அழ வைக்குற பொருள் அதுக்குள்ள இல்லவே இல்ல! | **வெங்காயம் வெட்டுனா ஏன் கண்ணுல தண்ணி வருது? 🧅** from frame 0; a stamp **உள்ள இல்ல!** lands on the second sentence · tag **உடம்பு series** far top-left |
+| 1 | Hook: question, then the surprise as a fact | 0 s | Mani sobbing at the kitchen counter, sad violin; push out to reveal he is cutting an onion | வெங்காயம் வெட்டுனா ஏன் கண்ணுல தண்ணி வருது? அழ வைக்குற பொருள் அதுக்குள்ள இல்லவே இல்ல! | **வெங்காயம் வெட்டுனா ஏன் கண்ணுல தண்ணி வருது? 🧅** from frame 0; a stamp **உள்ள இல்ல!** lands on the second sentence · tag **உடம்பு #2** far top-left |
 | 2 | Proof (viewer test) | 3.0 s | Mani holds a whole onion right at his eye; blinks; nothing; shrugs | முழு வெங்காயத்த கண்ணுக்கு கிட்ட வெச்சு பாருங்க. ஒரு சொட்டு கூட வராது. | முழு வெங்காயம் = 0 😐 |
 | 3 | Foreshadow | 6.9 s | Mani looks at the camera, eyebrow up | ஏன்னு தெரிஞ்சா, இனிமே அழுகை கம்மி ஆகும். | — |
 | 4 | But | 9.2 s | Knife hovering in slow motion, a tick sound | கத்தி பட்ட அந்த ஒரு second-ல தான் வெங்காயம் தன் வேலைய காட்டுது. | — |
@@ -193,3 +193,43 @@ Notes:
 - "gas அடிக்குது" is said in the hook and again in beat 6 (the fact twice); there is no myth to repeat.
 - No numbers on screen, no named-scientist claims, no health advice (an everyday kitchen fact).
 - The fridge line is the only tip, and it is the last line; nothing after it.
+
+## Upload text (2026-11-18, for the film in VideoHub; check against the final render)
+
+**YouTube title**
+```
+வெங்காயம் வெட்டுனா ஏன் கண்ணுல தண்ணி வருது? 🧅 Onion | உடம்பு #2
+```
+
+**YouTube description**
+```
+வெங்காயம் வெட்டுனா கண்ணுல தண்ணி வர்றது ஏன்? முழு வெங்காயத்துக்குள்ள அழ வைக்கிற gas இல்லவே இல்ல. கத்தி பட்டு அறை உடைஞ்சதும் தான், உள்ள தனித்தனியா இருக்குற ரெண்டு chemical ஒன்னா சேர்ந்து ஒரு gas உண்டாகுது. அது கண்ணுக்கு போனதும், கண்ணு அதை தூசுன்னு நினைச்சு தண்ணி ஊத்தி கழுவி விடுது. அதான் கண்ணீர்!
+
+Tip: கூர்மையான கத்தியால மெதுவா வெட்டுனா gas கம்மியா வரும். (Fridge-ல வெச்சா குறையும்ங்கிறது 2025 ஆய்வுல உண்மை இல்லன்னு தெரிஞ்சுது.)
+Why cutting an onion makes you cry, explained in Tamil.
+
+உடம்பு series #2
+Sources: Library of Congress (Everyday Mysteries: Why does chopping an onion make you cry?); Imai et al., Nature 2002 (the onion enzyme that makes eyes water); Cornell University study, PNAS 2025 (sharp, slow cutting releases far fewer droplets).
+
+#அதுஏன் #உடம்பு #tamilshorts #tamilfacts #shorts
+```
+
+**Pinned comment** (asks for real information)
+```
+வெங்காயம் வெட்டும்போது அழாம இருக்க நீங்க என்ன trick பண்ணுவீங்க? 👇
+```
+
+**Instagram / Facebook caption** (first line under ~125 characters; 5 hashtags)
+```
+வெங்காயம் வெட்டுனா ஏன் கண்ணுல தண்ணி வருது? 🧅 அதுக்குள்ள அப்படி எதுவுமே இல்ல!
+
+கத்தி பட்டதும் உள்ள இருக்குற ரெண்டு chemical சேர்ந்து ஒரு gas வருது. கண்ணு அதை தூசுன்னு நினைச்சு கழுவி விடுது. அதான் கண்ணீர்! Tip: கூர்மையான கத்தி = கம்மி gas.
+
+நீங்க அழாம இருக்க என்ன trick பண்ணுவீங்க? 👇
+
+உடம்பு #2 · Sources: Library of Congress, Cornell (PNAS 2025)
+
+#அதுஏன் #உடம்பு #tamilreels #tamilfacts #onion
+```
+
+**Upload checks:** cover = the frame at ~1.0 s (crying Mani + the question card), not frame 0 (blue sad tint); after posting, confirm the caption shows on YouTube, Instagram AND Facebook (ep 01's Facebook copy had none); AI label on for Instagram/Facebook; Unlisted first, watch once, then Public.
