@@ -24,7 +24,7 @@ Distilled on 2026-11-14 from the teardown notes in `research_notes/Animated shor
 4. Exactly **one mystery beat** (a question to the viewer) before the reveal. In the Paati series the guess beat is it. [MEASURED-ref]
 5. After the reveal, one **mechanism line with an everyday Tamil analogy**, opened with "ஏன்னா…" or "விஷயம் என்னன்னா…" (the reference's "You see," pivot). Use kitchen, kolam, bus, cricket, Paati's house. Place it at **55–65 %** of runtime. [MEASURED-ref, 14 of 20]
 6. The last spoken line is the **ironic or surprising twist**, and the video ends on its last word (tail ≤ 0.5 s). No recap ("சுருக்கமா…"). A callback to the hook is fine only if it *is* the twist. In the Paati series the twist line is still the fact. [MEASURED-ref + PRACTITIONER-DATA n=1]
-7. Pace is measured in **seconds, never words**: ≤ 3.6 s per sentence, one idea per sentence. Never speed the voice up: our Tamil already runs about 5.8 syllables/s, as dense as the reference. [MEASURED-ref for 3.6 s; RESEARCH: speech rates differ by language]
+7. Pace is measured in **seconds, never words**: ≤ 3.6 s per sentence, one idea per sentence. **Speed target: about 7–7.5 syllables a second** (measured 2026-11-18). The biggest Tamil facts channel (SJ Tamil, 2–3M-view Shorts) runs ~8.2–8.5 syl/s; our ep 01 ran 6.1 and ep 03's v5 take 6.6 at 1.04×. Comparing with the English reference (Zack D. Films ~4.8 syl/s) was misleading: Tamil packs fewer bits per syllable, so it runs more syllables a second. Get there by trimming words and pauses first, then the mix speed (`TEMPO`), checked by ear; don't chase 8.3 with an AI voice. Measure with `kit/tools/syllable-rate.cjs`. [MEASURED-ours + MEASURED-peer, see research_notes/ElevenLabs v4 voice direction.md]
 8. **Pause budget:** gaps over 0.25 s add up to ≤ 1.0 s per 40 s. One deliberate think-pause (≤ 0.5 s) after the mystery question is allowed. [MEASURED-ref; the exception is OPINION]
 9. Don't narrate what the picture already shows; the narration adds the *why*. [OPINION]
 10. Jokes are real researched facts, said in one steady calm tone. [OPINION]
@@ -48,6 +48,9 @@ Distilled on 2026-11-14 from the teardown notes in `research_notes/Animated shor
 10. Ordinary cuts are plain. Keep the zoom punch-in only on 1–2 beat cuts, or it stops meaning "impact". [MEASURED-ref + OPINION]
 11. Visual reactions (pops, rips, stamps, expression changes) start **2 f (0.067 s) before** their word. [MEASURED-ref, n=4; matches CANON]
 12. Background crowds and extras stand still; the camera supplies the motion. [MEASURED-ref]
+
+- **Ep 03 review (2026-11-18): "it looks like the camera is still" even at 12.7 % still share.** What fixed it (now 4.9 %): a firmer base push (`min(0.13, 0.42/d)`), a reframe about every 1.3 s instead of 1.8 s, a slow handheld drift on every shot, and a **parallax background** (`far()`: the back layer pushes in only 40 % as much as the front). Aim for **≤ 8 %** still share, and judge by eye too: the metric misses big flat areas.
+- **No empty holds.** If the line says something exists, it is on screen and moving from the start of the shot (ep 03's cells grid sat empty for ~3 s until "தீக்குச்சி"). Something new should appear or change at least every ~1.3 s.
 
 ## 3. Characters and acting
 
@@ -136,6 +139,10 @@ Distilled on 2026-11-14 from the teardown notes in `research_notes/Animated shor
 7. **After fixing one overlap, run the check again**: a move that cures one clash often causes the next.
 
 ---
+
+- **Every pill or card measures its own text** (`measureText` + padding), never a fixed width; Tamil words run wider than you expect. layout-check cannot see text spilling out of its own pill (ep 03 note 2).
+- **The payoff object is a claimed `key` box** (the tear in ep 03 fell off the frame edge on "அதான் கண்ணீர்!" and nobody saw it, note 1). Anything the line names must be on screen, inside the safe box, at that word.
+- **A comparison shot needs action on both sides**, not two still props: show the process (sawing, squashing, the halves parting), not just the result (ep 03 note 3).
 
 ## Ep 02 gap scorecard (02-pondy-grid, v1)
 

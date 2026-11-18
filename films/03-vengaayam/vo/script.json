@@ -1,0 +1,16 @@
+{
+  "_note": "Ep 03 Vengaayam, script v5.1 (locked v5 + three natural-Tamil fixes, 2026-11-18). Voice: Prashant V, Eleven v4, made by Vasanth in the ElevenLabs web app with the delivery-map v2 tags (tags are not spoken, so they are not in this text). Timings: vo/align-from-silence.cjs. Mix speed 1.1x.",
+  "segments": [
+    { "shot": "hook",       "text": "வெங்காயம் வெட்டுனா ஏன் கண்ணுல தண்ணி வருது? அதுக்குள்ள அப்படி எதுவுமே இல்ல!" },
+    { "shot": "proof",      "text": "முழு வெங்காயத்த கண்ணு பக்கத்துல வெச்சு பாருங்க… ஒரு சொட்டு கூட வராது." },
+    { "shot": "foreshadow", "text": "இது புரிஞ்சா, இனிமே அவ்ளோ அழ மாட்டீங்க." },
+    { "shot": "knife",      "text": "கத்தி பட்ட அந்த செகண்ட்ல தான் வெங்காயம் தன் வேலைய காட்டுது." },
+    { "shot": "joke",       "text": "நம்ம ஆளு helmet-லாம் போட்டு வெட்டி பாத்தாரு… அப்பவும் கண்ணீர் கொட்டுது!" },
+    { "shot": "rehook",     "text": "சரி… அந்த ஒரு செகண்ட்ல உள்ள என்ன தான் நடக்குது?" },
+    { "shot": "cells",      "text": "விஷயம் என்னன்னா, உள்ள ரெண்டு chemical தனித்தனியா இருக்கு. தீக்குச்சி, தீப்பெட்டி மாதிரி." },
+    { "shot": "gas",        "text": "வெட்டும்போது ரெண்டும் உரசுது… உடனே ஒரு gas கிளம்பி நேரா கண்ணுக்கு வருது!" },
+    { "shot": "tears",      "text": "கண்ணு அதை தூசுன்னு நினைச்சு, தண்ணி ஊத்தி கழுவி விடுது. அதான் கண்ணீர்!" },
+    { "shot": "sharp",      "text": "கத்தி கூர்மையா இருந்தா வெங்காயம் நசுங்காது… gas-உம் கம்மியா வரும்." },
+    { "shot": "twist",      "text": "அப்போ உங்கள அழ வைக்கிறது வெங்காயம் இல்ல… உங்க வீட்டு மொக்கை கத்தி தான்!" }
+  ]
+}

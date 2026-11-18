@@ -4,6 +4,35 @@ The launch-week checklist is in the report: `reports/Short video formats that wo
 
 Tool picks and the bake-off test plan (run it before paying for anything): `reports/Tamil Shorts production toolstack.md`. **Its cadence gate replaces the earlier 4–5 Shorts/week plan:** start at 2 a week, and run 3 series first, not 5.
 
+## 0. Defaults for every new Short (learned on ep 01–03; apply from the first draft)
+
+These are the fixes Vasanth had to ask for once. Build them in from the start so he never has to ask again. Sources and reasons: `kit/improvement-log.md` (ep 03 entry), `kit/film-craft.md` §1, §2, §7, `research_notes/Shorts scriptwriting craft.md` rules 27–33, `research_notes/ElevenLabs v4 voice direction.md`.
+
+**Script**
+- [ ] Hook = the question people actually search ("…ஏன்…?"), spoken AND on screen from frame 0, then the surprise stated as a fact within ~4.5 s (ep 03: Vasanth's question beat my statement-only hook).
+- [ ] Interactive by design: one guess for the viewer, one thing they can try at home, "you" in most lines, a twist that turns the hook around, a pinned comment asking for their own experience.
+- [ ] Rehook at 40–55 %, answer in the last third, nothing after the twist.
+- [ ] Natural spoken Tamil pass: no bookish words (பொருள், குறைவான, தன்னை, …ஆகும்); real particles and idioms (`helmet-லாம்`, `வெட்டி பாத்தாரு`, `கழுவி விடுது`, `என்ன தான்`). Read every line as a friend talking.
+- [ ] Every fact and every tip re-checked with a fresh search for newer studies before the lock (ep 03's "chill the onion" tip was overturned by a 2025 PNAS study).
+- [ ] Rule audit table (pass/fail with estimated timings) in the episode file before showing Vasanth.
+
+**Voice**
+- [ ] No ElevenLabs call of any size until Vasanth says so. He usually makes the take himself in the web app.
+- [ ] Eleven v4, Prashant V. Delivery tags: ONE base tone set once at the top (`[warm, curious, conversational storyteller, quick pace]`) plus at most 2–3 short accents where the story turns. A tag on every line sounded like a roller coaster.
+- [ ] Stress the question word in Tamil questions (ஏன், என்ன); they do not need a final rise.
+- [ ] Pace target about 7–7.5 syllables/s (top Tamil facts channel ~8.3). Check with `kit/tools/syllable-rate.cjs`; check melody with `kit/tools/pitch_check.py`. Ep 03 mix speed 1.1x.
+- [ ] A web-app take has no timestamps: build them free with `vo/align-from-silence.cjs` (copy from `films/03-vengaayam/vo/`).
+
+**Film (start by copying `films/03-vengaayam`: it already has all of this)**
+- [ ] Camera never reads as still: firm push-in, a reframe about every 1.3 s, slow handheld drift, parallax background through `far()`. Still share ≤ 8 % AND judged by eye.
+- [ ] No empty holds: whatever the line names is on screen and moving from the start of the shot; something new at least every ~1.3 s.
+- [ ] The object the line names (the tear, the gas, the knife) is a claimed `key` box, inside the safe box, at that word.
+- [ ] Comparison shots show the process on both sides (sawing, squashing, halves parting), not two still props.
+- [ ] Every pill and card measures its own text; cards at y ≈ 364; captions at y 1390 so props on the counter stay visible.
+- [ ] Characters: the redesigned Mani (hands, thick brows, 8 moods, real tears); props drawn in front of the face when held up.
+- [ ] Real brands and team logos stay out (CSK = yellow + navy colours only, no lion or name): trademarks risk claims.
+- [ ] `check-film.cjs` passes before Vasanth sees anything; open with `hub_live`, render only when he asks.
+
 ## A. Before scripting (research)
 - [ ] The topic passes the filter: is it on a Tamil viewer's body, in their house, on their street, or in their family's memory?
 - [ ] The answer is "half-known" (peak curiosity), not something obvious and not something obscure.
@@ -25,11 +54,13 @@ Tool picks and the bake-off test plan (run it before paying for anything): `repo
 - [ ] Each hook option passes the four-failure check (delay, confusion, irrelevance, disinterest) and has no swipe words ("யாருமே சொல்ல மாட்டாங்க", "ரகசியம்", unnamed "scientists", unsourced numbers). See `research_notes/Shorts scriptwriting craft.md` rules 27–32.
 - [ ] A mechanism line with an everyday Tamil analogy ("ஏன்னா…") at about 55–65 % of runtime.
 - [ ] The last line is the twist and the video ends on its last word. No recap.
-- [ ] Pace: every sentence ≤ 3.6 s; pauses over 0.25 s add up to ≤ 1 s per 40 s. Sentence lengths vary (mostly short, some medium, no run-ons). Cut words before speeding the voice; any speed-up (≤ 1.08×) is Vasanth's call.
+- [ ] Pace: every sentence ≤ 3.6 s; pauses over 0.25 s add up to ≤ 1 s per 40 s. Sentence lengths vary (mostly short, some medium, no run-ons). Speed about 7–7.5 syllables a second (film-craft §1.7; `kit/tools/syllable-rate.cjs`). Cut words and pauses first, then raise `TEMPO`; the final speed is Vasanth's call by ear.
 - [ ] Contrast mapped: common belief → true, sourced reality → one quick proof within ~5 s.
 - [ ] The key fact is said twice (plainly, then with the analogy); the myth only once.
 - [ ] One target emotion named for the episode; no manufactured fear.
 - [ ] Walkaway test: the fact can be retold to family in one sentence.
+- [ ] Natural-Tamil read-aloud: every line sounds like a Tamil friend talking, with no bookish or translated words (list in the producer skill).
+- [ ] Rule audit table filled in the episode file (pass/fail per rule, estimated timings), and every fact and tip re-checked with a fresh search for newer studies.
 - [ ] Script locked with Vasanth before any voice is generated.
 - [ ] Paati series: guess beat early; order is fact → myth once → why people believed it → fact; the stamp matches the evidence.
 - [ ] The final line and card state the **fact**, not the myth.
@@ -103,6 +134,7 @@ Tool picks and the bake-off test plan (run it before paying for anything): `repo
 - [ ] Fill in `metrics-sheet.csv` for every Short from this week.
 - [ ] Read each Short in three steps against your own median, using engaged views: stop (YouTube Viewed%, Instagram skip rate) → stay (where the retention curve drops) → share (sends/shares per reach). Add Instagram skip rate and share rate to `metrics-sheet.csv`.
 - [ ] For each Short, find the second where the retention curve falls hardest and write down the line spoken there. Also note the second the hook's question was answered and how much video ran after it.
+- [ ] Update `kit/improvement-log.md`: what each Short improved over the last one, what fell short, and the next 1% for the "Carry forward" list.
 - [ ] Apply the decision rules (report section 7):
   - Bottom-quartile Viewed% (or under 60%) → rewrite the first frame and line. Re-test only through Instagram Trial Reels, or YouTube's video-cut A/B test once Studio shows it. Never by re-uploading.
   - A Short at 5× the channel median → make 3 follow-ups on the same topic within 2 weeks.
