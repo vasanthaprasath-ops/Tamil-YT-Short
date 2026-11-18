@@ -115,7 +115,7 @@ Distilled on 2026-11-14 from the teardown notes in `research_notes/Animated shor
 
 1. **Frozen-span check:** no run of ≥ 12 frames with a mean frame difference under 0.02 (at 180×320), outside planned cards. [OPINION, cheap tooling]
 2. **Pop check:** no frame difference over 3× the local median (±8 f) except at planned cuts. [OPINION]
-3. **Still-camera share** ≤ 15 % of runtime; average one new framing/move/reveal every ≤ 2 s. [MEASURED-ref]
+3. **Still-camera share** ≤ 8 % of runtime (was 15 %; ep 03 at 12.7 % still looked still to Vasanth, 2026-11-18), and judged by eye too; something new about every 1.3 s. `check-film.cjs` fails above 8 %. [MEASURED-ref + MEASURED-ours]
 4. **Sync by eye on VideoHub frames:** a hit lands on the contact frame or up to 1 f early; never more than 3 f late (ITU-R BT.1359: +45 / −125 ms). [CANON]
 5. **Audio print per build:** voice / music / SFX / bed LUFS and the voice-minus-bed margin per shot; flag any shot whose 10th-percentile speech margin drops under 4 LU. Run `silencedetect` (−45 dB, 0.3 s). [MEASURED-ref + PRACTITIONER-DATA]
 6. **Phone checks:** 300 Hz high-pass listen; faces at phone size (expression readable, features not sinking into the skin); Tamil glyphs in an exported frame. [CANON + OPINION]
@@ -158,7 +158,7 @@ Distilled on 2026-11-14 from the teardown notes in `research_notes/Animated shor
 | Seconds per sentence | ~3.6 s | ~3.0 s | ≤ 3.6 s ✓ |
 | Pauses > 0.25 s | < 1 s per ~60 s | 2.15 s in 39 s | ≤ 1.0 s per 40 s |
 | New framing / move | every ~1.7 s | every ~3.3 s | ≤ 2 s average |
-| Still-camera share | 10 % | ~38 % | ≤ 15 % |
+| Still-camera share | 10 % | ~38 % | ≤ 8 % (was 15 %) |
 | Hold push-in rate | 0.14–0.35 %/f | 0.03–0.07 %/f | 0.15–0.35 %/f |
 | Whip pans | 0.45/min, 7–25 f, blurred | 2 in 39 s, 6.6 f, ghosted | ≤ 1, 10–15 f, real blur |
 | Punch-in on cuts | none measured | on all 5 cuts | 1–2 beat cuts only |

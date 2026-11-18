@@ -20,7 +20,7 @@ const tp = +(loud.match(/true peak ([-\d.]+)/) || [])[1], lufs = +(loud.match(/(
 const checks = [
   ['page errors', (qa.page_errors || []).length === 0, (qa.page_errors || []).length + ''],
   ['length 30-45 s', TL.dur >= 30 && TL.dur <= 45, TL.dur.toFixed(1) + ' s'],
-  ['still-camera share <= 15 %', qa.still_share_pct <= 15, qa.still_share_pct + ' %'],
+  ['still-camera share <= 8 %', qa.still_share_pct <= 8, qa.still_share_pct + ' %'],   // was 15 %; ep 03 at 12.7 % still looked still (film-craft §1, checklists §0)
   ['loudness -14 LUFS (+-0.5)', Math.abs(lufs + 14) <= 0.5, lufs + ' LUFS'],
   ['true peak <= -1 dBTP', tp <= -1, tp + ' dBTP'],
   ['layout: no overlaps, nothing cut off', lay.status === 0, layOut.split(/\r?\n/)[0].replace(/^(PASS|FAIL|SKIP)\s+layout:\s*/, '')],
