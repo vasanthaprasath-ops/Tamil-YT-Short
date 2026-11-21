@@ -1,6 +1,6 @@
 # Gap review after ep 01–03 (2026-11-18)
 
-Goal set by Vasanth: great content, great quality, built on how viewers think. This note looks for what is still missing after the ep 01–03 work, checks it against our own numbers and fresh research, and proposes fixes. Nothing here has been applied to the kit yet.
+Goal set by Vasanth: great content, great quality, built on how viewers think. This note looks for what is still missing after the ep 01–03 work, checks it against our own numbers and fresh research, and proposes fixes. Fixes 1, 3, 4, 6 and 7 were applied to the kit on 2026-11-18 (see `STATUS.md`); 2, 5 and 8 are open for Vasanth.
 
 Evidence grades as elsewhere in the repo: [OFFICIAL] platform's own page, [PEER-REVIEWED], [VENDOR] commissioned or marketing study, [OURS] our own measurement, [UNVERIFIED].
 
